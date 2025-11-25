@@ -21,7 +21,7 @@
             justify-content: center;
             align-items: center;
         }
-
+        
         .wrapper {
             background: #ffffff;
             width: 380px;
@@ -103,6 +103,7 @@
 </head>
 
 <body>
+    <img src="{{ asset('img/background.jpeg') }}" alt="bg">
     <div class="wrapper">
         <h1>Log In</h1>
         <form method="POST" action="{{ route('login') }}">
