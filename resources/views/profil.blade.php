@@ -14,13 +14,22 @@
         }
 
         body {
-            background: #18312E;
+            background: url('{{ asset("img/background.jpeg") }}') center/cover no-repeat fixed;
+            position: relative;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
+        body::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(24, 49, 46, 0.78); 
+            backdrop-filter: blur(1px); 
+            z-index: -1;
+        }
         .wrapper {
             background: #ffffff;
             width: 380px;
@@ -84,7 +93,7 @@
         <h1>Profil Saya</h1>
 
         <div class="profile-photo">
-            <img src="fotoprofil.jpeg" alt="Foto Profil">
+            <img src="{{ asset('img/fotoprofil.jpeg') }}" alt="icon fotoprofil" width="20">
             <p class="username">Gaby</p>
         </div>
 

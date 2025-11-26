@@ -15,12 +15,23 @@
         }
 
         body {
-            background: #18312E;
+            background: url('{{ asset("img/background.jpeg") }}') center/cover no-repeat fixed;
+            position: relative;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
         }
+
+        body::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(24, 49, 46, 0.78); 
+            backdrop-filter: blur(1px); 
+            z-index: -1;
+        }
+
         
         .wrapper {
             background: #ffffff;
@@ -103,7 +114,6 @@
 </head>
 
 <body>
-    <img src="{{ asset('img/background.jpeg') }}" alt="bg">
     <div class="wrapper">
         <h1>Log In</h1>
         <form method="POST" action="{{ route('login') }}">
