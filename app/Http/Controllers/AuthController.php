@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -25,12 +26,14 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $validate = $request->validate([
-            'name' => 'required|string|max:255',
+            'nama' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'username' => 'required|string|max:255|unique:users',
-            'password' => 'required|min:8',
-            'no_telp' => 'required|string|max:15',
+            'password' => 'required|min:6',
+            'no_telepon' => 'required|string|max:15',
         ]);
+
+        $user = User::create($validate);
     }
 
 

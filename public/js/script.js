@@ -5,6 +5,7 @@ const preloader = document.querySelector("[data-preload]");
 window.addEventListener("load", function () {
     preloader.classList.add("loaded");
     document.body.classList.add("loaded");
+    document.getElementById("header").style.visibility = 'visible';
 });
 
 const addEventOnElements = function (elements, eventType, callback) {
@@ -18,7 +19,6 @@ const navTogglers = document.querySelectorAll("[data-nav-toggler]");
 const overlay = document.querySelector("[data-overlay]");
 
 const toggleNavbar = function () {
-    console.log('123');
     navbar.classList.toggle("active");
     overlay.classList.toggle("active");
     document.body.classList.toggle("nav-active");
