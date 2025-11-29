@@ -15,7 +15,7 @@
         }
 
         body {
-            background: url('{{ asset("img/background.jpeg") }}') center/cover no-repeat fixed;
+            background: url('{{ asset('img/background.jpeg') }}') center/cover no-repeat fixed;
             position: relative;
             height: 100vh;
             display: flex;
@@ -27,12 +27,12 @@
             content: "";
             position: absolute;
             inset: 0;
-            background: rgba(24, 49, 46, 0.78); 
-            backdrop-filter: blur(1px); 
+            background: rgba(24, 49, 46, 0.78);
+            backdrop-filter: blur(1px);
             z-index: -1;
         }
 
-        
+
         .wrapper {
             background: #ffffff;
             width: 380px;
