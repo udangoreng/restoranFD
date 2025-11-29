@@ -11,6 +11,10 @@ Route::get('/profil', function () {
     return view('profil');
 });
 
+Route::get('/reservasi', function () {
+    return view('reservasi');
+});
+
 Route::get('/auth/login', [AuthController::class, 'showLogin'])->name('auth.login');
 Route::get('/auth/register', [AuthController::class, 'showRegister'])->name('auth.register');
 
