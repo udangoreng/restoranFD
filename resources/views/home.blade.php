@@ -29,24 +29,24 @@
         <p class="text">Courvoiser</p>
     </div>
 
-        <section id="header" style="visibility: hidden;">
-            <a href="#"><img src="logo.png" class="logo" alt=""></a>
+    <section id="header" style="visibility: hidden;">
+        <a href="#"><img src="logo.png" class="logo" alt=""></a>
 
-            <div>
-                <ul id="navbar">
-                    <li><a class="active" href="home.html">home</a></li>
-                    <li><a href="menu.html">shop</a></li>
-                    <li><a href="about us.html">about</a></li>
-                    <li><a href="contact.html">contact</a></li>
-                </ul>
-            </div>
+        <div>
+            <ul id="navbar">
+                <li><a class="active" href="home.html">home</a></li>
+                <li><a href="menu.html">shop</a></li>
+                <li><a href="about us.html">about</a></li>
+                <li><a href="contact.html">contact</a></li>
+            </ul>
+        </div>
 
-            <a href="reservation.html" class="book-btn">BOOK A TABLE</a>
+        <a href="{{ route('reservasi') }}" class="book-btn">BOOK A TABLE</a>
 
-            <div id="mobile">
-                <i id="bar" class="fa-solid fa-bars"></i>
-            </div>
-        </section>
+        <div id="mobile">
+            <i id="bar" class="fa-solid fa-bars"></i>
+        </div>
+    </section>
 
     <section id="hero">
         <h1 class="serif">WHERE<br>TASTE MEETS</h1>

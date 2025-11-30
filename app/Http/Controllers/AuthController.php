@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
@@ -18,9 +20,22 @@ class AuthController extends Controller
         return view('register');
     }
 
-    public function login()
+    public function login(Request $request)
     {
-        
+        $credentials = $request->validate([
+            'email' => 'required|string|email|max:255',
+            'password' => 'required|min:6',
+        ]);
+
+        if(Auth::attempt($credentials)){
+            $request->session()->regenerate();
+            return redirect('/');
+        }
+
+        throw ValidationException::withMessages([
+            'email'=>'Could Not Find Email',
+            'password'=>'Password Is Incorrect'
+        ]);
     }
 
     public function register(Request $request)

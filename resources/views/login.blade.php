@@ -118,17 +118,23 @@
         <h1>Log In</h1>
         <form method="POST" action="{{ route('login') }}">
             @csrf
+            @error('email')
+                <p style="color:#dc3545">{{ $message }}</p>
+            @enderror
             <div>
                 <label for="Email-input">
                     <img src="{{ asset('img/email.svg') }}" alt="icon email" width="20">
                 </label>
-                <input type="email" name="Email" id="Email-input" placeholder="Email">
+                <input type="email" name="email" id="Email-input" placeholder="Email" value="{{old('email')}}">
             </div>
+            @error('password')
+                <p style="color:#dc3545">{{ $message }}</p>
+            @enderror
             <div>
                 <label for="Password-input">
                     <img src="{{ asset('img/kunci.svg') }}" alt="icon password" width="20">
                 </label>
-                <input type="password" name="Password" id="Password-input" placeholder="Password">
+                <input type="password" name="password" id="Password-input" placeholder="Password">
             </div>
             <div class="login-link">
                 Belum punya akun? <a href="{{ route('auth.register') }}">Sign UP</a>
