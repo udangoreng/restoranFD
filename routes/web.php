@@ -5,15 +5,15 @@ use App\Http\Controllers\AuthController;
 
 Route::get('/', function () {
     return view('home');
-});
+})->name('/');
 
 Route::get('/profil', function () {
     return view('profil');
-});
+})->name('profile');
 
 Route::get('/reservasi', function () {
     return view('reservasi');
-});
+})->name('reservasi');
 
 Route::get('/payment', function () {
     return view('payment');
