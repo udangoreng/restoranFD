@@ -19,6 +19,10 @@ Route::get('/payment', function () {
     return view('payment');
 });
 
+Route::get('/order', function () {
+    return view('order');
+});
+
 Route::get('/auth/login', [AuthController::class, 'showLogin'])->name('auth.login');
 Route::get('/auth/register', [AuthController::class, 'showRegister'])->name('auth.register');
 
