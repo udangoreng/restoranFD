@@ -23,8 +23,16 @@ Route::get('/order', function () {
     return view('order');
 });
 
+Route::any('/menu', function () {
+    return view('menu');
+})->name('hallo');
+
 Route::get('/auth/login', [AuthController::class, 'showLogin'])->name('auth.login');
 Route::get('/auth/register', [AuthController::class, 'showRegister'])->name('auth.register');
 
 Route::post('/auth/login', [AuthController::class, 'login'])->name('login');
 Route::post('/auth/register', [AuthController::class, 'register'])->name('register');
+
+Route::get('/menu', function () {
+    return view('menu');
+});
