@@ -20,6 +20,15 @@ Route::any('/menu', function () {
     return view('menu');
 })->name('menu');
 
+Route::get('/checkout', function () {
+    return view('checkout');
+});
+
+Route::get('/contact', function () {
+    return view('contact');
+});
+
+
 Route::middleware(['role:admin'])->group(function () {});
 
 Route::middleware(['role:user'])->group(function () {

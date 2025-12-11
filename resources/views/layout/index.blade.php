@@ -22,10 +22,11 @@
     <link rel="preload" as="image" href="slider-1.jpg">
     <link rel="preload" as="image" href="slider-2.jpg">
     <link rel="preload" as="image" href="slider-3.jpg">
+    @yield('style')
 </head>
 <body>
 
-    @yield('content');
+    @yield('content')
     <script src="{{ asset('js/script.js') }}"></script>
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
