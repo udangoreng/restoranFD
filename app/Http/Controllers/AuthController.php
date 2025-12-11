@@ -29,7 +29,17 @@ class AuthController extends Controller
 
         if(Auth::attempt($credentials)){
             $request->session()->regenerate();
-            return redirect('/');
+            
+            $user = Auth::user();
+            if($user->role === 'admin'){
+                return redirect('/admin');
+            } elseif($user->role === 'customer'){
+                return redirect('/');
+            } else{
+                Auth::logout();
+                return redirect('/login')->withErrors(['role' => 'Unauthorized Role.']);
+            }
+            
         }
 
         throw ValidationException::withMessages([
@@ -41,15 +51,18 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $validate = $request->validate([
-            'nama' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'username' => 'required|string|max:255|unique:users',
             'password' => 'required|min:6',
-            'no_telepon' => 'required|string|max:15',
+            'phone' => 'required|string|max:15',
         ]);
 
         $user = User::create($validate);
     }
 
-
+    public function logout(){
+        Auth::logout();
+        return redirect('/');
+    }
 }

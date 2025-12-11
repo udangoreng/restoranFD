@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -118,14 +117,14 @@
         <h1>Register</h1>
         <form method="POST" action="{{ route('register') }}">
             @csrf
-            @error('nama')
+            @error('name')
                 <p style="color:#dc3545">{{ $message }}</p>
             @enderror
             <div>
                 <label for="Nama-input">
                     <img src="{{ asset('img/orang.svg') }}" alt="icon orang" width="20">
                 </label>
-                <input type="text" name="nama" id="Nama-input" placeholder="Nama" value="{{ old('nama') }}">
+                <input type="text" name="name" id="Nama-input" placeholder="Nama" value="{{ old('nama') }}">
             </div>
             @error('username')
                 <p style="color:#dc3545">{{ $message }}</p>
@@ -145,14 +144,14 @@
                 </label>
                 <input type="email" name="email" id="Email-input" placeholder="Email" value="{{ old('email') }}">
             </div>
-            @error('no_telepon')
+            @error('phone')
                 <p style="color:#dc3545">{{ $message }}</p>
             @enderror
             <div>
                 <label for="No.telp-input">
                     <img src="{{ asset('img/telp.svg') }}" alt="icon telp" width="20">
                 </label>
-                <input type="number" name="no_telepon" id="No.telp-input" placeholder="No.telp" value="{{ old('no_telp') }}">
+                <input type="number" name="phone" id="No.telp-input" placeholder="No.telp" value="{{ old('no_telp') }}">
             </div>
             @error('password')
                 <p style="color:#dc3545">{{ $message }}</p>
