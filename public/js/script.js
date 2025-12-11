@@ -5,7 +5,6 @@ const preloader = document.querySelector("[data-preload]");
 window.addEventListener("load", function () {
     preloader.classList.add("loaded");
     document.body.classList.add("loaded");
-    document.getElementById("header").style.visibility = 'visible';
 });
 
 const addEventOnElements = function (elements, eventType, callback) {
@@ -14,38 +13,44 @@ const addEventOnElements = function (elements, eventType, callback) {
     }
 };
 
-const navbar = document.querySelector("[data-navbar]");
-const navTogglers = document.querySelectorAll("[data-nav-toggler]");
-const overlay = document.querySelector("[data-overlay]");
+const mobileMenu = document.querySelector("#mobile-menu");
+const bar = document.querySelector("#bar");
+const overlay = document.querySelector("#overlay");
 
-const toggleNavbar = function () {
-    navbar.classList.toggle("active");
+bar.addEventListener("click", () => {
+    mobileMenu.classList.toggle("active");
     overlay.classList.toggle("active");
-    document.body.classList.toggle("nav-active");
-};
+});
 
-addEventOnElements(navTogglers, "click", toggleNavbar);
+overlay.addEventListener("click", () => {
+    mobileMenu.classList.remove("active");
+    overlay.classList.remove("active");
+});
 
-const header = document.querySelector("[data-header]");
-let lastScrollPos = 0;
+const track = document.getElementById("galleryTrack");
+const hoverLeft = document.getElementById("hoverLeft");
+const hoverRight = document.getElementById("hoverRight");
 
-const hideHeader = function () {
-    const isScrollBottom = lastScrollPos < window.scrollY;
+let position = 0;
+const speed = 6;
+const resetPoint = track.scrollWidth / 2; 
 
-    if (isScrollBottom) {
-        header.classList.add("hide");
-    } else {
-        header.classList.remove("hide");
-    }
+hoverRight.addEventListener("mousemove", () => {
+  position -= speed;
 
-    lastScrollPos = window.scrollY;
-};
+  if (Math.abs(position) >= resetPoint) {
+    position = 0; 
+  }
 
-window.addEventListener("scroll", function () {
-    if (window.scrollY >= 50) {
-        header.classList.add("active");
-        hideHeader();
-    } else {
-        header.classList.remove("active");
-    }
+  track.style.transform = `translateX(${position}px)`;
+});
+
+hoverLeft.addEventListener("mousemove", () => {
+  position += speed;
+
+  if (position >= 0) {
+    position = -resetPoint;
+  }
+
+  track.style.transform = `translateX(${position}px)`;
 });
