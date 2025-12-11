@@ -31,9 +31,9 @@ Route::middleware(['role:user'])->group(function () {
         return view('reservasi');
     })->name('reservasi');
 
-    Route::get('/payment', function () {
-        return view('payment');
-    });
+Route::get('/payment', function () {
+    return view('payment');
+});
 
     Route::get('/order', function () {
         return view('order');

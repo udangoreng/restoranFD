@@ -14,7 +14,7 @@
         }
 
         body {
-            background: url('{{ asset('img/background.jpeg') }}') center/cover no-repeat fixed;
+            background: url('{{ asset("img/background.jpeg") }}') center/cover no-repeat fixed;
             position: relative;
             height: 100vh;
             display: flex;
