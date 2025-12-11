@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="style.css">
 
     <link rel="preload" as="image" href="slider-1.jpg">
     <link rel="preload" as="image" href="slider-2.jpg">
@@ -28,22 +28,65 @@
         <p class="text">Courvoiser</p> 
     </div>
 
-    <section id="header" style="visibility: hidden;">
-        <img src="{{ asset('img/logo.png') }}" alt="icon logo" width="100px">
+    <section id="header">
+        <a href="#"><img src="logo.png" class="logo" alt=""></a>
+
         <div>
             <ul id="navbar">
                 <li><a class="active" href="home.html">home</a></li>
-                <li><a href="{{route('hallo')}}">menu</a></li>
-                <li><a href="about us.html">about</a></li>
+                <li><a href="menu.html">menu</a></li>
+                <li><a href="about.html">about</a></li>
                 <li><a href="contact.html">contact</a></li>
             </ul>
         </div>
 
-        <a href="{{ route('reservasi') }}" class="book-btn">BOOK A TABLE</a>
+        <a href="reservation.html" class="book-btn">BOOK A TABLE</a>
 
         <div id="mobile">
             <i id="bar" class="fa-solid fa-bars"></i>
         </div>
+
+        <div id="mobile-menu" class="mobile-menu" data-navbar>
+            <div class="mobile-menu-logo">
+                <img src="logo1.png" alt="Logo">
+            </div>
+
+            <ul class="mobile-nav-list">
+                <li>
+                    <a href="profile.html" class="mobile-link">
+                        <span class="star">✦</span>
+                        My Profile
+                        <span class="arrow">›</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="my_reservation.html" class="mobile-link">
+                        <span class="star">✦</span>
+                        My Reservation
+                        <span class="arrow">›</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="my_history.html" class="mobile-link">
+                        <span class="star">✦</span>
+                        My History
+                        <span class="arrow">›</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="login.html" class="mobile-link">
+                        <span class="star">✦</span>
+                        Log In
+                        <span class="arrow">›</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div id="overlay"></div>
+
     </section>
 
     <section id="hero">
@@ -52,7 +95,7 @@
 
         <div class="banner">
             <video autoplay loop muted plays-inline>
-                <source src="{{asset('video/video.mp4')}}" type="video/mp4">
+                <source src="video.mp4" type="video/mp4">
             </video>
         </div>
     </section>
@@ -75,7 +118,7 @@
             </div>
 
             <div class="icon">
-                <img src="{{asset('img/logo.png')}}" alt="icon">
+                <img src="logo.png" alt="icon">
             </div>
 
         </div>
@@ -88,7 +131,7 @@
 
             <div class="menu-card">
                 <div class="img-arch">
-                    <img src="{{asset('img/appetizer.jpg')}}" alt="">
+                    <img src="appetizer.jpg" alt="">
                     <span class="arch-border"></span>
                 </div>
 
@@ -99,7 +142,7 @@
 
             <div class="menu-card">
                 <div class="img-arch">
-                    <img src="{{asset('img/main.jpg')}}" alt="">
+                    <img src="main.jpg" alt="">
                     <span class="arch-border"></span>
                 </div>
 
@@ -110,7 +153,7 @@
 
             <div class="menu-card">
                 <div class="img-arch">
-                    <img src="{{asset('img/dessert.jpg')}}" alt="">
+                    <img src="dessert.jpg" alt="">
                     <span class="arch-border"></span>
                 </div>
 
@@ -129,14 +172,14 @@
         </h2>
 
         <div class="story-row">
-            <img src="{{asset('img/gambar1.jpg')}}" class="story-img left" alt="">
+            <img src="gambar1.jpg" class="story-img left" alt="">
             <h3 class="story-highlight">Breakfast, Hearty</h3>
-            <img src="{{asset('img/gambar2.jpg')}}" class="story-img right" alt="">
+            <img src="gambar2.jpg" class="story-img right" alt="">
         </div>
 
         <div class="story-row">
             <h3 class="story-highlight">Mains&nbsp;&</h3>
-            <img src="{{asset('img/gambar3.jpg')}}" class="story-img left" alt="">
+            <img src="gambar3.jpg" class="story-img left" alt="">
             <h3 class="story-highlight">Drinks</h3>
         </div>
     </section>
@@ -152,13 +195,13 @@
 
             <div class="story-feature">
                 <div class="feat-box">
-                    <img src="{{asset('img/hygenic.png')}}" class="feat-icon">
+                    <img src="hygenic.png" class="feat-icon">
                     <h3>HYGIENIC<br>FOOD</h3>
                     <p>Lorem Ipsum is simply dummy text of the printing and type setting dummy text.</p>
                 </div>
 
                 <div class="feat-box">
-                    <img src="{{asset('img/ambience.png')}}" class="feat-icon">
+                    <img src="ambience.png" class="feat-icon">
                     <h3>FRESH<br>AMBIENCE</h3>
                     <p>Lorem Ipsum is simply dummy text of the printing and type setting dummy text.</p>
                 </div>
@@ -174,7 +217,7 @@
 
         <div class="story-right">
             <div class="arc-image-wrap">
-                <img src="{{asset('img/gambar4.jpg')}}" class="arc-image">
+                <img src="gambar4.jpg" class="arc-image">
                 <span class="arc-border"></span>
             </div>
         </div>
@@ -190,25 +233,25 @@
 
                 <div class="col-md-3">
                     <div class="review-box">
-                        <img src="{{asset('img/testimoni1.png')}}" alt="Review 1">
+                        <img src="testimoni1.png" alt="Review 1">
                     </div>
                 </div>
 
                 <div class="col-md-3">
                     <div class="review-box">
-                        <img src="{{asset('img/testimoni2.png')}}" alt="Review 2">
+                        <img src="testimoni2.png" alt="Review 2">
                     </div>
                 </div>
 
                 <div class="col-md-3">
                     <div class="review-box">
-                        <img src="{{asset('img/testimoni3.png')}}" alt="Review 3">
+                        <img src="testimoni3.png" alt="Review 3">
                     </div>
                 </div>
 
                 <div class="col-md-3">
                     <div class="review-box">
-                        <img src="{{asset('img/testimoni4.png')}}" alt="Review 4">
+                        <img src="testimoni4.png" alt="Review 4">
                     </div>
                 </div>
 
@@ -221,12 +264,12 @@
         <div class="footer-content">
 
             <div class="footer-img-container">
-                <img src="{{asset('img/footer1.jpg')}}" alt="Restaurant Interior" class="footer-side-img">
+                <img src="footer1.jpg" alt="Restaurant Interior" class="footer-side-img">
             </div>
 
             <div class="footer-center">
 
-                <img src="{{asset('img/logo1.png')}}" alt="Restoria Logo" class="footer-logo-img">
+                <img src="logo1.png" alt="Restoria Logo" class="footer-logo-img">
 
                 <p class="visit-us">✦ VISIT US ✦</p>
 
@@ -247,7 +290,7 @@
             </div>
 
             <div class="footer-img-container">
-                <img src="{{asset('img/footer2.jpg')}}" alt="Desserts img" class="footer-side-img">
+                <img src="footer2.jpg" alt="Desserts img" class="footer-side-img">
             </div>
 
         </div>
@@ -267,10 +310,10 @@
     </section>
 
 
-    <script src={{ asset('js/script.js') }}></script>
+    <script src="script.js"></script>
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
-    </body>
+</body>
 </html>
