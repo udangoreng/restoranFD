@@ -1,0 +1,64 @@
+<section id="header" style="visibility: hidden;">
+    <a href="#"><img src="{{ asset('img/logo.png') }}" class="logo" alt=""></a>
+
+    <div>
+        <ul id="navbar">
+            <li><a class="{{ request()->route()->getName() === '/' ? 'active' : '' }}" href="{{ route('/') }}">home</a></li>
+            <li><a class="{{ request()->route()->getName() === 'menu' ? 'active' : '' }}" href="{{ route('menu') }}">menu</a></li>
+            <li><a href="about us.html">about</a></li>
+            <li><a href="contact.html">contact</a></li>
+        </ul>
+    </div>
+
+    <a href="{{ route('reservasi') }}" class="book-btn">BOOK A TABLE</a>
+
+    <div id="mobile">
+        <i id="bar" class="fa-solid fa-bars"></i>
+    </div>
+
+    <div id="mobile-menu" class="mobile-menu" data-navbar>
+        <div class="mobile-menu-logo">
+            <img src="{{ asset('img/logo1.png') }}" alt="Logo">
+        </div>
+
+        <ul class="mobile-nav-list">
+            @auth
+                <li>
+                    <a href="profile.html" class="mobile-link">
+                        <span class="star">✦</span>
+                        My Profile
+                        <span class="arrow">›</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="my_reservation.html" class="mobile-link">
+                        <span class="star">✦</span>
+                        My Reservation
+                        <span class="arrow">›</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="my_history.html" class="mobile-link">
+                        <span class="star">✦</span>
+                        My History
+                        <span class="arrow">›</span>
+                    </a>
+                </li>
+            @endauth
+
+            @guest
+                <li>
+                    <a href="{{ route('login') }}" class="mobile-link">
+                        <span class="star">✦</span>
+                        Log In
+                        <span class="arrow">›</span>
+                    </a>
+                </li>
+            @endguest
+        </ul>
+    </div>
+    <div id="overlay"></div>
+
+</section>
