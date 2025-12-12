@@ -28,10 +28,15 @@ Route::get('/contact', function () {
     return view('contact');
 });
 
+Route::get('/testadmin', function () {
+    return view('admin.layout.index');
+});
 
-Route::middleware(['role:admin'])->group(function () {});
 
-Route::middleware(['role:user'])->group(function () {
+Route::middleware(['role:admin'])->group(function () {
+});
+
+// Route::middleware(['role:user'])->group(function () {
     Route::get('/profil', function () {
         return view('profil');
     })->name('profile');
@@ -47,4 +52,4 @@ Route::get('/payment', function () {
     Route::get('/order', function () {
         return view('order');
     });
-});
+// });
