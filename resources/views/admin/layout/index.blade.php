@@ -9,6 +9,9 @@
 
     <link href="{{ asset('admin/static/css/app.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.datatables.net/2.3.5/css/dataTables.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 
 <body>
@@ -39,12 +42,13 @@
 
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="pages-sign-in.html">
-                            <i class="align-middle" data-feather="book"></i> <span class="align-middle">Resevation</span>
+                            <i class="align-middle" data-feather="book"></i> <span
+                                class="align-middle">Resevation</span>
                         </a>
                     </li>
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="pages-sign-up.html">
+                        <a class="sidebar-link" href="{{ route('admin.menu') }}">
                             <i class="align-middle" data-feather="book-open"></i> <span class="align-middle">Menu</span>
                         </a>
                     </li>
@@ -61,7 +65,7 @@
 
         <div class="main">
             <nav class="navbar navbar-expand navbar-light navbar-bg">
-                <a class="sidebar-toggle js-sidebar-toggle">
+                <a class="sidebar-toggle js-sidebar-toggle ms-3">
                     <i class="hamburger align-self-center"></i>
                 </a>
 
@@ -75,9 +79,7 @@
                             </a>
 
                             <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#"
-                                data-bs-toggle="dropdown">
-                                <img src="img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1"
-                                    alt="Charles Hall" /> <span class="text-dark">Charles Hall</span>
+                                data-bs-toggle="dropdown"><span class="text-dark">{{ auth()->user()->username }}</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end">
                                 <a class="dropdown-item" href="{{ route('logout') }}">Log out</a>
@@ -126,7 +128,15 @@
     </div>
 
     <script src="{{ asset('admin/static/js/app.js') }}"></script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
+        integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.datatables.net/2.3.5/js/dataTables.min.js"></script>
+    @yield('script')
 </body>
 
 </html>
