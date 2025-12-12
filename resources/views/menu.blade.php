@@ -25,111 +25,48 @@
         <div class="menu-category mb-4">
             <h4 class="menu-heading">Appetizer</h4>
             <div class="row g-3">
-                <div class="col-6 col-md-3">
-                    <div class="menu-item" style="background-image: url({{ asset('img/appetizer1.jpg') }});"></div>
-                    <a href="detail_menu.html" class="menu-info">
-                        <h5 class="menu-name">Grilled Pear & Cheese</h5>
-                        <p class="menu-price">IDR 135.000</p>
-                    </a>
-                </div>
-
-                <div class="col-6 col-md-3">
-                    <div class="menu-item" style="background-image: url({{ asset('img/appetizer2.jpg') }});"></div>
-                    <a href="detail-appetizer2.html" class="menu-info">
-                        <h5 class="menu-name">Shrimp Tartlet</h5>
-                        <p class="menu-price">IDR 150.000</p>
-                    </a>
-                </div>
-
-                <div class="col-6 col-md-3">
-                    <div class="menu-item" style="background-image: url({{ asset('img/appetizer3.jpg') }});"></div>
-                    <a href="detail-appetizer3.html" class="menu-info">
-                        <h5 class="menu-name">Peach Bruschetta</h5>
-                        <p class="menu-price">IDR 140.000</p>
-                    </a>
-                </div>
-
-                <div class="col-6 col-md-3">
-                    <div class="menu-item" style="background-image: url({{ asset('img/appetizer4.jpg') }});"></div>
-                    <a href="detail-appetizer4.html" class="menu-info">
-                        <h5 class="menu-name">Antipasto Bites</h5>
-                        <p class="menu-price">IDR 160.000</p>
-                    </a>
-                </div>
+                @foreach ($appetizers as $appetizer)
+                    <div class="col-6 col-md-3">
+                        <div class="menu-item"
+                            style="background-image: url({{ asset('storage/' . $appetizer->img_path) }});"></div>
+                        <a href="{{ route('menu.detail', $appetizer->id) }}" class="menu-info">
+                            <h5 class="menu-name">{{ $appetizer->name }}</h5>
+                            <p class="menu-price">@currency($appetizer->price)</p>
+                        </a>
+                    </div>
+                @endforeach
             </div>
         </div>
 
         <div class="menu-category mb-4">
             <h4 class="menu-heading">Main Dish</h4>
             <div class="row g-3">
-                <div class="col-6 col-md-3">
-                    <div class="menu-item" style="background-image: url({{ asset('img/maindish1.jpg') }});"></div>
-                    <a href="detail-maindish1.html" class="menu-info">
-                        <h5 class="menu-name">Herb-Roasted Salmon</h5>
-                        <p class="menu-price">IDR 185.000</p>
-                    </a>
-                </div>
-
-                <div class="col-6 col-md-3">
-                    <div class="menu-item" style="background-image: url({{ asset('img/maindish2.jpg') }});"></div>
-                    <a href="detail-maindish2.html" class="menu-info">
-                        <h5 class="menu-name">Golden Roast Chicken</h5>
-                        <p class="menu-price">IDR 210.000</p>
-                    </a>
-                </div>
-
-                <div class="col-6 col-md-3">
-                    <div class="menu-item" style="background-image: url({{ asset('img/maindish3.jpg') }});"></div>
-                    <a href="detail-maindish3.html" class="menu-info">
-                        <h5 class="menu-name">Premium Lamb Chops</h5>
-                        <p class="menu-price">IDR 260.000</p>
-                    </a>
-                </div>
-
-                <div class="col-6 col-md-3">
-                    <div class="menu-item" style="background-image: url({{ asset('img/maindish4.jpg') }});"></div>
-                    <a href="detail-maindish4.html" class="menu-info">
-                        <h5 class="menu-name">Garlic Butter Lobster</h5>
-                        <p class="menu-price">IDR 320.000</p>
-                    </a>
-                </div>
+                @foreach ($mainDishes as $mainDish)
+                    <div class="col-6 col-md-3">
+                        <div class="menu-item"
+                            style="background-image: url({{ asset('storage/' . $mainDish->img_path) }});"></div>
+                        <a href="{{ route('menu.detail', $mainDish->id) }}" class="menu-info">
+                            <h5 class="menu-name">{{ $mainDish->name }}</h5>
+                            <p class="menu-price">@currency($mainDish->price)</p>
+                        </a>
+                    </div>
+                @endforeach
             </div>
         </div>
 
         <div class="menu-category mb-4">
             <h4 class="menu-heading">Dessert</h4>
             <div class="row g-3">
-                <div class="col-6 col-md-3">
-                    <div class="menu-item" style="background-image: url({{ asset('img/dessert1.jpg') }});"></div>
-                    <a href="detail-dessert1.html" class="menu-info">
-                        <h5 class="menu-name">Caramel Banana Cake</h5>
-                        <p class="menu-price">IDR 95.000</p>
-                    </a>
-                </div>
-
-                <div class="col-6 col-md-3">
-                    <div class="menu-item" style="background-image: url({{ asset('img/dessert2.jpg') }});"></div>
-                    <a href="detail-dessert2.html" class="menu-info">
-                        <h5 class="menu-name">Fresh Fruit Shortcake</h5>
-                        <p class="menu-price">IDR 110.000</p>
-                    </a>
-                </div>
-
-                <div class="col-6 col-md-3">
-                    <div class="menu-item" style="background-image: url({{ asset('img/dessert3.jpg') }});"></div>
-                    <a href="detail-dessert3.html" class="menu-info">
-                        <h5 class="menu-name">Classic Cherry Cheesecake</h5>
-                        <p class="menu-price">IDR 120.000</p>
-                    </a>
-                </div>
-
-                <div class="col-6 col-md-3">
-                    <div class="menu-item" style="background-image: url({{ asset('img/dessert4.jpg') }});"></div>
-                    <a href="detail-dessert4.html" class="menu-info">
-                        <h5 class="menu-name">Caramel Panna Cotta</h5>
-                        <p class="menu-price">IDR 105.000</p>
-                    </a>
-                </div>
+                @foreach ($desserts as $dessert)
+                    <div class="col-6 col-md-3">
+                        <div class="menu-item" style="background-image: url({{ asset('storage/' . $dessert->img_path) }});">
+                        </div>
+                        <a href="{{ route('menu.detail', $dessert->id) }}" class="menu-info">
+                            <h5 class="menu-name">{{ $dessert->name }}</h5>
+                            <p class="menu-price">@currency($dessert->price)</p>
+                        </a>
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -163,57 +100,24 @@
         <div class="drink-container">
 
             <div class="drink-list">
-
-                <div class="drink-item">
-                    <img src="{{ asset('img/matcha.jpg') }}" class="drink-thumb">
-                    <div class="drink-text">
-                        <div class="drink-title-row">
-                            <span>ICED MATCHA LATTE</span>
-                            <span class="drink-price">IDR 49.000</span>
+                @foreach ($beverages as $beverage)
+                    <div class="drink-item">
+                        <img src="{{ asset('img/matcha.jpg') }}" class="drink-thumb">
+                        <div class="drink-text">
+                            <div class="drink-title-row">
+                                <span>{{ $beverage->name }}</span>
+                                <span class="drink-price">@currency($beverage->price)</span>
+                            </div>
+                            <p>{{ $beverage->description }}</p>
                         </div>
-                        <p>Matcha powder blended with fresh milk and light sweetness.</p>
                     </div>
+                @endforeach
+
+                <div class="drink-image">
+                    <img src="{{ asset('img/mocktail.jpg') }}" alt="">
                 </div>
 
-                <div class="drink-item">
-                    <img src="{{ asset('img/berry.jpg') }}" class="drink-thumb">
-                    <div class="drink-text">
-                        <div class="drink-title-row">
-                            <span>STRAWBERRY SMOOTHIE <small class="drink-badge">NEW</small></span>
-                            <span class="drink-price">IDR 55.000</span>
-                        </div>
-                        <p>Fresh strawberries blended with yogurt and honey.</p>
-                    </div>
-                </div>
-
-                <div class="drink-item">
-                    <img src="{{ asset('img/lemon.jpg') }}" class="drink-thumb">
-                    <div class="drink-text">
-                        <div class="drink-title-row">
-                            <span>LEMON ICED TEA</span>
-                            <span class="drink-price">IDR 40.000</span>
-                        </div>
-                        <p>Refreshing black tea mixed with fresh lemon juice.</p>
-                    </div>
-                </div>
-
-                <div class="drink-item">
-                    <img src="{{ asset('img/caramel.jpg') }}" class="drink-thumb">
-                    <div class="drink-text">
-                        <div class="drink-title-row">
-                            <span>CARAMEL FRAPPE</span>
-                            <span class="drink-price">IDR 59.000</span>
-                        </div>
-                        <p>Blended coffee with caramel syrup and whipped cream.</p>
-                    </div>
-                </div>
             </div>
-
-            <div class="drink-image">
-                <img src="{{ asset('img/mocktail.jpg') }}" alt="">
-            </div>
-
-        </div>
     </section>
 
 
@@ -222,86 +126,21 @@
 
         <div class="row g-5">
 
-            <div class="col-md-6 d-flex additional-item">
-                <div class="additional-img hover-img" style="background-image: url({{ asset('img/addon1.jpg') }});">
-                </div>
-                <a href="detail-additional.html">
-                    <div class="additional-text ms-3">
-                        <h4 class="additional-name clickable">Beluga Caviar
-                            <span class="additional-price">IDR 1.800.000</span>
-                        </h4>
-                        <p class="additional-desc">Premium grade caviar with rich, buttery flavor and delicate texture.</p>
+            @foreach ($additionals as $additional)
+                <div class="col-md-6 d-flex additional-item">
+                    <div class="additional-img hover-img"
+                        style="background-image: url({{ asset('storage/' . $additional->img_path) }});">
                     </div>
-                </a>
-            </div>
-
-            <div class="col-md-6 d-flex additional-item">
-                <div class="additional-img hover-img" style="background-image: url({{ asset('img/addon2.jpg') }});">
+                    <a href="detail-additional.html">
+                        <div class="additional-text ms-3">
+                            <h4 class="additional-name clickable">{{ $additional->name }}
+                                <span class="additional-price">@currency($additional->price)</span>
+                            </h4>
+                            <p class="additional-desc">{{ $additional->description }}</p>
+                        </div>
+                    </a>
                 </div>
-                <a href="detail-additional.html">
-                    <div class="additional-text ms-3">
-                        <h4 class="additional-name clickable">Ikura Salmon Roe
-                            <span class="additional-price">IDR 450.000</span>
-                        </h4>
-                        <p class="additional-desc">Bright, briny salmon pearls that add a burst of umami to any dish.</p>
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-md-6 d-flex additional-item">
-                <div class="additional-img hover-img" style="background-image: url({{ asset('img/addon3.jpg') }});">
-                </div>
-                <a href="detail-additional.html">
-                    <div class="additional-text ms-3">
-                        <h4 class="additional-name clickable">Black Truffle Shavings
-                            <span class="additional-price">IDR 950.000</span>
-                        </h4>
-                        <p class="additional-desc">Fresh black truffle slices, aromatic and earthy for a luxurious finish.
-                        </p>
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-md-6 d-flex additional-item">
-                <div class="additional-img hover-img" style="background-image: url({{ asset('img/addon4.jpg') }});">
-                </div>
-                <a href="detail-additional.html">
-                    <div class="additional-text ms-3">
-                        <h4 class="additional-name clickable">Parmigiano Reggiano
-                            <span class="additional-price">IDR 150.000</span>
-                        </h4>
-                        <p class="additional-desc">Aged Italian cheese with nutty, savory notes to elevate flavor depth.
-                        </p>
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-md-6 d-flex additional-item">
-                <div class="additional-img hover-img" style="background-image: url({{ asset('img/addon5.jpg') }});">
-                </div>
-                <a href="detail-additional.html">
-                    <div class="additional-text ms-3">
-                        <h4 class="additional-name clickable">Uni Sea Urchin
-                            <span class="additional-price">IDR 680.000</span>
-                        </h4>
-                        <p class="additional-desc">Creamy sea urchin with delicate sweetness and smooth brininess.</p>
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-md-6 d-flex additional-item">
-                <div class="additional-img hover-img" style="background-image: url({{ asset('img/addon6.jpg') }});">
-                </div>
-                <a href="detail-additional.html">
-                    <div class="additional-text ms-3">
-                        <h4 class="additional-name clickable">Truffle Butter
-                            <span class="additional-price">IDR 120.000</span>
-                        </h4>
-                        <p class="additional-desc">Smooth, aromatic butter infused with truffle for a rich, velvety touch.
-                        </p>
-                    </div>
-                </a>
-            </div>
+            @endforeach
         </div>
     </section>
 

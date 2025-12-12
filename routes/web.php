@@ -17,12 +17,9 @@ Route::get('/', function () {
     return view('home');
 })->name('/');
 
-Route::any('/menu', function () {
-    return view('menu');
-})->name('menu');
-
-Route::any('/detailmenu', function () {
-    return view('detail_menu');
+Route::controller(MenuController::class)->group(function(){
+    route::get('/menu', 'show')->name('menu');
+    route::get('/menu/{id}', 'detail')->name('menu.detail');
 });
 
 Route::get('/checkout', function () {

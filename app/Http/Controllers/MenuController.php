@@ -87,7 +87,18 @@ class MenuController extends Controller
 
     public function show()
     {
-        $menus = Menu::all();
-        return view('menu', compact('menu'));
+        $appetizers = Menu::where('category', 'Appetizer')->get();
+        $mainDishes = Menu::where('category', 'Main Dish')->get();
+        $desserts = Menu::where('category', 'Dessert')->get();
+        $beverages = Menu::where('category', 'Beverages')->get();
+        $additionals = Menu::where('category', 'Additional')->get();
+
+        return view('menu', compact('appetizers', 'mainDishes', 'desserts', 'beverages', 'additionals'));
+    }
+
+    public function detail(string $id)
+    {
+        $menu = Menu::findOrFail($id);
+        return view('detail_menu', compact('menu'));
     }
 }
