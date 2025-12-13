@@ -65,4 +65,12 @@ Route::get('/payment', function () {
 Route::get('/order', function () {
     return view('order');
 });
+
+Route::get('/myreservation', function () {
+    return view('myreservation');
+});
+
+Route::get('/myhistory', function () {
+    return view('myhistory');
+});
 // });
