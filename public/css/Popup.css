@@ -1,0 +1,85 @@
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(4px);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modal-content {
+    background: #0d2625;
+    border: 2px solid #c89b3c;
+    padding: 40px 45px;
+    max-width: 420px;
+    width: 90%;
+    text-align: center;
+    color: #f5f2ed;
+    border-radius: 14px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+    animation: fadeScale 0.35s ease;
+}
+
+.modal-icon {
+    display: block;
+    font-size: 22px;
+    color: #c89b3c;
+    margin-bottom: 18px;
+}
+
+.modal-content h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 14px;
+    letter-spacing: 0.5px;
+}
+
+.modal-content p {
+    font-size: 14.5px;
+    line-height: 1.8;
+    color: #e3ded4;
+    margin-bottom: 32px;
+}
+
+.modal-btn {
+    background: transparent;
+    color: #c89b3c;
+    border: 1px solid #c89b3c;
+    padding: 10px 26px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modal-btn:hover {
+    background:  #c89b3c;
+    color: #0d2625;
+}
+
+.reserve-btn {
+    margin-top: 40px;
+    padding: 12px 30px;
+    background: #c89b3c;
+    border: none;
+    color: #0d2625;
+    font-weight: 500;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+@keyframes fadeScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
