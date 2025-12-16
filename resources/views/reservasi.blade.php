@@ -79,6 +79,10 @@ form {
     font-size: 16px;
 }
 
+.input-box option{
+    background-color: #333 !important;
+}
+
 textarea {
     height: 130px;
     resize: none;

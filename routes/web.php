@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ReservationController;
 
 
 Route::get('/auth/login', [AuthController::class, 'showLogin'])->name('auth.login');
@@ -30,23 +31,21 @@ Route::get('/contact', function () {
     return view('contact');
 });
 
-Route::get('/testadmin', function () {
-    return view('admin.layout.index');
-});
 
-
-Route::middleware(['verifyrole:admin'])->group(function () {
+Route::middleware(['verifyrole:admin'])->prefix('admin')->group(function () {
     Route::get('/admin', function(){
         return view('admin.dashboard');
-    });
+    })->name('admin');
 
     Route::controller(MenuController::class)->group(function () {
-        Route::get('admin/menu', 'index')->name('admin.menu');
-        Route::post('admin/menu', 'store')->name('admin.menu.add');
-        Route::get('admin/menu/{id}', 'edit')->name('admin.menu.detail');
-        Route::put('admin/menu/{id}', 'update')->name('admin.menu.update');
-        Route::delete('admin/menu/{id}', 'destroy')->name('admin.menu.destroy');
+        Route::get('/menu', 'index')->name('admin.menu');
+        Route::post('/menu', 'store')->name('admin.menu.add');
+        Route::get('/menu/{id}', 'edit')->name('admin.menu.detail');
+        Route::put('/menu/{id}', 'update')->name('admin.menu.update');
+        Route::delete('/menu/{id}', 'destroy')->name('admin.menu.destroy');
     });
+
+    Route::resource('reservation', ReservationController::class);
 });
 
 // Route::middleware(['role:user'])->group(function () {
@@ -54,13 +53,13 @@ Route::get('/profil', function () {
     return view('profil');
 })->name('profile');
 
-Route::get('/reservasi', function () {
-    return view('reservasi');
-})->name('reservasi');
+Route::controller(ReservationController::class)->group(function(){
+    Route::get('reservasi', 'index')->name('reservasi');
+});
 
 Route::get('/payment', function () {
     return view('payment');
-});
+})->name('payment');
 
 Route::get('/order', function () {
     return view('order');
