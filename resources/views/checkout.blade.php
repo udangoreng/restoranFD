@@ -614,15 +614,7 @@
 
                         <div class="detail-group">
                             <div class="detail-label">Nama :</div>
-                            <div class="detail-value" id="customer-name">Cholby Sabrina</div>
-                        </div>
-
-                        <div class="detail-group">
-                            <div class="detail-label">Alamat :</div>
-                            <div class="detail-value" id="customer-address">
-                                Jl. Ketintang A No. 19,<br>
-                                Surabaya, Jawa Timur
-                            </div>
+                            <div class="detail-value" id="customer-name">Primey Timberlake</div>
                         </div>
 
                         <div class="detail-group">
@@ -632,7 +624,7 @@
 
                         <div class="detail-group">
                             <div class="detail-label">Email Address :</div>
-                            <div class="detail-value" id="customer-email">cholbysabrina@email.com</div>
+                            <div class="detail-value" id="customer-email">primeytimberlake@email.com</div>
                         </div>
                     </div>
 
@@ -705,6 +697,16 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="payment-method">
+                            <h3>DP</h3>
+                            <div class="payment-info">
+                                <span class="payment-text">DP 50%:</span>
+                                <span class="grand-total">IDR 523.000</span>
+                            </div>
+                            <div class="dp-subtitle">Sisa 50% dibayar saat dine-in</div>
+                        </div>
+
                         <div class="payment-method">
                             <h3>Metode Pembayaran</h3>
                             <div class="payment-info">
