@@ -1421,7 +1421,7 @@ body.nav-active {
     position: relative;
     width: 100%;
     height: 100vh;
-    background: url('{{asset("img/abouthero.jpg")}}') no-repeat center/cover;
+    background: url("/img/heroreservasi.png") no-repeat center/cover;
     display: flex;
     justify-content: center;
     align-items: center;

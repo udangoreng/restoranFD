@@ -13,7 +13,7 @@ Route::get('/auth/register', [AuthController::class, 'showRegister'])->name('aut
 Route::post('/auth/login', [AuthController::class, 'login'])->name('login');
 Route::post('/auth/register', [AuthController::class, 'register'])->name('register');
 
-Route::post('/auth/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/auth/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/', function () {
     return view('home');
@@ -30,7 +30,11 @@ Route::get('/checkout', function () {
 
 Route::get('/contact', function () {
     return view('contact');
-});
+})->name('contact');
+
+Route::get('/aboutus', function () {
+    return view('about');
+})->name('aboutus');
 
 
 Route::middleware(['verifyrole:admin'])->prefix('admin')->group(function () {
@@ -54,7 +58,13 @@ Route::middleware(['verifyrole:admin'])->prefix('admin')->group(function () {
         Route::delete('/table/{id}', 'destroy')->name('admin.table.destroy');
     });
 
-    Route::resource('reservation', ReservationController::class);
+    Route::controller(ReservationController::class)->group(function () {
+        Route::get('/reservation', 'index')->name('admin.reservation');
+        Route::post('/reservation', 'store')->name('admin.reservation.add');
+        Route::get('/reservation/{id}', 'edit')->name('admin.reservation.detail');
+        Route::put('/reservation/{id}', 'update')->name('admin.reservation.update');
+        Route::delete('/reservation/{id}', 'destroy')->name('admin.reservation.destroy');
+    });
 });
 
 // Route::middleware(['role:user'])->group(function () {
@@ -63,7 +73,7 @@ Route::get('/profil', function () {
 })->name('profile');
 
 Route::controller(ReservationController::class)->group(function(){
-    Route::get('reservasi', 'index')->name('reservasi');
+    Route::get('reservation', 'index')->name('reservation');
 });
 
 Route::get('/payment', function () {

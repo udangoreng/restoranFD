@@ -10,8 +10,12 @@
 body {
     background: #18312E;
     overflow-x: hidden;
+}
+
+.contact-her0, .contact-section, .left-content, .right-content{
     font-family: 'Georgia', 'Times New Roman', serif;
 }
+
 .contact-hero {
     position: relative;
     width: 100%;
@@ -495,4 +499,6 @@ form button:active {
             </div>
         </div>
     </section>
+
+    @include('layout.components.footer')
 @endsection
