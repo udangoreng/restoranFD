@@ -27,34 +27,35 @@
                         Pages
                     </li>
 
-                    <li class="sidebar-item active">
+                    <li class="sidebar-item {{ request()->route()->getName() === '/admin/admin' ? 'active' : '' }}">
                         <a class="sidebar-link" href="index.html">
                             <i class="align-middle" data-feather="sliders"></i> <span
                                 class="align-middle">Dashboard</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item">
+                    <li class="sidebar-item {{ request()->route()->getName() === '/admin/user' ? 'active' : '' }}">
                         <a class="sidebar-link" href="pages-profile.html">
                             <i class="align-middle" data-feather="user"></i> <span class="align-middle">Users</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item">
+                    <li
+                        class="sidebar-item {{ request()->route()->getName() === '/admin/reservation' ? 'active' : '' }}">
                         <a class="sidebar-link" href="pages-sign-in.html">
                             <i class="align-middle" data-feather="book"></i> <span
                                 class="align-middle">Resevation</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item">
+                    <li class="sidebar-item {{ request()->route()->getName() === 'admin.menu' ? 'active' : '' }}">
                         <a class="sidebar-link" href="{{ route('admin.menu') }}">
                             <i class="align-middle" data-feather="book-open"></i> <span class="align-middle">Menu</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="pages-blank.html">
+                    <li class="sidebar-item {{ request()->route()->getName() === '.admin.table' ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('admin.table') }}">
                             <i class="align-middle" data-feather="grid"></i> <span class="align-middle">Tables</span>
                         </a>
                     </li>

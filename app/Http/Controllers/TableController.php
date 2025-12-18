@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CustTable;
 use Illuminate\Http\Request;
 
 class TableController extends Controller
@@ -11,15 +12,8 @@ class TableController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $tables = CustTable::all();
+        return view('admin.table', compact('tables'));
     }
 
     /**
@@ -27,15 +21,15 @@ class TableController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'table_number' => 'required|string|unique:cust_tables|max:5',
+            'capacity' => 'required|numeric|min:0|max:10',
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        $data = $request->all();
+
+        CustTable::create($data);
+        return redirect()->route('admin.table')->with('Success', 'Menu created successfully.');
     }
 
     /**
@@ -43,15 +37,25 @@ class TableController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $table = CustTable::findOrFail($id);
+        return view('admin.detailtable', compact('table'));
     }
-
+    
     /**
      * Update the specified resource in storage.
-     */
+    */
     public function update(Request $request, string $id)
     {
-        //
+        $table = CustTable::findOrFail($id);
+        $request->validate([
+            'table_number' => 'required|string|unique:cust_tables|max:5',
+            'capacity' => 'required|numeric|min:0|max:10',
+        ]);
+
+        $data = $request->all();
+
+        $res = $table->update($data);
+        return redirect()->route('admin.table')->with('Success', 'Menu created successfully.');
     }
 
     /**
@@ -59,6 +63,9 @@ class TableController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $table = CustTable::findOrFail($id);
+        $table->delete();
+
+        return redirect()->route('admin.table')->with('success', 'Menu deleted successfully.');
     }
 }

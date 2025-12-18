@@ -1,6 +1,6 @@
 @extends('admin.layout.index')
 @section('content')
-    <h1>Edit Post</h1>
+    <h1>Edit Menu</h1>
     <form action="{{ route('admin.menu.update', $menu) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
