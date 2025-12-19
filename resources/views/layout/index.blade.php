@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COURVOISER - Fine Dining Restaurant</title>
+    <title>@yield('title', 'COURVOISER - Fine Dining Restaurant')</title>
     <meta name="title" content="COURVOISER - Fine Dining Restaurant">
 
     <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">

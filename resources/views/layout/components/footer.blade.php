@@ -14,8 +14,8 @@
 
             <p>Restoria, Arrondissement, Paris 9578</p>
             <p>Daily · 8.00 am to 10.00 pm</p>
-            <p>booking@gmail.com</p>
-            <p>Booking Request : +88-123-123456</p>
+            <p>courvoiser@booking.com</p>
+            <p>Booking Request : +62-812-34567890</p>
 
             <hr class="footer-divider">
 

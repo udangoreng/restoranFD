@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservasi</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             margin: 0;
             font-family: 'Poppins', sans-serif;
-            background: url('{{ asset("img/background.jpeg") }}') center/cover no-repeat fixed;
+            background: url('{{ asset('img/background.jpeg') }}') center/cover no-repeat fixed;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
         }
+
         .reservasi-wrapper {
             width: 90%;
             max-width: 900px;
@@ -26,6 +29,7 @@
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
             color: white;
         }
+
         .reservasi-wrapper .subtitle {
             text-transform: uppercase;
             letter-spacing: 3px;
@@ -55,6 +59,7 @@
         .reservasi-wrapper p.info a:hover {
             text-decoration: underline;
         }
+
         form {
             display: flex;
             flex-direction: column;
@@ -70,6 +75,7 @@
         .form-row-triple {
             grid-template-columns: 1fr 1fr 1fr;
         }
+
         .input-box {
             background: rgba(0, 30, 20, 0.7);
             padding: 15px;
@@ -98,6 +104,7 @@
         .input-box textarea::placeholder {
             color: rgba(255, 255, 255, 0.7);
         }
+
         .input-box select {
             appearance: none;
             -webkit-appearance: none;
@@ -119,10 +126,12 @@
             color: rgba(255, 255, 255, 0.5);
             font-style: italic;
         }
+
         textarea {
             height: 130px;
             resize: none;
         }
+
         .button-submit {
             background: #e4ad53;
             color: #000;
@@ -144,25 +153,27 @@
             background: #d19940;
             transform: translateY(-2px);
         }
+
         select:invalid {
             color: rgba(255, 255, 255, 0.5);
         }
+
         @media (max-width: 768px) {
             .reservasi-wrapper {
                 width: 95%;
                 padding: 25px;
             }
-            
+
             .reservasi-wrapper h1 {
                 font-size: 32px;
             }
-            
+
             .form-row,
             .form-row-triple {
                 grid-template-columns: 1fr;
                 gap: 15px;
             }
-            
+
             .input-box select {
                 font-size: 14px;
             }
@@ -174,15 +185,39 @@
     <div class="reservasi-wrapper">
         <div class="subtitle">✦︎ Online Reservation ✦︎</div>
         <h1>Book A Table</h1>
-        <p class="info">
+        <p class="info" style="margin-bottom: 0.75rem !important">
             Booking request <a href="#">+62-812-34567890</a> or fill out the order form
         </p>
+        <p class="info">*For Group Reservation more than 10 people, please contact
+            courvoiser@booking.com, or call on +62-812-34567890 </p>
 
         <form>
-            <div class="form-row form-row-triple">
-                <div class="input-box">
-                    <input type="text" placeholder="Your Name">
+            <div class="d-flex">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                        value="option1">
+                    <label class="form-check-label" for="inlineRadio1">Ms.</label>
                 </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                        value="option2">
+                    <label class="form-check-label" for="inlineRadio2">Mr.</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3"
+                        value="option3">
+                    <label class="form-check-label" for="inlineRadio3">Mx.</label>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="input-box">
+                    <input type="text" placeholder="First Name">
+                </div>
+                <div class="input-box">
+                    <input type="text" placeholder="Last Name">
+                </div>
+            </div>
+            <div class="form-row">
                 <div class="input-box">
                     <input type="email" placeholder="Email Address">
                 </div>
@@ -200,10 +235,13 @@
                         <option>5 Person</option>
                         <option>6 Person</option>
                         <option>7 Person</option>
+                        <option>8 Person</option>
+                        <option>9 Person</option>
+                        <option>10 Person</option>
                     </select>
                 </div>
                 <div class="input-box">
-                    <input type="date">
+                    <input type="date" id="#date" min="<?php echo date("Y-m-d"); ?>">
                 </div>
             </div>
             <div class="form-row">
@@ -253,5 +291,16 @@
             <button class="button-submit">Book A Table</button>
         </form>
     </div>
+
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(function() {
+            $("#date").datepicker({
+                minDate: new Date()
+            });
+        });
+    </script>
 </body>
+
 </html>

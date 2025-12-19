@@ -144,5 +144,5 @@
         </div>
     </section>
 
-    @include('layout.component.footer')
+    @include('layout.components.footer')
 @endsection
