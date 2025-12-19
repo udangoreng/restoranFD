@@ -95,4 +95,16 @@ Route::get('/myhistory', function () {
 Route::get('/editprofile', function () {
     return view('editprofile');
 });
+
+Route::get('/detail_history', function () {
+    return view('detail_history');
+});
+
+Route::get('/detail_menu', function () {
+    return view('detail_menu');
+});
+
+Route::get('/detail_reservation', function () {
+    return view('detail_reservation');
+});
 // });
