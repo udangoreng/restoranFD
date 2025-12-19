@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Profile</title>
+    <title>Edit Profile</title>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         * {
             margin: 0;
@@ -27,9 +29,9 @@
         .profile-box {
             max-width: 1200px;
             margin: auto;
+            padding: 30px;
             border: 2px solid #d4af37;
             border-radius: 20px;
-            padding: 30px;
             background: rgba(12, 40, 36, 0.95);
         }
 
@@ -47,7 +49,6 @@
             gap: 25px;
         }
 
-        
         .profile-card {
             background: linear-gradient(180deg, #143c37, #0d2a26);
             border-radius: 18px;
@@ -96,7 +97,53 @@
             width: 20px;
         }
 
-    
+        .profile-input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            border-radius: 10px;
+            padding: 7px 12px;
+            color: #f5f5f5;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .profile-input:focus {
+            outline: none;
+            border-color: #d4af37;
+            box-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .profile-input.profile-name {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            color: #e6c87a;
+            margin-bottom: 20px;
+        }
+
+        .edit-btn {
+            margin-top: 10px;
+            background: rgba(212, 175, 55, 0.15);
+            color: #d4af37;
+            border: 1px solid #d4af37;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .edit-btn:hover {
+            background: rgba(212, 175, 55, 0.3);
+            transform: translateY(-2px);
+        }
+
         .activity-card {
             background: linear-gradient(180deg, #143c37, #0d2a26);
             border-radius: 18px;
@@ -116,7 +163,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin: 25px 0 15px 0;
+            margin: 25px 0 15px;
         }
 
         .section-subtitle {
@@ -131,10 +178,6 @@
             color: #3cb371;
         }
 
-        .section-subtitle i {
-            font-size: 16px;
-        }
-
         .detail-btn {
             padding: 8px 20px;
             border-radius: 20px;
@@ -144,8 +187,8 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            transition: all 0.3s ease;
             border: none;
+            transition: all 0.3s ease;
         }
 
         .detail-btn.active-btn {
@@ -160,25 +203,15 @@
             border: 1px solid #3cb371;
         }
 
-        .detail-btn.active-btn:hover {
-            background: rgba(212, 175, 55, 0.25);
+        .detail-btn:hover {
             transform: translateY(-2px);
         }
 
-        .detail-btn.history-btn:hover {
-            background: rgba(60, 179, 113, 0.25);
-            transform: translateY(-2px);
-        }
-
-        
+    
         .reservation-list {
             display: flex;
             flex-direction: column;
             gap: 15px;
-        }
-
-        .reservation-list.history {
-            opacity: 0.9;
         }
 
         .reservation-item {
@@ -229,7 +262,32 @@
             color: #3cb371;
             border: 1px solid #3cb371;
         }
+        @media (max-width: 1024px) {
+            .profile-layout {
+                grid-template-columns: 1fr;
+            }
 
+            .profile-card {
+                max-width: 400px;
+                margin: auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .profile-box {
+                padding: 20px;
+            }
+
+            .page-title {
+                font-size: 24px;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
         .reservation-body p {
             margin-bottom: 10px;
             font-size: 14px;
@@ -243,109 +301,51 @@
             width: 16px;
         }
 
-    
-        @media (max-width: 1024px) {
-            .profile-layout {
-                grid-template-columns: 1fr;
-            }
-            
-            .profile-card {
-                max-width: 400px;
-                margin: 0 auto;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .profile-container {
-                padding: 15px;
-            }
-            
-            .profile-box {
-                padding: 20px;
-            }
-            
-            .page-title {
-                font-size: 24px;
-            }
-            
-            .section-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-                margin: 20px 0 10px 0;
-            }
-            
-            .detail-btn {
-                align-self: flex-start;
-            }
-            
-            .reservation-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-            
-            .section-title {
-                font-size: 20px;
-            }
-            
-            .section-subtitle {
-                font-size: 16px;
-            }
-        }
-                .edit-btn {
-            margin-left: auto;
-            background: rgba(212, 175, 55, 0.15);
-            color: #d4af37;
-            border: 1px solid #d4af37;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
+        .profile-action {
             display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.3s ease;
+            justify-content: flex-end;
+            margin-top: 15px;
         }
-
-        .edit-btn:hover {
-            background: rgba(212, 175, 55, 0.3);
-            transform: translateY(-2px);
-        }
-        
 
     </style>
 </head>
+
 <body>
     <main class="profile-container">
         <div class="profile-box">
-            <h1 class="page-title">My Profile</h1>
+            <h1 class="page-title">Edit Profile</h1>
+
             <div class="profile-layout">
                 <aside class="profile-card">
                     <div class="profile-photo">
-                        <img src="{{ asset('img/fotoprofil.jpeg') }}" alt="">
+                        <img src="{{ asset('img/fotoprofil.jpeg') }}" alt="Profile Photo">
                     </div>
-                    <h2 class="profile-name">Princy Timberlake</h2>
+
+                    <input type="text" class="profile-input profile-name" value="Princy Timberlake">
+
                     <div class="profile-about">
                         <h4>Personal Information</h4>
                         <ul class="about-list">
                             <li>
                                 <i class="fa-solid fa-cake-candles"></i>
-                                <span>03 Jan 1997</span>
+                                <input type="date" class="profile-input" value="1997-01-03">
                             </li>
                             <li>
                                 <i class="fa-solid fa-phone"></i>
-                                <span>0812-3456-7890</span>
+                                <input type="tel" class="profile-input" value="0812-3456-7890">
                             </li>
                             <li>
                                 <i class="fa-solid fa-location-dot"></i>
-                                <span>Surabaya, Indonesia</span>
+                                <input type="text" class="profile-input" value="Surabaya, Indonesia">
                             </li>
-                            <button class="edit-btn">
-                                    <i class="fa-solid fa-pen"></i> Edit
-                            </button>
                         </ul>
+
+                       <div class="profile-action">
+                        <button class="edit-btn">
+                            <i class="fa-solid fa-floppy-disk"></i> Save
+                        </button>
+                    </div>
+
                     </div>
                 </aside>
 

@@ -91,4 +91,8 @@ Route::get('/myreservation', function () {
 Route::get('/myhistory', function () {
     return view('myhistory');
 });
+
+Route::get('/editprofile', function () {
+    return view('editprofile');
+});
 // });
