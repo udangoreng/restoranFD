@@ -178,6 +178,45 @@
             font-size: 15px;
             flex: 1;
         }
+        .detail-button-container {
+            display: flex;
+            justify-content: flex-end;
+            padding: 0 20px 15px 20px;
+        }
+
+        .detail-button {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            background: linear-gradient(to right, #c89b3c, #e6c780);
+            color: #0a1f1c;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 8px rgba(200, 155, 60, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            height: 32px;
+        }
+
+        .detail-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(200, 155, 60, 0.4);
+            background: linear-gradient(to right, #e6c780, #f0d9a0);
+        }
+
+        .detail-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(200, 155, 60, 0.3);
+        }
+
+        .detail-button i {
+            font-size: 11px;
+        }
 
         @media (max-width: 768px) {
             .reservation-header {
@@ -185,12 +224,27 @@
                 align-items: flex-start;
                 gap: 15px;
             }
+            
+            .detail-button-container {
+                justify-content: center;
+                padding: 0 20px 15px 20px;
+            }
+            
+            .detail-button {
+                padding: 6px 16px;
+            }
         }
 
         @media (max-width: 576px) {
             .info-group {
                 flex-direction: column;
                 gap: 5px;
+            }
+            
+            .detail-button {
+                width: auto;
+                justify-content: center;
+                padding: 6px 20px;
             }
         }
 
@@ -213,7 +267,7 @@
                     <div class="reservation-header">
                         <div class="reservation-id">
                             <span class="id-label">Reservation ID:</span>
-                            <span class="id-value">#RSV-20241207-0088</span>
+                            <span class="id-value">#RSV-20251207-0098</span>
                         </div>
                         <div class="reservation-status status-completed">
                             <i class="fas fa-check-circle"></i>
@@ -225,39 +279,7 @@
                         <div class="reservation-info">
                             <div class="info-group">
                                 <span class="info-label"><i class="fas fa-calendar-alt"></i> Date & Time:</span>
-                                <span class="info-value">Saturday, 9 March 2024 • 20:30</span>
-                            </div>
-
-                            <div class="info-group">
-                                <span class="info-label"><i class="fas fa-users"></i> Guests:</span>
-                                <span class="info-value">6 Persons</span>
-                            </div>
-
-                            <div class="info-group">
-                                <span class="info-label"><i class="fas fa-phone"></i> Contact:</span>
-                                <span class="info-value">0812-3456-7890</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="reservation-card completed">
-                    <div class="reservation-header">
-                        <div class="reservation-id">
-                            <span class="id-label">Reservation ID:</span>
-                            <span class="id-value">#RSV-20241207-0089</span>
-                        </div>
-                        <div class="reservation-status status-completed">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Completed</span>
-                        </div>
-                    </div>
-
-                    <div class="reservation-content">
-                        <div class="reservation-info">
-                            <div class="info-group">
-                                <span class="info-label"><i class="fas fa-calendar-alt"></i> Date & Time:</span>
-                                <span class="info-value">Sunday, 20 Aug 2024 • 18:00</span>
+                                <span class="info-value">Saturday, 25 Dec 2025 • 07:30</span>
                             </div>
 
                             <div class="info-group">
@@ -271,13 +293,19 @@
                             </div>
                         </div>
                     </div>
+                    <div class="detail-button-container">
+                        <button class="detail-button">
+                            <i class="fas fa-info-circle"></i>
+                            Details
+                        </button>
+                    </div>
                 </div>
 
                 <div class="reservation-card completed">
                     <div class="reservation-header">
                         <div class="reservation-id">
                             <span class="id-label">Reservation ID:</span>
-                            <span class="id-value">#RSV-20251207-0090</span>
+                            <span class="id-value">#RSV-20251207-0089</span>
                         </div>
                         <div class="reservation-status status-completed">
                             <i class="fas fa-check-circle"></i>
@@ -289,7 +317,45 @@
                         <div class="reservation-info">
                             <div class="info-group">
                                 <span class="info-label"><i class="fas fa-calendar-alt"></i> Date & Time:</span>
-                                <span class="info-value">Friday, 20 July 2025 • 19:00</span>
+                                <span class="info-value">Sunday, 20 Aug 2025 • 18:00</span>
+                            </div>
+
+                            <div class="info-group">
+                                <span class="info-label"><i class="fas fa-users"></i> Guests:</span>
+                                <span class="info-value">6 Persons</span>
+                            </div>
+
+                            <div class="info-group">
+                                <span class="info-label"><i class="fas fa-phone"></i> Contact:</span>
+                                <span class="info-value">0812-3456-7890</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-button-container">
+                        <button class="detail-button">
+                            <i class="fas fa-info-circle"></i>
+                            Details
+                        </button>
+                    </div>
+                </div>
+                <div class="reservation-card completed">
+                    <div class="reservation-header">
+                        <div class="reservation-id">
+                            <span class="id-label">Reservation ID:</span>
+                            <span class="id-value">#RSV-20241207-0090</span>
+                        </div>
+                        <div class="reservation-status status-completed">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Completed</span>
+                        </div>
+                    </div>
+
+                    <div class="reservation-content">
+                        <div class="reservation-info">
+                            <div class="info-group">
+                                <span class="info-label"><i class="fas fa-calendar-alt"></i> Date & Time:</span>
+                                <span class="info-value">Friday, 24 July 2024 • 19:00</span>
                             </div>
 
                             <div class="info-group">
@@ -302,6 +368,12 @@
                                 <span class="info-value">0812-3456-7890</span>
                             </div>
                         </div>
+                    </div>
+                    <div class="detail-button-container">
+                        <button class="detail-button">
+                            <i class="fas fa-info-circle"></i>
+                            Details
+                        </button>
                     </div>
                 </div>
 
