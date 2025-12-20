@@ -321,111 +321,130 @@
 <body>
     <main class="profile-container">
         <div class="profile-box">
-            <h1 class="page-title">My Profile</h1>
-            <div class="profile-layout">
-                <aside class="profile-card">
-                    <div class="profile-photo">
-                        <img src="{{ $userdata->profile_img_path ? asset('storage/' . $userdata->profile_img_path) : asset('img/fotoprofil.jpeg') }}" alt="Profile Photo">
-                    </div>
-                    <h2 class="profile-name">{{$userdata->name}}</h2>
-                    <div class="profile-about">
-                        <h4>Personal Information</h4>
-                        <ul class="about-list">
-                            <li>
-                                <i class="fa-solid fa-address-card"></i>
-                                <span>{{$userdata->username}}</span>
-                            </li>
-                            <li>
-                                <i class="fa-solid fa-cake-candles"></i>
-                                <span>{{($userdata->birthday != null) ? $userdata->birthday : "-"}}</span>
-                            </li>
-                            <li>
-                                <i class="fa-solid fa-phone"></i>
-                                <span>{{$userdata->phone}}</span>
-                            </li>
-                            <button class="edit-btn">
-                                <a href="{{ route('editprofile') }}" style="text-decoration: none; color:#d4af37">
-                                    <i class="fa-solid fa-pen"></i> Edit
-                                </a>
-                            </button>
-                        </ul>
-                    </div>
-                </aside>
+            @if (!$userdata)
+                @include('layout.popup.login_popup')
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const modal = document.getElementById("loginInfoModal");
+                        modal.style.display = "flex";
+                    });
+                    const understoodBtn = document.getElementById('closeLoginInfoModal');
+                    understoodBtn.addEventListener('click', function() {
+                        modal.style.display = none;
+                        setTimeout(() => {
+                            window.location.href = "{{ route('auth.login') }}";
+                        }, 1000);
+                    });
+                </script>
+            @endif
+            @auth
+                <h1 class="page-title">My Profile</h1>
+                <div class="profile-layout">
+                    <aside class="profile-card">
+                        <div class="profile-photo">
+                            <img src="{{ $userdata->profile_img_path ? asset('storage/' . $userdata->profile_img_path) : asset('img/fotoprofil.jpeg') }}"
+                                alt="Profile Photo">
+                        </div>
+                        <h2 class="profile-name">{{ $userdata->name }}</h2>
+                        <div class="profile-about">
+                            <h4>Personal Information</h4>
+                            <ul class="about-list">
+                                <li>
+                                    <i class="fa-solid fa-address-card"></i>
+                                    <span>{{ $userdata->username }}</span>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-cake-candles"></i>
+                                    <span>{{ $userdata->birthday != null ? $userdata->birthday : '-' }}</span>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-phone"></i>
+                                    <span>{{ $userdata->phone }}</span>
+                                </li>
+                                <button class="edit-btn">
+                                    <a href="{{ route('editprofile') }}" style="text-decoration: none; color:#d4af37">
+                                        <i class="fa-solid fa-pen"></i> Edit
+                                    </a>
+                                </button>
+                            </ul>
+                        </div>
+                    </aside>
 
-                <section class="activity-card">
-                    <h3 class="section-title">Activities</h3>
-                    <div class="section-header">
-                        <h4 class="section-subtitle">
-                            <i class="fa-solid fa-clock"></i> Active Reservations (3)
-                        </h4>
-                        <button class="detail-btn active-btn">
-                            <i class="fa-solid fa-arrow-right"></i> Detail
-                        </button>
-                    </div>
-                    <div class="reservation-list">
-                        <div class="reservation-item active">
-                            <div class="reservation-header">
-                                <span class="reservation-id">RESERVATION ID: <strong>#RSV-20251207-0098</strong></span>
-                                <span class="status active">
-                                    <i class="fa-solid fa-clock"></i> ACTIVE
-                                </span>
-                            </div>
-                            <div class="reservation-body">
-                                <p>
-                                    <i class="fa-solid fa-calendar-days"></i>
-                                    <strong>Date & Time:</strong>
-                                    Friday, 30 Dec 2025 • 19:00
-                                </p>
-                                <p>
-                                    <i class="fa-solid fa-user-group"></i>
-                                    <strong>Guests:</strong>
-                                    4 Persons
-                                </p>
-                                <p>
-                                    <i class="fa-solid fa-phone"></i>
-                                    <strong>Contact:</strong>
-                                    0812-3456-7890
-                                </p>
+                    <section class="activity-card">
+                        <h3 class="section-title">Activities</h3>
+                        <div class="section-header">
+                            <h4 class="section-subtitle">
+                                <i class="fa-solid fa-clock"></i> Active Reservations (3)
+                            </h4>
+                            <button class="detail-btn active-btn">
+                                <i class="fa-solid fa-arrow-right"></i> Detail
+                            </button>
+                        </div>
+                        <div class="reservation-list">
+                            <div class="reservation-item active">
+                                <div class="reservation-header">
+                                    <span class="reservation-id">RESERVATION ID: <strong>#RSV-20251207-0098</strong></span>
+                                    <span class="status active">
+                                        <i class="fa-solid fa-clock"></i> ACTIVE
+                                    </span>
+                                </div>
+                                <div class="reservation-body">
+                                    <p>
+                                        <i class="fa-solid fa-calendar-days"></i>
+                                        <strong>Date & Time:</strong>
+                                        Friday, 30 Dec 2025 • 19:00
+                                    </p>
+                                    <p>
+                                        <i class="fa-solid fa-user-group"></i>
+                                        <strong>Guests:</strong>
+                                        4 Persons
+                                    </p>
+                                    <p>
+                                        <i class="fa-solid fa-phone"></i>
+                                        <strong>Contact:</strong>
+                                        0812-3456-7890
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="section-header">
-                        <h4 class="section-subtitle history">
-                            <i class="fa-solid fa-history"></i> History (3)
-                        </h4>
-                        <button class="detail-btn history-btn">
-                            <i class="fa-solid fa-arrow-right"></i> Detail
-                        </button>
-                    </div>
-                    <div class="reservation-list history">
-                        <div class="reservation-item history">
-                            <div class="reservation-header">
-                                <span class="reservation-id">RESERVATION ID: <strong>#RSV-20451207-0088</strong></span>
-                                <span class="status history">
-                                    <i class="fa-solid fa-check"></i> COMPLETED
-                                </span>
-                            </div>
-                            <div class="reservation-body">
-                                <p>
-                                    <i class="fa-solid fa-calendar-days"></i>
-                                    <strong>Date & Time:</strong>
-                                    Saturday, 9 March 2024 • 20:30
-                                </p>
-                                <p>
-                                    <i class="fa-solid fa-user-group"></i>
-                                    <strong>Guests:</strong>
-                                    6 Persons
-                                </p>
-                                <p>
-                                    <i class="fa-solid fa-phone"></i>
-                                    <strong>Contact:</strong>
-                                    0812-3456-7890
-                                </p>
+                        <div class="section-header">
+                            <h4 class="section-subtitle history">
+                                <i class="fa-solid fa-history"></i> History (3)
+                            </h4>
+                            <button class="detail-btn history-btn">
+                                <i class="fa-solid fa-arrow-right"></i> Detail
+                            </button>
+                        </div>
+                        <div class="reservation-list history">
+                            <div class="reservation-item history">
+                                <div class="reservation-header">
+                                    <span class="reservation-id">RESERVATION ID: <strong>#RSV-20451207-0088</strong></span>
+                                    <span class="status history">
+                                        <i class="fa-solid fa-check"></i> COMPLETED
+                                    </span>
+                                </div>
+                                <div class="reservation-body">
+                                    <p>
+                                        <i class="fa-solid fa-calendar-days"></i>
+                                        <strong>Date & Time:</strong>
+                                        Saturday, 9 March 2024 • 20:30
+                                    </p>
+                                    <p>
+                                        <i class="fa-solid fa-user-group"></i>
+                                        <strong>Guests:</strong>
+                                        6 Persons
+                                    </p>
+                                    <p>
+                                        <i class="fa-solid fa-phone"></i>
+                                        <strong>Contact:</strong>
+                                        0812-3456-7890
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </section>
-            </div>
+                    </section>
+                </div>
+            @endauth
         </div>
     </main>
 </body>
