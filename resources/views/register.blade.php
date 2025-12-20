@@ -163,7 +163,7 @@
                 <input type="password" name="password" id="Password-input" placeholder="Password">
             </div>
             <div class="login-link">
-                Sudah punya akun? <a href="#">Sign In</a>
+                Sudah punya akun? <a href="{{route('login')}}">Sign In</a>
             </div>
             <button type="submit" name="register">Register</button>
         </form>

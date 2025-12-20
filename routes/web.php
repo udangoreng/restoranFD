@@ -5,7 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\TableController;
 use App\Http\Controllers\ReservationController;
-
+use App\Http\Controllers\UserController;
 
 Route::get('/auth/login', [AuthController::class, 'showLogin'])->name('auth.login');
 Route::get('/auth/register', [AuthController::class, 'showRegister'])->name('auth.register');
@@ -38,9 +38,9 @@ Route::get('/aboutus', function () {
 
 
 Route::middleware(['verifyrole:admin'])->prefix('admin')->group(function () {
-    Route::get('', function(){
+    Route::get('/dashboard', function(){
         return view('admin.dashboard');
-    })->name('');
+    })->name('admin');
 
     Route::controller(MenuController::class)->group(function () {
         Route::get('/menu', 'index')->name('admin.menu');
@@ -59,21 +59,31 @@ Route::middleware(['verifyrole:admin'])->prefix('admin')->group(function () {
     });
 
     Route::controller(ReservationController::class)->group(function () {
-        Route::get('/reservation', 'index')->name('admin.reservation');
+        Route::get('/reservation', 'show')->name('admin.reservation');
         Route::post('/reservation', 'store')->name('admin.reservation.add');
         Route::get('/reservation/{id}', 'edit')->name('admin.reservation.detail');
         Route::put('/reservation/{id}', 'update')->name('admin.reservation.update');
         Route::delete('/reservation/{id}', 'destroy')->name('admin.reservation.destroy');
     });
+    
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/user', 'index')->name('admin.user');
+        Route::post('/user', 'store')->name('admin.user.add');
+        Route::get('/user/{id}', 'edit')->name('admin.user.detail');
+        Route::put('/user/{id}', 'update')->name('admin.user.update');
+        Route::delete('/user/{id}', 'destroy')->name('admin.user.destroy');
+    });
 });
 
 // Route::middleware(['role:user'])->group(function () {
-Route::get('/profil', function () {
-    return view('profil');
-})->name('profile');
+Route::controller(UserController::class)->group(function(){
+    Route::get('profil/{id}', 'show')->name('profil');
+    Route::get('profil/edit/{id}', 'detail')->name('editprofil');
+});
 
 Route::controller(ReservationController::class)->group(function(){
     Route::get('reservation', 'index')->name('reservation');
+    Route::post('reservation', 'create')->name('reservation.create');
 });
 
 Route::get('/payment', function () {

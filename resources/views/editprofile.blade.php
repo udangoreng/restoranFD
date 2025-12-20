@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -207,7 +208,7 @@
             transform: translateY(-2px);
         }
 
-    
+
         .reservation-list {
             display: flex;
             flex-direction: column;
@@ -262,6 +263,7 @@
             color: #3cb371;
             border: 1px solid #3cb371;
         }
+
         @media (max-width: 1024px) {
             .profile-layout {
                 grid-template-columns: 1fr;
@@ -288,6 +290,7 @@
                 gap: 10px;
             }
         }
+
         .reservation-body p {
             margin-bottom: 10px;
             font-size: 14px;
@@ -306,7 +309,6 @@
             justify-content: flex-end;
             margin-top: 15px;
         }
-
     </style>
 </head>
 
@@ -327,6 +329,10 @@
                         <h4>Personal Information</h4>
                         <ul class="about-list">
                             <li>
+                                <i class="fa-solid fa-address-card"></i>
+                                <input type="text" class="profile-input" value="prncss">
+                            </li>
+                            <li>
                                 <i class="fa-solid fa-cake-candles"></i>
                                 <input type="date" class="profile-input" value="1997-01-03">
                             </li>
@@ -335,16 +341,16 @@
                                 <input type="tel" class="profile-input" value="0812-3456-7890">
                             </li>
                             <li>
-                                <i class="fa-solid fa-location-dot"></i>
-                                <input type="text" class="profile-input" value="Surabaya, Indonesia">
+                                <i class="fa-solid fa-camera"></i>
+                                <input type="file" class="profile-input" value="">
                             </li>
                         </ul>
 
-                       <div class="profile-action">
-                        <button class="edit-btn">
-                            <i class="fa-solid fa-floppy-disk"></i> Save
-                        </button>
-                    </div>
+                        <div class="profile-action">
+                            <button class="edit-btn">
+                                <i class="fa-solid fa-floppy-disk"></i> Save
+                            </button>
+                        </div>
 
                     </div>
                 </aside>
@@ -426,4 +432,5 @@
         </div>
     </main>
 </body>
+
 </html>

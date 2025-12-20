@@ -14,11 +14,11 @@
         <div class="mb-3">
             <label for="category" class="form-label fw-bold">Category</label>
             <select class="form-select" aria-label="" name="category">
-                <option value="Appetizer" selected>Appetizer</option>
-                <option value="Main Dish">Main Dish</option>
-                <option value="Dessert">Dessert</option>
-                <option value="Beverages">Beverages</option>
-                <option value="Additional">Additional</option>
+                <option value="Appetizer" {{$menu->category =='Appetizer' ? 'selected' : ''}}>Appetizer</option>
+                <option value="Main Dish" {{$menu->category =='Main Dish' ? 'selected' : ''}}>Main Dish</option>
+                <option value="Dessert" {{$menu->category =='Dessert' ? 'selected' : ''}}>Dessert</option>
+                <option value="Beverages" {{$menu->category =='Beverages' ? 'selected' : ''}}>Beverages</option>
+                <option value="Additional" {{$menu->category =='Additional' ? 'selected' : ''}}>Additional</option>
             </select>
             @error('category')
                 <span class="text-danger">{{ $message }}</span>

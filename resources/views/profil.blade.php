@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -47,7 +48,7 @@
             gap: 25px;
         }
 
-        
+
         .profile-card {
             background: linear-gradient(180deg, #143c37, #0d2a26);
             border-radius: 18px;
@@ -96,7 +97,7 @@
             width: 20px;
         }
 
-    
+
         .activity-card {
             background: linear-gradient(180deg, #143c37, #0d2a26);
             border-radius: 18px;
@@ -170,7 +171,7 @@
             transform: translateY(-2px);
         }
 
-        
+
         .reservation-list {
             display: flex;
             flex-direction: column;
@@ -243,12 +244,12 @@
             width: 16px;
         }
 
-    
+
         @media (max-width: 1024px) {
             .profile-layout {
                 grid-template-columns: 1fr;
             }
-            
+
             .profile-card {
                 max-width: 400px;
                 margin: 0 auto;
@@ -259,41 +260,42 @@
             .profile-container {
                 padding: 15px;
             }
-            
+
             .profile-box {
                 padding: 20px;
             }
-            
+
             .page-title {
                 font-size: 24px;
             }
-            
+
             .section-header {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 10px;
                 margin: 20px 0 10px 0;
             }
-            
+
             .detail-btn {
                 align-self: flex-start;
             }
-            
+
             .reservation-header {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 10px;
             }
-            
+
             .section-title {
                 font-size: 20px;
             }
-            
+
             .section-subtitle {
                 font-size: 16px;
             }
         }
-                .edit-btn {
+
+        .edit-btn {
             margin-left: auto;
             background: rgba(212, 175, 55, 0.15);
             color: #d4af37;
@@ -313,10 +315,9 @@
             background: rgba(212, 175, 55, 0.3);
             transform: translateY(-2px);
         }
-        
-
     </style>
 </head>
+
 <body>
     <main class="profile-container">
         <div class="profile-box">
@@ -331,6 +332,10 @@
                         <h4>Personal Information</h4>
                         <ul class="about-list">
                             <li>
+                                <i class="fa-solid fa-address-card"></i>
+                                <span>prncss</span>
+                            </li>
+                            <li>
                                 <i class="fa-solid fa-cake-candles"></i>
                                 <span>03 Jan 1997</span>
                             </li>
@@ -338,12 +343,10 @@
                                 <i class="fa-solid fa-phone"></i>
                                 <span>0812-3456-7890</span>
                             </li>
-                            <li>
-                                <i class="fa-solid fa-location-dot"></i>
-                                <span>Surabaya, Indonesia</span>
-                            </li>
                             <button class="edit-btn">
+                                <a href="{{ route('editprofil', 2) }}" style="text-decoration: none; color:#d4af37">
                                     <i class="fa-solid fa-pen"></i> Edit
+                                </a>
                             </button>
                         </ul>
                     </div>
@@ -426,4 +429,5 @@
         </div>
     </main>
 </body>
+
 </html>

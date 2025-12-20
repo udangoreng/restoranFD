@@ -32,7 +32,7 @@ class AuthController extends Controller
             
             $user = Auth::user();
             if($user->role === 'admin'){
-                return redirect('/admin');
+                return redirect('/admin/dashboard');
             } elseif($user->role === 'customer'){
                 return redirect('/');
             } else{

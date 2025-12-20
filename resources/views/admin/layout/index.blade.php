@@ -12,6 +12,7 @@
     <link href="https://cdn.datatables.net/2.3.5/css/dataTables.dataTables.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/css/datepicker-bs5.min.css">
 </head>
 
 <body>
@@ -27,22 +28,22 @@
                         Pages
                     </li>
 
-                    <li class="sidebar-item {{ request()->route()->getName() === '/admin/admin' ? 'active' : '' }}">
-                        <a class="sidebar-link" href="index.html">
+                    <li class="sidebar-item {{ request()->route()->getName() === '/admin/dashboard' ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{route('admin')}}">
                             <i class="align-middle" data-feather="sliders"></i> <span
                                 class="align-middle">Dashboard</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item {{ request()->route()->getName() === '/admin/user' ? 'active' : '' }}">
-                        <a class="sidebar-link" href="pages-profile.html">
+                    <li class="sidebar-item {{ request()->route()->getName() === 'admin.user' ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{route('admin.user')}}">
                             <i class="align-middle" data-feather="user"></i> <span class="align-middle">Users</span>
                         </a>
                     </li>
 
                     <li
-                        class="sidebar-item {{ request()->route()->getName() === '/admin/reservation' ? 'active' : '' }}">
-                        <a class="sidebar-link" href="pages-sign-in.html">
+                        class="sidebar-item {{ request()->route()->getName() === 'admin.reservation' ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{route('admin.reservation')}}">
                             <i class="align-middle" data-feather="book"></i> <span
                                 class="align-middle">Resevation</span>
                         </a>
@@ -54,7 +55,7 @@
                         </a>
                     </li>
 
-                    <li class="sidebar-item {{ request()->route()->getName() === '.admin.table' ? 'active' : '' }}">
+                    <li class="sidebar-item {{ request()->route()->getName() === 'admin.table' ? 'active' : '' }}">
                         <a class="sidebar-link" href="{{ route('admin.table') }}">
                             <i class="align-middle" data-feather="grid"></i> <span class="align-middle">Tables</span>
                         </a>
@@ -137,6 +138,7 @@
         integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous">
     </script>
     <script src="https://cdn.datatables.net/2.3.5/js/dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/js/datepicker-full.min.js"></script>
     @yield('script')
 </body>
 
