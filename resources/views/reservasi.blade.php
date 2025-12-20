@@ -182,6 +182,23 @@
 </head>
 
 <body>
+    @if (!$userdata)
+        @include('layout.popup.login_popup')
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const modal = document.getElementById("loginInfoModal");
+                modal.style.display = "flex";
+            });
+            const understoodBtn = document.getElementById('closeLoginInfoModal');
+            understoodBtn.addEventListener('click', function () {
+                modal.style.display = none;
+                setTimeout(() => {
+                    window.location.href = "{{ route('auth.login') }}";
+                }, 1000);
+            });
+        </script>
+    @endif
+
     <div class="reservasi-wrapper">
         <div class="subtitle">✦︎ Online Reservation ✦︎</div>
         <h1>Book A Table</h1>
@@ -191,8 +208,10 @@
         <p class="info">For Group Reservation more than 10 people, please contact
             courvoiser@booking.com, or call on +62-812-34567890 </p>
 
+        @auth
         <form method="POST" action="{{ route('reservation.create') }}">
             @csrf
+            <input type="text" name="user_id" id="" value="{{$userdata->id}}" hidden>
             <div class="d-flex">
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="salutation" id="inlineRadio1" value="Ms.">
@@ -290,8 +309,9 @@
             <div class="input-box">
                 <textarea name="message" placeholder="Message"></textarea>
             </div>
-            <button class="button-submit">Book A Table</button>
+            <button class="button-submit" type="submit">Book A Table</button>
         </form>
+        @endauth
     </div>
 </body>
 

@@ -325,26 +325,26 @@
             <div class="profile-layout">
                 <aside class="profile-card">
                     <div class="profile-photo">
-                        <img src="{{ asset('img/fotoprofil.jpeg') }}" alt="">
+                        <img src="{{ $userdata->profile_img_path ? asset('storage/' . $userdata->profile_img_path) : asset('img/fotoprofil.jpeg') }}" alt="Profile Photo">
                     </div>
-                    <h2 class="profile-name">Princy Timberlake</h2>
+                    <h2 class="profile-name">{{$userdata->name}}</h2>
                     <div class="profile-about">
                         <h4>Personal Information</h4>
                         <ul class="about-list">
                             <li>
                                 <i class="fa-solid fa-address-card"></i>
-                                <span>prncss</span>
+                                <span>{{$userdata->username}}</span>
                             </li>
                             <li>
                                 <i class="fa-solid fa-cake-candles"></i>
-                                <span>03 Jan 1997</span>
+                                <span>{{($userdata->birthday != null) ? $userdata->birthday : "-"}}</span>
                             </li>
                             <li>
                                 <i class="fa-solid fa-phone"></i>
-                                <span>0812-3456-7890</span>
+                                <span>{{$userdata->phone}}</span>
                             </li>
                             <button class="edit-btn">
-                                <a href="{{ route('editprofil', 2) }}" style="text-decoration: none; color:#d4af37">
+                                <a href="{{ route('editprofile') }}" style="text-decoration: none; color:#d4af37">
                                     <i class="fa-solid fa-pen"></i> Edit
                                 </a>
                             </button>

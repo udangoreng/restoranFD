@@ -30,6 +30,7 @@ class UserController extends Controller
             'username' => 'required|string|max:255|unique:users',
             'password' => 'required|min:6',
             'phone' => 'required|string|max:15',
+            'birthday' => 'nullable|date',
             'role' => 'required',
         ]);
 
@@ -75,12 +76,14 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'phone' => 'required|string|max:15',
             'role' => 'required',
+            'birthday' => 'nullable|date',
             'profile_img_path' => 'nullable|image|mimes:jpeg,jpg,png',
         ]);
 
         if ($request->hasFile('profile_img_path')) {
-            $data['profile_img_path'] = $request->file('profile_img_path')->storeAs('profile', $request->file('profile_img_path')->getClientOriginalName(), 'public');
+            $data['profile_img_path'] = $request->file('profile_img_path')->storeAs('profile', $request->file('profile_img_path')->hashName(), 'public');
         }
+
         $user->update($data);
 
         return redirect()->route('admin.user')->with('success', 'User updated successfully.');
@@ -103,23 +106,54 @@ class UserController extends Controller
     //USER
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
     {
-        return view('profil');
+        //Search latest resrvation based on user id
+        $userdata = Auth::user();
+        return view('profile', compact('userdata'));
     }
 
-    public function detail(string $id)
+    public function detail()
     {
-        return view('editprofile');
+        //Search latest resrvation based on user id
+        $userdata = Auth::user();
+        return view('editprofile', compact('userdata'));
+    }
+
+    public function userUpdate(Request $request, string $id)
+    {
+        $user = User::findOrFail($id);
+
+        $request->validate([
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                Rule::unique('users')->ignore($user->id),
+            ],
+            'username' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('users')->ignore($user->id),
+            ],
+            'name' => 'required|string|max:255',
+            'phone' => 'required|string|max:15',
+            'birthday' => 'nullable|date',
+            'profile_img_path' => 'nullable|image|mimes:jpeg,jpg,png',
+        ]);
+
+        $data = $request->all();
+
+        if ($request->hasFile('profile_img_path')) {
+            $data['profile_img_path'] = $request->file('profile_img_path')->storeAs('profile', $request->file('profile_img_path')->hashName(), 'public');
+        }
+
+        $user->update($data);
+
+        return redirect()->route('profile')->with('success', 'User updated successfully.');
     }
 }

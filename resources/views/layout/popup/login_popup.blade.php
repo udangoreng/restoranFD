@@ -1,3 +1,4 @@
+@extends('layout.index')
 @section('style')
     <link rel="stylesheet" href="{{ asset('css/Popup.css') }}">
 @endsection
@@ -14,12 +15,12 @@
             </p>
 
             <button class="modal-btn" id="closeLoginInfoModal">
-                Understood
+                <a href="{{ route('auth.login') }}">
+                    Understood
+                </a>
             </button>
         </div>
     </div>
-
-    <button id="reserveBtn" class="reserve-btn">Reserve a Table</button>
 @endsection
 
 @section('script')

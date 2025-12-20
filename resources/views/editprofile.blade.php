@@ -313,6 +313,9 @@
 </head>
 
 <body>
+    @if ($errors->any())
+        @include('layout.popup.error_popup')
+    @endif
     <main class="profile-container">
         <div class="profile-box">
             <h1 class="page-title">Edit Profile</h1>
@@ -320,39 +323,51 @@
             <div class="profile-layout">
                 <aside class="profile-card">
                     <div class="profile-photo">
-                        <img src="{{ asset('img/fotoprofil.jpeg') }}" alt="Profile Photo">
+                        <img src="{{ $userdata->profile_img_path ? asset('storage/' . $userdata->profile_img_path) : asset('img/fotoprofil.jpeg') }}" alt="Profile Photo">
                     </div>
 
-                    <input type="text" class="profile-input profile-name" value="Princy Timberlake">
+                    <form action="{{ route('profile.edit', $userdata->id) }}" method="POST" enctype="multipart/form-data">
+                        @method('PUT')
+                        @csrf
+                        <input type="text" class="profile-input profile-name" name="name"
+                            value="{{ $userdata->name }}">
 
-                    <div class="profile-about">
-                        <h4>Personal Information</h4>
-                        <ul class="about-list">
-                            <li>
-                                <i class="fa-solid fa-address-card"></i>
-                                <input type="text" class="profile-input" value="prncss">
-                            </li>
-                            <li>
-                                <i class="fa-solid fa-cake-candles"></i>
-                                <input type="date" class="profile-input" value="1997-01-03">
-                            </li>
-                            <li>
-                                <i class="fa-solid fa-phone"></i>
-                                <input type="tel" class="profile-input" value="0812-3456-7890">
-                            </li>
-                            <li>
-                                <i class="fa-solid fa-camera"></i>
-                                <input type="file" class="profile-input" value="">
-                            </li>
-                        </ul>
+                        <div class="profile-about">
+                            <h4>Personal Information</h4>
+                            <ul class="about-list">
+                                <li>
+                                    <i class="fa-solid fa-address-card"></i>
+                                    <input type="text" name="username" class="profile-input"
+                                        value="{{ $userdata->username }}">
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-cake-candles"></i>
+                                    <input type="date" name="birthday" class="profile-input"
+                                        value="{{ $userdata->birthday != null ? $userdata->birthday : 0 }}">
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-at"></i>
+                                    <input type="tel" name="email" class="profile-input"
+                                        value="{{ $userdata->email }}">
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-phone"></i>
+                                    <input type="tel" name="phone" class="profile-input"
+                                        value="{{ $userdata->phone }}">
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-camera"></i>
+                                    <input type="file" class="profile-input" name="profile_img_path">
+                                </li>
+                            </ul>
 
-                        <div class="profile-action">
-                            <button class="edit-btn">
-                                <i class="fa-solid fa-floppy-disk"></i> Save
-                            </button>
+                            <div class="profile-action">
+                                <button class="edit-btn" type="submit">
+                                    <i class="fa-solid fa-floppy-disk"></i> Save
+                                </button>
+                            </div>
                         </div>
-
-                    </div>
+                    </form>
                 </aside>
 
                 <section class="activity-card">

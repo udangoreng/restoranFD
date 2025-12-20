@@ -15,7 +15,7 @@
         }
 
         body {
-            background: url('{{ asset("img/background.jpeg") }}') center/cover no-repeat fixed;
+            background: url('{{ asset('img/background.jpeg') }}') center/cover no-repeat fixed;
             position: relative;
             height: 100vh;
             display: flex;
@@ -125,7 +125,7 @@
                 <label for="Email-input">
                     <img src="{{ asset('img/email.svg') }}" alt="icon email" width="20">
                 </label>
-                <input type="email" name="email" id="Email-input" placeholder="Email" value="{{old('email')}}">
+                <input type="email" name="email" id="Email-input" placeholder="Email" value="{{ old('email') }}">
             </div>
             @error('password')
                 <p style="color:#dc3545">{{ $message }}</p>

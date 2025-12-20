@@ -24,7 +24,7 @@
         <ul class="mobile-nav-list">
             @auth
                 <li>
-                    <a href="profile.html" class="mobile-link">
+                    <a href="{{route('profile')}}" class="mobile-link">
                         <span class="star">✦</span>
                         My Profile
                         <span class="arrow">›</span>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
@@ -13,15 +14,16 @@ class ReservationController extends Controller
     //User
     public function index()
     {
-        return view('reservasi');
+        $userdata = Auth::user();
+        return view('reservasi', compact('userdata'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        dd($request);
     }
 
     //Admin

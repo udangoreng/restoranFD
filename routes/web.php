@@ -19,13 +19,13 @@ Route::get('/', function () {
     return view('home');
 })->name('/');
 
-Route::controller(MenuController::class)->group(function(){
+Route::controller(MenuController::class)->group(function () {
     route::get('/menu', 'show')->name('menu');
     route::get('/menu/{id}', 'detail')->name('menu.detail');
 });
 
-Route::get('/checkout', function () {
-    return view('checkout');
+Route::get('/popup', function () {
+    return view('popup');
 });
 
 Route::get('/contact', function () {
@@ -38,7 +38,7 @@ Route::get('/aboutus', function () {
 
 
 Route::middleware(['verifyrole:admin'])->prefix('admin')->group(function () {
-    Route::get('/dashboard', function(){
+    Route::get('/dashboard', function () {
         return view('admin.dashboard');
     })->name('admin');
 
@@ -65,7 +65,7 @@ Route::middleware(['verifyrole:admin'])->prefix('admin')->group(function () {
         Route::put('/reservation/{id}', 'update')->name('admin.reservation.update');
         Route::delete('/reservation/{id}', 'destroy')->name('admin.reservation.destroy');
     });
-    
+
     Route::controller(UserController::class)->group(function () {
         Route::get('/user', 'index')->name('admin.user');
         Route::post('/user', 'store')->name('admin.user.add');
@@ -75,46 +75,53 @@ Route::middleware(['verifyrole:admin'])->prefix('admin')->group(function () {
     });
 });
 
-// Route::middleware(['role:user'])->group(function () {
-Route::controller(UserController::class)->group(function(){
-    Route::get('profil/{id}', 'show')->name('profil');
-    Route::get('profil/edit/{id}', 'detail')->name('editprofil');
-});
 
-Route::controller(ReservationController::class)->group(function(){
+
+Route::controller(ReservationController::class)->group(function () {
     Route::get('reservation', 'index')->name('reservation');
-    Route::post('reservation', 'create')->name('reservation.create');
 });
 
-Route::get('/payment', function () {
-    return view('payment');
-})->name('payment');
+// Route::middleware(['verifyrole:user'])->group(function () {
+    Route::controller(UserController::class)->group(function () {
+        Route::get('profile/', 'show')->name('profile');
+        Route::get('profile/edit/', 'detail')->name('editprofile');
+        Route::put('profile/edit/{id}', 'userUpdate')->name('profile.edit');
+    });
+    
+    Route::controller(ReservationController::class)->group(function () {
+        Route::post('reservation', 'create')->name('reservation.create');
+    });
+    
 
-Route::get('/order', function () {
-    return view('order');
-});
+    Route::get('/payment', function () {
+        return view('payment');
+    })->name('payment');
 
-Route::get('/myreservation', function () {
-    return view('myreservation');
-});
+    Route::get('/order', function () {
+        return view('order');
+    });
 
-Route::get('/myhistory', function () {
-    return view('myhistory');
-});
+    Route::get('/myreservation', function () {
+        return view('myreservation');
+    });
 
-Route::get('/editprofile', function () {
-    return view('editprofile');
-});
+    Route::get('/myhistory', function () {
+        return view('myhistory');
+    });
 
-Route::get('/detail_history', function () {
-    return view('detail_history');
-});
+    Route::get('/editprofile', function () {
+        return view('editprofile');
+    });
 
-Route::get('/detail_menu', function () {
-    return view('detail_menu');
-});
+    Route::get('/detail_history', function () {
+        return view('detail_history');
+    });
 
-Route::get('/detail_reservation', function () {
-    return view('detail_reservation');
-});
+    Route::get('/detail_menu', function () {
+        return view('detail_menu');
+    });
+
+    Route::get('/detail_reservation', function () {
+        return view('detail_reservation');
+    });
 // });

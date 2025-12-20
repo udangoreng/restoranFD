@@ -32,7 +32,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header d-flex justify-content-between">
-                        <h5 class="modal-title" id="addMenuModalLabel">Add New Menu</h5>
+                        <h5 class="modal-title" id="addMenuModalLabel">Add New User</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -81,6 +81,11 @@
                                                 <input type="password" class="form-control" id="password" name="password"
                                                     required>
                                             </div>
+                                            <div class="mb-3">
+                                                <label for="birthday" class="form-label">Birthday</label>
+                                                <input type="date" class="form-control" id="birthday" name="birthday"
+                                                    required>
+                                            </div>
                                             <input type="text" value="admin" name="role" hidden />
                                             <button type="submit" class="btn btn-primary d-flex ms-auto">Save</button>
                                         </form>
@@ -109,6 +114,11 @@
                                             <div class="mb-3">
                                                 <label for="phone" class="form-label">Phone</label>
                                                 <input type="text" class="form-control" id="phone" name="phone"
+                                                    required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="birthday" class="form-label">Birthday</label>
+                                                <input type="date" class="form-control" id="birthday" name="birthday"
                                                     required>
                                             </div>
                                             <div class="mb-3">

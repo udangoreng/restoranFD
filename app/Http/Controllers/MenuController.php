@@ -30,7 +30,7 @@ class MenuController extends Controller
 
         $data = $request->all();
         if ($request->hasFile('img_path')) {
-            $data['img_path'] = $request->file('img_path')->storeAs('img', $request->file('img_path')->getClientOriginalName(), 'public');
+            $data['img_path'] = $request->file('img_path')->storeAs('img', $request->file('img_path')->hashName(), 'public');
         }
 
         Menu::create($data);
@@ -64,7 +64,7 @@ class MenuController extends Controller
 
         $data = $request->all();
         if ($request->hasFile('img_path')) {
-            $data['img_path'] = $request->file('img_path')->storeAs('img', $request->file('img_path')->getClientOriginalName(), 'public');
+            $data['img_path'] = $request->file('img_path')->storeAs('img', $request->file('img_path')->hashName(), 'public');
         }
 
         $menu->update($data);
