@@ -1,0 +1,125 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+
+class UserController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        $users = User::all();
+        return view('admin.user', compact('users'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'username' => 'required|string|max:255|unique:users',
+            'password' => 'required|min:6',
+            'phone' => 'required|string|max:15',
+            'role' => 'required',
+        ]);
+
+        $data = $request->all();
+
+        User::create($data);
+        return redirect()->route('admin.user')->with('success', 'User Added successfully.');
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        $user = User::findOrFail($id);
+        return view('admin.detailuser', compact('user'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        $user = User::findOrFail($id);
+        $data = $request->all();
+
+        Validator::make($data, [
+            'email' => [
+                'string',
+                'email',
+                'max:255',
+                'required',
+                Rule::unique('users')->ignore($user->id),
+            ],
+            'username' => [
+                'string',
+                'max:255',
+                'required',
+                Rule::unique('users')->ignore($user->id),
+            ],
+        ]);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'phone' => 'required|string|max:15',
+            'role' => 'required',
+            'profile_img_path' => 'nullable|image|mimes:jpeg,jpg,png',
+        ]);
+
+        if ($request->hasFile('profile_img_path')) {
+            $data['profile_img_path'] = $request->file('profile_img_path')->storeAs('profile', $request->file('profile_img_path')->getClientOriginalName(), 'public');
+        }
+        $user->update($data);
+
+        return redirect()->route('admin.user')->with('success', 'User updated successfully.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        $user = User::findOrFail($id);
+        if (Auth::id() == $user->id) {
+            return redirect()->route('admin.user')->with('error', 'You cannot delete your own account.');
+        }
+
+        $user->delete();
+        return redirect()->route('admin.user')->with('success', 'User deleted successfully.');
+    }
+
+    //USER
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        return view('profil');
+    }
+
+    public function detail(string $id)
+    {
+        return view('editprofile');
+    }
+}

@@ -9,6 +9,8 @@ class ReservationController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    //User
     public function index()
     {
         return view('reservasi');
@@ -22,18 +24,20 @@ class ReservationController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    //Admin
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
+    {
+        return view('admin.reservation');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
     {
         //
     }

@@ -55,7 +55,7 @@ class TableController extends Controller
         $data = $request->all();
 
         $res = $table->update($data);
-        return redirect()->route('admin.table')->with('Success', 'Menu created successfully.');
+        return redirect()->route('admin.table')->with('Success', 'Menu updated successfully.');
     }
 
     /**

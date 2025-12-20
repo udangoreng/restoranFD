@@ -8,6 +8,19 @@ class Reservation extends Model
 {
     protected $fillable = ([
         'user_id',
-        
+        'table_id',
+        'salutation',
+        'first_name',
+        'last_name',
+        'phone',
+        'email',
+        'person_attend',
+        'booking_date',
+        'time_in',
+        'time_out',
+        'request',
+        'allergies',
+        'message',
+        'status',
     ]);
 }
