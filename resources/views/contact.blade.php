@@ -25,6 +25,12 @@ body {
     overflow: hidden;
     margin-bottom: 40px;
 }
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45); 
+    z-index: 1;
+}
 
 .hero-image {
     width: 100%;
@@ -42,7 +48,7 @@ body {
 
 .hero-content {
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
@@ -66,7 +72,7 @@ body {
 }
 
 .hero-subtitle {
-    font-size: 1.4rem;
+    font-size: 2.0rem;
     line-height: 1.6;
     color: white;
     max-width: 700px;
