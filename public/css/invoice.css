@@ -1,0 +1,257 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #0d2625;
+    margin: 0;
+    padding: 40px;
+    color: #0d2625;
+}
+
+.invoice-container {
+    max-width: 900px;
+    margin: auto;
+    background: #ffffff;
+    padding: 40px;
+    border: 1px solid #ddd;
+}
+
+.invoice-header {
+    text-align: center;
+    border-bottom: 3px solid #c89b3c;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+.restaurant-name {
+    font-family: "Forum";
+    font-size: 35px;
+    margin: 0;
+    color: #0d2625;
+}
+
+.tagline {
+    font-size: 18px;
+    color: #666;
+}
+
+.invoice-title {
+    margin-top: 15px;
+    font-size: 20px;
+    letter-spacing: 1px;
+}
+
+.invoice-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 35px;
+}
+
+.info-box p {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dashed #e5e5e5;
+    padding: 6px 0;
+    font-size: 13px;
+}
+
+.info-box span:first-child {
+    color: #777;
+}
+
+.info-box span:last-child {
+    font-weight: 500;
+    color: #0d2625;
+}
+
+.status.paid {
+    color: #0d2625;
+    font-weight: bold;
+}
+
+.order-section h3 {
+    font-size: 15px;
+    font-family: 'Forum', serif;
+    margin-bottom: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+th {
+    background: #0f2e2c;
+    color: #fff;
+    padding: 10px;
+    font-weight: 500;
+    text-align: center;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+
+th:nth-child(1),
+td:nth-child(1),
+th:nth-child(4),
+td:nth-child(4),
+th:nth-child(5),
+td:nth-child(5),
+th:nth-child(6),
+td:nth-child(6) {
+    text-align: center;
+}
+
+.menu-note {
+    font-size: 11.5px;
+    color: #666;
+    margin-top: 8px;
+    text-align: start;
+}
+
+.payment-summary {
+    margin-top: 45px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 60px;
+    align-items: flex-start;
+}
+
+.summary-box {
+    width: 340px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    font-size: 13px;
+}
+
+.summary-box .row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    margin: 6px 0;
+    line-height: 1.6;
+}
+
+.summary-box .row span {
+    white-space: nowrap;
+}
+
+.summary-box .row span:last-child {
+    text-align: right;
+}
+
+.summary-divider {
+    height: 1px;
+    background: #d6c28f;
+    margin: 12px 0;
+    width: 100%;
+}
+
+.grand-total {
+    color: #c89b3c;
+    font-weight: 500;
+}
+
+.dp {
+    color: #2f7d4f;
+    font-weight: 500;
+}
+
+.remaining {
+    color: #ff7b7b;
+    font-weight: 500;
+}
+
+.payment-note {
+    max-width: 340px;
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid #e3d3a4;
+    font-size: 13px;
+    font-style: italic;
+    color: #777;
+    line-height: 1.8;
+    background: transparent;
+}
+
+.special-request {
+    margin-top: 45px;
+    font-size: 13px;
+}
+
+.special-request h4 {
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.special-request ul {
+    margin: 0 0 16px 18px;
+}
+
+.guest-message {
+    font-size: 12.5px;
+    color: #444;
+}
+
+.terms-section.letter-style {
+    margin-top: 60px;
+    padding-top: 32px;
+    border-top: 1px solid #ddd;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    font-size: 12px;
+    color: #666;
+    line-height: 1.8;
+}
+
+.terms-left p {
+    margin: 0 0 14px;
+    font-size: 12px;          
+    line-height: 1.8;
+    color: #333;   
+}
+
+.signature-block {
+    text-align: center;
+    padding-top: 75px;
+}
+
+.signature-block .thank-you {
+    font-family: 'Forum', serif;
+    font-size: 12px; 
+    color: #333;
+    margin-bottom: 14px;
+}
+
+.signature-line {
+    width: 140px;
+    height: 1px;
+    background: #c89b3c;
+    margin: 0 auto 12px;
+}
+
+.signature-name {
+    font-size: 12px;
+    letter-spacing: 1.6px;
+    font-weight: 500;
+    color: #0d2625;
+    margin-bottom: 4px;
+}
+
+.signature-tagline {
+    font-size: 11px;
+    color: #888;
+    font-style: italic;
+}
+
+@media print {
+    body {
+        background: #fff;
+        padding: 0;
+    }
+}
