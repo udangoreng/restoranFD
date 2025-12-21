@@ -130,7 +130,10 @@
                         {{ $reservation->status == 'Created' || $reservation->status == 'Pending Payment' ? 'disabled' : '' }}>Download
                         Invoice (PDF)</button>
                     <div class="reservation-actions-row">
-                        <button class="reservation-btn reservation-btn-outline">Modify Menu</button>
+                        <a href={{ route('order.menu', $reservation->id) }}><button
+                                class="reservation-btn reservation-btn-outline">Modify Menu</button></a>
+                        <a href={{ route('order.menu', $reservation->id) }}><button
+                                class="reservation-btn reservation-btn-outline">Checkout</button></a>
                         <button class="reservation-btn reservation-btn-cancel">Cancel Reservation</button>
                     </div>
                 </div>
@@ -157,10 +160,25 @@
 
     @include('layout.components.footer')
 
-    {{-- <div id="popupContainer"></div> --}}
+    {{-- <div id="popupContainer"></div> --}}<div class="floating-cart" id="floatingCartBtn" data-bs-toggle="modal"
+        data-bs-target="#orderModal">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="cart-count" id="cartCount">0</span>
+    </div>
+
+    @include('order')
 @endsection
 
 @section('script')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const reservationData = document.getElementById('reservationData');
+            if (reservationData) {
+                const reservationId = reservationData.dataset.reservationId;
+                setCurrentReservation(reservationId);
+            }
+        });
+    </script>
     <script>
         fetch("Cancel_popup.html")
             .then(res => res.text())

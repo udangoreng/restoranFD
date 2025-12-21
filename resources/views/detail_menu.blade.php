@@ -234,7 +234,7 @@
 
     @include('layout.components.footer')
 
-    <div class="floating-cart" id="floatingCartBtn" data-bs-toggle="modal" data-bs-target="#orderModal">
+    <div class="floating-cart" id="floatingCartBtn" style="visibility: hidden;" data-bs-toggle="modal" data-bs-target="#orderModal">
         <i class="fa-solid fa-cart-shopping"></i>
         <span class="cart-count" id="cartCount">0</span>
     </div>
@@ -244,7 +244,7 @@
 
 @section('script')
     @parent
+    <script src="{{ asset('js/cart.js') }}"></script>
     <script src="{{ asset('js/detail_menu.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ asset('js/cart.js') }}"></script>
 @endsection

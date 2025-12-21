@@ -12,6 +12,19 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
+
+    public function getActiveReservation()
+    {
+        $user = Auth::user();
+
+        $activeReservation = Reservation::where('user_id', $user->id)
+            ->whereIn('status', ['Created', 'Pending Payment'])
+            ->first();
+
+        return $activeReservation;
+    }
+
+
     public function index(string $resId)
     {
         $reservation = Reservation::findOrFail($resId);
@@ -36,10 +49,8 @@ class OrderController extends Controller
     {
         $user = Auth::user();
 
-        $activeReservation = Reservation::where('user_id', $user->id)
-            ->whereIn('status', ['Created', 'Pending Payment'])
-            ->first();
-
+        $activeReservation = $this->getActiveReservation();
+        
         if (!$activeReservation) {
             return redirect()->back()->with('error', 'You Currently Don\'t Have An Active Reservation');
         }
@@ -86,7 +97,7 @@ class OrderController extends Controller
 
         $this->updateOrderTotal($order->id);
         $cartCount = Cart::where('order_id', $order->id)->sum('quantity');
-        
+
         if ($request->ajax() || $request->wantsJson()) {
             try {
                 return response()->json([
@@ -95,7 +106,6 @@ class OrderController extends Controller
                     'cart_count' => $cartCount,
                     'order_total' => $order->fresh()->total_amount
                 ]);
-                
             } catch (\Exception $e) {
                 return response()->json([
                     'error' => 'Terjadi kesalahan: ' . $e->getMessage()
@@ -137,28 +147,61 @@ class OrderController extends Controller
         $order->save();
     }
 
-    public function getCart()
-    {
+    // app/Http/Controllers/CartController.php
+public function getCart()
+{
+    try {
         $user = Auth::user();
-
+        
+        if (!$user) {
+            return response()->json([
+                'error' => 'User not authenticated',
+                'has_active_reservation' => false
+            ], 401);
+        }
+        
+        // Cari reservasi aktif
         $activeReservation = Reservation::where('user_id', $user->id)
             ->whereIn('status', ['Created', 'Pending Payment'])
             ->first();
 
         if (!$activeReservation) {
-            return response()->json(['error' => 'No active reservation'], 400);
+            return response()->json([
+                'error' => 'No active reservation found. Please create a reservation first.',
+                'has_active_reservation' => false,
+                'cart' => [],
+                'total' => 0
+            ], 200); // Return 200 dengan error message
         }
 
+        // Cari order untuk reservasi ini
         $order = Order::where('reservation_id', $activeReservation->id)->first();
-        if (!$order) {
-            return response()->json(['cart' => [], 'total' => 0]);
-        }
 
-        $cartItems = Cart::with('menu')->where('order_id', $order->id)->get();
+        $cartItems = [];
+        $total = 0;
+        
+        if ($order) {
+            $cartItems = Cart::with('menu')->where('order_id', $order->id)->get();
+            $total = $order->total_amount;
+        }
 
         return response()->json([
+            'success' => true,
             'cart' => $cartItems,
-            'total' => $order->total_amount
+            'total' => $total,
+            'reservation_id' => $activeReservation->id,
+            'reservation_code' => $activeReservation->reservation_code,
+            'order_id' => $order ? $order->id : null,
+            'order_code' => $order ? $order->order_code : null,
+            'has_active_reservation' => true,
+            'user_id' => $user->id
         ]);
+        
+    } catch (\Exception $e) {
+        return response()->json([
+            'error' => 'Server error: ' . $e->getMessage(),
+            'has_active_reservation' => false
+        ], 500);
     }
+}
 }

@@ -20,8 +20,10 @@
                     <span>Subtotal</span>
                     <span id="subtotalAmount">IDR 0</span>
                 </div>
-                <button class="checkout-btn" id="checkoutBtn" disabled>Checkout</button>
-            </div>
+                <button class="checkout-btn mb-2" id="checkoutBtn" disabled>Checkout</button>
+                <button class="checkout-btn" id="backToReservationBtn" style="display: none;">
+                    Back To Reservation
+                </button>
 
         </div>
     </div>

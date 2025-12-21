@@ -614,17 +614,23 @@
 
                         <div class="detail-group">
                             <div class="detail-label">Nama :</div>
-                            <div class="detail-value" id="customer-name">Primey Timberlake</div>
+                            <div class="detail-value" id="customer-name">
+                                {{ $order->user->first_name }} {{ $order->user->last_name }}
+                            </div>
                         </div>
 
                         <div class="detail-group">
                             <div class="detail-label">No.Tlp :</div>
-                            <div class="detail-value" id="customer-phone">0812-3456-7890</div>
+                            <div class="detail-value" id="customer-phone">
+                                {{ $order->user->phone ?? $order->reservation->phone }}
+                            </div>
                         </div>
 
                         <div class="detail-group">
                             <div class="detail-label">Email Address :</div>
-                            <div class="detail-value" id="customer-email">primeytimberlake@email.com</div>
+                            <div class="detail-value" id="customer-email">
+                                {{ $order->user->email }}
+                            </div>
                         </div>
                     </div>
 
@@ -638,62 +644,24 @@
                                 <span class="subtotal-col">Subtotal</span>
                             </div>
 
+                            @foreach($order->cartItems as $item)
                             <div class="order-item">
                                 <div class="product-info">
-                                    <span class="product-name">Peach Bruschetta</span>
-                                    <span class="product-quantity">× 1</span>
+                                    <span class="product-name">{{ $item->menu->name }}</span>
+                                    <span class="product-quantity">× {{ $item->quantity }}</span>
                                 </div>
-                                <span class="product-price">IDR 140.000</span>
+                                <span class="product-price">IDR {{ number_format($item->subtotal, 0, ',', '.') }}</span>
                             </div>
-
-                            <div class="order-item">
-                                <div class="product-info">
-                                    <span class="product-name">Herb Roasted Salmon</span>
-                                    <span class="product-quantity">× 1</span>
-                                </div>
-                                <span class="product-price">IDR 185.000</span>
-                            </div>
-
-                            <div class="order-item">
-                                <div class="product-info">
-                                    <span class="product-name">Garlic Butter Lobster</span>
-                                    <span class="product-quantity">× 1</span>
-                                </div>
-                                <span class="product-price">IDR 320.000</span>
-                            </div>
-
-                            <div class="order-item">
-                                <div class="product-info">
-                                    <span class="product-name">Caramel Pannacotta</span>
-                                    <span class="product-quantity">× 1</span>
-                                </div>
-                                <span class="product-price">IDR 105.000</span>
-                            </div>
-
-                            <div class="order-item">
-                                <div class="product-info">
-                                    <span class="product-name">Lychee Rose Mocktail</span>
-                                    <span class="product-quantity">× 2</span>
-                                </div>
-                                <span class="product-price">IDR 73.000</span>
-                            </div>
-
-                            <div class="order-item">
-                                <div class="product-info">
-                                    <span class="product-name">Strawberry Smoothie</span>
-                                    <span class="product-quantity">× 1</span>
-                                </div>
-                                <span class="product-price">IDR 55.000</span>
-                            </div>
+                            @endforeach
 
                             <div class="order-totals">
                                 <div class="total-row">
                                     <span>Subtotal</span>
-                                    <span>IDR 951.000</span>
+                                    <span>IDR {{ number_format($order->total_amount, 0, ',', '.') }}</span>
                                 </div>
                                 <div class="total-row">
-                                    <span>Total</span>
-                                    <span class="grand-total">IDR 1.046.100</span>
+                                    <span>Down Payment (50%)</span>
+                                    <span class="grand-total">IDR {{ number_format($order->down_payment_amount, 0, ',', '.') }}</span>
                                 </div>
                             </div>
                         </div>
@@ -702,7 +670,7 @@
                             <h3>DP</h3>
                             <div class="payment-info">
                                 <span class="payment-text">DP 50%:</span>
-                                <span class="grand-total">IDR 523.000</span>
+                                <span class="grand-total">IDR {{ number_format($order->down_payment_amount, 0, ',', '.') }}</span>
                             </div>
                             <div class="dp-subtitle">Sisa 50% dibayar saat dine-in</div>
                         </div>
@@ -717,9 +685,15 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="place-order-btn">
-                            Place Order
-                        </button>
+                        <form action="{{ route('checkout.process') }}" method="POST" id="checkoutForm">
+                            @csrf
+                            <input type="hidden" name="order_id" value="{{ $order->id }}">
+                            <input type="hidden" name="payment_method" id="paymentMethodInput">
+                            
+                            <button type="submit" class="place-order-btn">
+                                Bayar Down Payment
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -727,4 +701,30 @@
     </main>
 
     @include('payment')
+@endsection
+
+@section('script')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const checkoutForm = document.getElementById('checkoutForm');
+        const paymentMethodInput = document.getElementById('paymentMethodInput');
+        
+        // Set payment method dari modal
+        document.querySelectorAll('.bank-radio').forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (this.checked) {
+                    paymentMethodInput.value = this.value;
+                }
+            });
+        });
+        
+        // Validasi form sebelum submit
+        checkoutForm.addEventListener('submit', function(e) {
+            if (!paymentMethodInput.value) {
+                e.preventDefault();
+                alert('Silakan pilih metode pembayaran terlebih dahulu');
+            }
+        });
+    });
+</script>
 @endsection
