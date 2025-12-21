@@ -14,4 +14,11 @@ class CustTable extends Model
         'capacity',
         'is_occupied'
     ];
+
+    protected $guarded = ['id'];
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class, 'table_id');
+    }
 }

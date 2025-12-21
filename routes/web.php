@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\TableController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\UserController;
@@ -76,23 +77,6 @@ Route::middleware(['verifyrole:admin'])->prefix('admin')->group(function () {
 });
 
 
-
-Route::controller(ReservationController::class)->group(function () {
-    Route::get('reservation', 'index')->name('reservation');
-});
-
-// Route::middleware(['verifyrole:user'])->group(function () {
-    Route::controller(UserController::class)->group(function () {
-        Route::get('profile/', 'show')->name('profile');
-        Route::get('profile/edit/', 'detail')->name('editprofile');
-        Route::put('profile/edit/{id}', 'userUpdate')->name('profile.edit');
-    });
-    
-    Route::controller(ReservationController::class)->group(function () {
-        Route::post('reservation', 'create')->name('reservation.create');
-    });
-    
-
     Route::get('/payment', function () {
         return view('payment');
     })->name('payment');
@@ -124,4 +108,27 @@ Route::controller(ReservationController::class)->group(function () {
     Route::get('/detail_reservation', function () {
         return view('detail_reservation');
     });
-// });
+
+Route::controller(ReservationController::class)->group(function () {
+    Route::get('reservation', 'index')->name('reservation');
+});
+
+Route::middleware(['verifyrole:customer'])->group(function () {
+    Route::controller(UserController::class)->group(function () {
+        Route::get('profile/', 'show')->name('profile');
+        Route::get('profile/edit/', 'detail')->name('editprofile');
+        Route::put('profile/edit/{id}', 'userUpdate')->name('profile.edit');
+    });
+    
+    Route::controller(ReservationController::class)->group(function () {
+        Route::post('reservation', 'create')->name('reservation.create');
+        Route::get('reservation/{id}', 'detail')->name('reservation.detail');
+        Route::get('myreservation', 'seeReservation')->name('reservation.see');
+    });
+
+    Route::controller(OrderController::class)->group(function(){
+        Route::get('order/{resId}', 'index')->name('order.menu');
+    });
+    
+
+});

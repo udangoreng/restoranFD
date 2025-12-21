@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CustTable;
 use App\Models\Reservation;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -42,8 +43,30 @@ class ReservationController extends Controller
 
         $carbon_time = Carbon::parse($request->time_in);
         $time_out = $carbon_time->addMinutes(150);
-        $queue = Reservation::whereDate('created_at', Carbon::today())->count();
 
+        $availableTable = CustTable::where('capacity', '>=', $request->person_attend)
+            ->where('is_occupied', false)
+            ->whereDoesntHave('reservations', function ($query) use ($carbon_time, $time_out, $request) {
+                $query->where('booking_date', $request->booking_date)
+                      ->where('status', '!=', 'Cancelled')
+                      ->where(function ($q) use ($carbon_time, $time_out) {
+                          $q->whereBetween('time_in', [$carbon_time->format('H:i'), $time_out->format('H:i')])
+                            ->orWhereBetween('time_out', [$carbon_time->format('H:i'), $time_out->format('H:i')])
+                            ->orWhere(function ($sub) use ($carbon_time, $time_out) {
+                                $sub->where('time_in', '<', $carbon_time->format('H:i'))
+                                    ->where('time_out', '>', $time_out->format('H:i'));
+                            });
+                      });
+            })
+            ->orderBy('capacity', 'asc') 
+            ->first();
+
+        if (!$availableTable) {
+            return back()->with('error', 'Sorry! There\'s No Avaiable Table On That Time and Date. Please Choose Other Time and Date!');
+        }
+
+        
+        $queue = Reservation::whereDate('created_at', Carbon::today())->count();
         $res_id = '#RSV-'.Carbon::Now()->format('Ymd').'-'.($queue+1);
 
         
@@ -53,8 +76,17 @@ class ReservationController extends Controller
             'time_out'=> $time_out->format('H:i'),
         ]);
 
-        Reservation::create($data->all());
-        return redirect()->route('menu')->with('success', 'Reservation created successfully.');
+        $res = Reservation::create($data->all());
+        return redirect()->route('reservation/'.$res->id)->with('success', 'Reservation created successfully.');
+    }
+
+    public function detail(string $id){
+        $reservation = Reservation::with(['orders.carts.menu'])->findOrFail($id);
+        return view('detail_reservation', compact('reservation'));
+    }
+
+    public function seeReservation(){
+        return view('myreservation');
     }
 
     //Admin

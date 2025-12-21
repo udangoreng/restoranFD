@@ -179,6 +179,7 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="{{ asset('css/Popup.css') }}">
 </head>
 
 <body>
@@ -190,7 +191,7 @@
                 modal.style.display = "flex";
             });
             const understoodBtn = document.getElementById('closeLoginInfoModal');
-            understoodBtn.addEventListener('click', function () {
+            understoodBtn.addEventListener('click', function() {
                 modal.style.display = none;
                 setTimeout(() => {
                     window.location.href = "{{ route('auth.login') }}";
@@ -209,111 +210,125 @@
             courvoiser@booking.com, or call on +62-812-34567890 </p>
 
         @auth
-        <form method="POST" action="{{ route('reservation.create') }}">
-            @csrf
-            <input type="text" name="user_id" id="" value="{{$userdata->id}}" hidden>
-            <div class="d-flex">
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="salutation" id="inlineRadio1" value="Ms.">
-                    <label class="form-check-label" for="inlineRadio1">Ms.</label>
+            <form method="POST" action="{{ route('reservation.create') }}">
+                @csrf
+                <input type="text" name="user_id" id="" value="{{ $userdata->id }}" hidden>
+                <div class="d-flex">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="salutation" id="inlineRadio1" value="Ms.">
+                        <label class="form-check-label" for="inlineRadio1">Ms.</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="salutation" id="inlineRadio2" value="Mr.">
+                        <label class="form-check-label" for="Mr.">Mr.</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="salutation" id="inlineRadio3" value="Mx.">
+                        <label class="form-check-label" for="Mx.">Mx.</label>
+                    </div>
                 </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="salutation" id="inlineRadio2" value="Mr.">
-                    <label class="form-check-label" for="Mr.">Mr.</label>
+                <div class="form-row">
+                    <div class="input-box">
+                        <input type="text" name="first_name" placeholder="First Name">
+                    </div>
+                    <div class="input-box">
+                        <input type="text" name="last_name" placeholder="Last Name">
+                    </div>
                 </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="salutation" id="inlineRadio3" value="Mx.">
-                    <label class="form-check-label" for="Mx.">Mx.</label>
+                <div class="form-row">
+                    <div class="input-box">
+                        <input type="email" name="email" placeholder="Email Address">
+                    </div>
+                    <div class="input-box">
+                        <input type="text" name="phone" placeholder="Phone Number">
+                    </div>
                 </div>
-            </div>
-            <div class="form-row">
+                <div class="form-row">
+                    <div class="input-box">
+                        <select name="person_attend">
+                            <option value="1">1 Person</option>
+                            <option value="3">2 Person</option>
+                            <option value="3">3 Person</option>
+                            <option value="4">4 Person</option>
+                            <option value="5">5 Person</option>
+                            <option value="6">6 Person</option>
+                            <option value="7">7 Person</option>
+                            <option value="8">8 Person</option>
+                            <option value="9">9 Person</option>
+                            <option value="10">10 Person</option>
+                        </select>
+                    </div>
+                    <div class="input-box">
+                        <select name="on_behalf" required>
+                            <option value="" disabled selected>Are you making reservation for?</option>
+                            <option value="Myself">Myself</option>
+                            <option value="Someone">Someone Else</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="input-box">
+                        <select name="time_in" required>
+                            <option value="" disabled>========= Breakfast =========</option>
+                            <option value="08:00">08:00 AM</option>
+                            <option value="09:00">09:00 AM</option>
+                            <option value="10:00">10:00 AM</option>
+                            <option value="" disabled>========= Lunch =========</option>
+                            <option value="11:00">11:00 AM</option>
+                            <option value="12:00">12:00 PM</option>
+                            <option value="13:00">01:00 PM</option>
+                            <option value="14:00">02:00 PM</option>
+                            <option value="15:00">03:00 PM</option>
+                            <option value="16:00">04:00 PM</option>
+                            <option value="17:00">05:00 PM</option>
+                            <option value="" disabled>========= Dinner =========</option>
+                            <option value="18:00">06:00 PM</option>
+                            <option value="19:00">07:00 PM</option>
+                            <option value="20:00">08:00 PM</option>
+                            <option value="21:00">09:00 PM</option>
+                            <option value="22:00">10:00 PM</option>
+                        </select>
+                    </div>
+                    <div class="input-box">
+                        <input type="date" name="booking_date" id="#date" min="<?php echo date('Y-m-d'); ?>" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="input-box">
+                        <select name="request">
+                            <option value="" disabled selected>Request</option>
+                            <option value="Accessibility Accomodation">Accessibility Accomodation</option>
+                            <option value="Window Seating">Window Seating</option>
+                            <option value="Private Seating">Private Seating</option>
+                            <option value="Special Occasion">Special Occasion (Birthday, Anniversary, Romantic Dinner)
+                            </option>
+                            <option value="Bussiness Occasion">Bussiness Meeting</option>
+                            <option value="Smoking Lounge">Smoking Lounge</option>
+                        </select>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" name="allergies" placeholder="Food Allergies">
+                    </div>
+                </div>
                 <div class="input-box">
-                    <input type="text" name="first_name" placeholder="First Name">
+                    <textarea name="message" placeholder="Message (max 255 characters)"></textarea>
                 </div>
-                <div class="input-box">
-                    <input type="text" name="last_name" placeholder="Last Name">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="input-box">
-                    <input type="email" name="email" placeholder="Email Address">
-                </div>
-                <div class="input-box">
-                    <input type="text" name="phone" placeholder="Phone Number">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="input-box">
-                    <select name="person_attend">
-                        <option value="1">1 Person</option>
-                        <option value="3">2 Person</option>
-                        <option value="3">3 Person</option>
-                        <option value="4">4 Person</option>
-                        <option value="5">5 Person</option>
-                        <option value="6">6 Person</option>
-                        <option value="7">7 Person</option>
-                        <option value="8">8 Person</option>
-                        <option value="9">9 Person</option>
-                        <option value="10">10 Person</option>
-                    </select>
-                </div>
-                <div class="input-box">
-                    <select name="on_behalf" required>
-                        <option value="" disabled selected>Are you making reservation for?</option>
-                        <option value="Myself">Myself</option>
-                        <option value="Someone">Someone Else</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="input-box">
-                    <select name="time_in" required>
-                        <option value="" disabled>========= Breakfast =========</option>
-                        <option value="08:00">08:00 AM</option>
-                        <option value="09:00">09:00 AM</option>
-                        <option value="10:00">10:00 AM</option>
-                        <option value="" disabled>========= Lunch =========</option>
-                        <option value="11:00">11:00 AM</option>
-                        <option value="12:00">12:00 PM</option>
-                        <option value="13:00">01:00 PM</option>
-                        <option value="14:00">02:00 PM</option>
-                        <option value="15:00">03:00 PM</option>
-                        <option value="16:00">04:00 PM</option>
-                        <option value="17:00">05:00 PM</option>
-                        <option value="" disabled>========= Dinner =========</option>
-                        <option value="18:00">06:00 PM</option>
-                        <option value="19:00">07:00 PM</option>
-                        <option value="20:00">08:00 PM</option>
-                        <option value="21:00">09:00 PM</option>
-                        <option value="22:00">10:00 PM</option>
-                    </select>
-                </div>
-                <div class="input-box">
-                    <input type="date" name="booking_date" id="#date" min="<?php echo date('Y-m-d'); ?>" required>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="input-box">
-                    <select name="request">
-                        <option value="" disabled selected>Request</option>
-                        <option value="Accessibility Accomodation">Accessibility Accomodation</option>
-                        <option value="Window Seating">Window Seating</option>
-                        <option value="Private Seating">Private Seating</option>
-                        <option value="Special Occasion">Special Occasion (Birthday, Anniversary, Romantic Dinner)
-                        </option>
-                        <option value="Bussiness Occasion">Bussiness Meeting</option>
-                        <option value="Smoking Lounge">Smoking Lounge</option>
-                    </select>
-                </div>
-                <div class="input-box">
-                    <input type="text" name="allergies" placeholder="Food Allergies">
-                </div>
-            </div>
-            <div class="input-box">
-                <textarea name="message" placeholder="Message (max 255 characters)"></textarea>
-            </div>
-            <button class="button-submit" type="submit">Book A Table</button>
-        </form>
+                <button class="button-submit" type="submit">Book A Table</button>
+            </form>
+            @if (session('error'))
+                @include('layout.popup.error_reservation_popup')
+                <script src="{{ asset('js/Popup.js') }}"></script>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const modal = document.getElementById("loginInfoModal");
+                        modal.style.display = "flex";
+                    });
+                    const understoodBtn = document.getElementById('closeLoginInfoModal');
+                    understoodBtn.addEventListener('click', function() {
+                        modal.style.display = "none";
+                    });
+                </script>
+            @endif
         @endauth
     </div>
 </body>
