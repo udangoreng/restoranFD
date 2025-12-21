@@ -128,6 +128,7 @@ Route::middleware(['verifyrole:customer'])->group(function () {
 
     Route::controller(OrderController::class)->group(function(){
         Route::get('order/{resId}', 'index')->name('order.menu');
+        Route::get('order/{resId}/{menuId}', 'detail')->name('order.menu.detail');
     });
     
 
