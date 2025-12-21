@@ -218,11 +218,11 @@
                     <label class="form-check-label" for="inlineRadio1">Ms.</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="salutation" id="inlineRadio2" value="option2">
+                    <input class="form-check-input" type="radio" name="salutation" id="inlineRadio2" value="Mr.">
                     <label class="form-check-label" for="Mr.">Mr.</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="salutation" id="inlineRadio3" value="option3">
+                    <input class="form-check-input" type="radio" name="salutation" id="inlineRadio3" value="Mx.">
                     <label class="form-check-label" for="Mx.">Mx.</label>
                 </div>
             </div>
@@ -258,7 +258,7 @@
                     </select>
                 </div>
                 <div class="input-box">
-                    <select name="on_behalf">
+                    <select name="on_behalf" required>
                         <option value="" disabled selected>Are you making reservation for?</option>
                         <option value="Myself">Myself</option>
                         <option value="Someone">Someone Else</option>
@@ -267,10 +267,12 @@
             </div>
             <div class="form-row">
                 <div class="input-box">
-                    <select name="time_in">
+                    <select name="time_in" required>
+                        <option value="" disabled>========= Breakfast =========</option>
                         <option value="08:00">08:00 AM</option>
                         <option value="09:00">09:00 AM</option>
                         <option value="10:00">10:00 AM</option>
+                        <option value="" disabled>========= Lunch =========</option>
                         <option value="11:00">11:00 AM</option>
                         <option value="12:00">12:00 PM</option>
                         <option value="13:00">01:00 PM</option>
@@ -278,6 +280,7 @@
                         <option value="15:00">03:00 PM</option>
                         <option value="16:00">04:00 PM</option>
                         <option value="17:00">05:00 PM</option>
+                        <option value="" disabled>========= Dinner =========</option>
                         <option value="18:00">06:00 PM</option>
                         <option value="19:00">07:00 PM</option>
                         <option value="20:00">08:00 PM</option>
@@ -286,7 +289,7 @@
                     </select>
                 </div>
                 <div class="input-box">
-                    <input type="date" name="booking_date" id="#date" min="<?php echo date('Y-m-d'); ?>">
+                    <input type="date" name="booking_date" id="#date" min="<?php echo date('Y-m-d'); ?>" required>
                 </div>
             </div>
             <div class="form-row">
@@ -307,7 +310,7 @@
                 </div>
             </div>
             <div class="input-box">
-                <textarea name="message" placeholder="Message"></textarea>
+                <textarea name="message" placeholder="Message (max 255 characters)"></textarea>
             </div>
             <button class="button-submit" type="submit">Book A Table</button>
         </form>

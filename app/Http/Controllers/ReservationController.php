@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reservation;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,7 +25,36 @@ class ReservationController extends Controller
      */
     public function create(Request $request)
     {
-        dd($request);
+        $request->validate([
+            'user_id'=>'required',
+            'salutation'=>'required',
+            'first_name'=>'required|string|max:20',
+            'last_name'=>'required|string|max:20',
+            'phone'=>'required',
+            'email'=>'required|email',
+            'person_attend'=>'required|numeric|max:10',
+            'booking_date'=>'required|date',
+            'time_in'=>'required',
+            'request'=>'nullable|string',
+            'allergies'=>'nullable|string|max:100',
+            'message'=>'nullable|string|max:255',
+        ]);
+
+        $carbon_time = Carbon::parse($request->time_in);
+        $time_out = $carbon_time->addMinutes(150);
+        $queue = Reservation::whereDate('created_at', Carbon::today())->count();
+
+        $res_id = '#RSV-'.Carbon::Now()->format('Ymd').'-'.($queue+1);
+
+        
+        $data = $request->merge([
+            'reservation_code'=>$res_id,
+            'status'=>'Created',
+            'time_out'=> $time_out->format('H:i'),
+        ]);
+
+        Reservation::create($data->all());
+        return redirect()->route('menu')->with('success', 'Reservation created successfully.');
     }
 
     //Admin
@@ -33,7 +64,8 @@ class ReservationController extends Controller
      */
     public function show()
     {
-        return view('admin.reservation');
+        $reservations = Reservation::all();
+        return view('admin.reservation', compact('reservations'));
     }
 
     /**

@@ -18,25 +18,19 @@
                 </tr>
             </thead>
             <tbody>
-                {{-- @foreach ($menus as $menu)
+                @foreach ($reservations as $reservation)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $menu->name }}</td>
-                        <td>{{ Str::limit($menu->description, 50) }}</td>
-                        <td>{{ $menu->price }}</td>
+                        <td>{{ $reservation->reservation_code }}</td>
+                        <td>{{ $reservation->first_name." ".$reservation->last_name}}</td>
+                        <td>{{ $reservation->person_attend }}</td>
+                        <td>{{$reservation->booking_date}}</td>
+                        <td>{{$reservation->time_in}}</td>
                         <td>
-                            @if ($menu->img_path)
-                                <img src="{{ asset('storage/' . $menu->img_path) }}" alt="{{ $menu->name }}"
-                                    width="50">
-                            @else
-                                No Image
-                            @endif
-                        </td>
-                        <td>
-                            <a href="{{ route('admin.menu.detail', $menu->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="{{ route('admin.reservation.detail', $reservation->id) }}" class="btn btn-warning btn-sm">Edit</a>
                             <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                 data-bs-target="#deleteModal">Delete</button>
-                            <form action="{{ route('admin.menu.destroy', $menu->id) }}" method="POST" class="d-inline">
+                            <form action="{{ route('admin.reservation.destroy', $reservation->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
                                 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -44,7 +38,7 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Menu</h1>
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Delete reservation</h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
@@ -58,7 +52,7 @@
                                                         d="M15 6C14.1714 6 13.5 6.67188 13.5 7.5V17.0361C13.5 17.8643 14.1714 18.5361 15 18.5361C15.8286 18.5361 16.5 17.8643 16.5 17.0361V7.5C16.5 6.67188 15.8286 6 15 6ZM15 19.9111C14.1714 19.9111 13.5 20.583 13.5 21.4111V22.5C13.5 23.3281 14.1714 24 15 24C15.8286 24 16.5 23.3281 16.5 22.5V21.4111C16.5 20.583 15.8286 19.9111 15 19.9111Z"
                                                         fill="#DC3545" />
                                                 </svg>
-                                                <h4 class="mt-3">Are You Sure to Delete Menu?</h4>
+                                                <h4 class="mt-3">Are You Sure to Delete reservation?</h4>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
@@ -71,7 +65,7 @@
                             </form>
                         </td>
                     </tr>
-                @endforeach --}}
+                @endforeach
             </tbody>
         </table>
     </div>
