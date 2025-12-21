@@ -1,5 +1,6 @@
 @extends('layout.index')
 @section('style')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('css/detail_menu.css') }}">
     <style>
         .btn-dark {
@@ -164,7 +165,6 @@
     </div>
 
     @include('layout.components.navbar')
-
     <section class="container my-4 detail-menu-section">
         <div class="row align-items-start detail-menu-box p-4">
 
@@ -184,8 +184,8 @@
 
                 <h4 class="detail-menu-price">@currency($menu->price)</h4>
             </div>
-            <button class="add-to-cart-btn" data-name="Grilled Caesar Salad" data-price="175000"
-                data-image="appetizer1.jpg">
+            <button class="add-to-cart-btn" data-menu-id="{{ $menu->id }}" data-name="{{ $menu->name }}"
+                data-price="{{ $menu->price }}" data-image="{{ asset('storage/' . $menu->img_path) }}">
                 Add to Order
             </button>
         </div>
@@ -243,41 +243,8 @@
 @endsection
 
 @section('script')
-    <script src="detail_menu.js"></script>
+    @parent
+    <script src="{{ asset('js/detail_menu.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-
-            const quantityBtns = document.querySelectorAll('.quantity-btn');
-
-            quantityBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-
-                    const item = this.closest('.order-item');
-                    const quantity = item.querySelector('.quantity');
-                    let qty = parseInt(quantity.textContent);
-                    const basePrice = parseInt(item.dataset.basePrice);
-
-                    if (this.textContent === '+') qty++;
-                    else if (this.textContent === '-' && qty > 1) qty--;
-
-                    quantity.textContent = qty;
-                    item.querySelector('.item-price').textContent = `IDR ${basePrice * qty}.000`;
-
-                    updateSubtotal();
-                });
-            });
-
-            function updateSubtotal() {
-                let subtotal = 0;
-                document.querySelectorAll('.item-price').forEach(p => {
-                    subtotal += parseInt(p.textContent.replace('IDR ', '').replace('.000', ''));
-                });
-                document.getElementById('subtotalAmount').textContent = `IDR ${subtotal}.000`;
-            }
-
-            updateSubtotal();
-        });
-    </script>
+    <script src="{{ asset('js/cart.js') }}"></script>
 @endsection

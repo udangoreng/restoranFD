@@ -1,4 +1,7 @@
 @extends('layout.index')
+@section('style')
+    <link rel="stylesheet" href="{{ asset('css/cancelPopup.css') }}">
+@endsection
 @section('content')
     <div class="preload" data-preload>
         <div class="circle"></div>
@@ -50,12 +53,14 @@
 
                     <div class="reservation-card-row">
                         <div class="reservation-label">Date</div>
-                        <div class="reservation-value">{{ \Carbon\Carbon::parse($reservation->booking_date)->format('j F Y') }}</div>
+                        <div class="reservation-value">
+                            {{ \Carbon\Carbon::parse($reservation->booking_date)->format('j F Y') }}</div>
                     </div>
 
                     <div class="reservation-card-row">
                         <div class="reservation-label">Time</div>
-                        <div class="reservation-value">{{\Carbon\Carbon::parse($reservation->time_in)->format('H:i A') }}</div>
+                        <div class="reservation-value">{{ \Carbon\Carbon::parse($reservation->time_in)->format('H:i A') }}
+                        </div>
                     </div>
 
                     <div class="reservation-card-row">
@@ -84,66 +89,48 @@
 
                 <div class="reservation-card reservation-order">
                     <h3 class="reservation-card-title">Ordered Menu</h3>
-                    @if (!isset($reservation->carts))
+                    @if (!isset($reservation->orders))
                         <p class="reservation-value">
-                           You Haven't Had Any Menu Ordered. <a href={{route('order.menu', $reservation->id)}}>Order Some Menu?</a>
+                            You Haven't Had Any Menu Ordered. <a href={{ route('order.menu', $reservation->id) }}>Order
+                                Some
+                                Menu?</a>
                         </p>
                     @else
-                    <table class="reservation-menu-table" aria-label="Ordered menu">
-                        <thead>
-                            <tr>
-                                <th>Item</th>
-                                <th class="reservation-qty">Qty</th>
-                                <th class="reservation-price">Price</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="menu-name">Peach Bruschetta</td>
-                                <td class="reservation-qty">1</td>
-                                <td class="reservation-price">IDR 140.000</td>
-                            </tr>
-                            <tr>
-                                <td class="menu-name">Herb Roasted Salmon</td>
-                                <td class="reservation-qty">1</td>
-                                <td class="reservation-price">IDR 185.000</td>
-                            </tr>
-                            <tr>
-                                <td class="menu-name">Garlic Butter Lobster</td>
-                                <td class="reservation-qty">1</td>
-                                <td class="reservation-price">IDR 320.000</td>
-                            </tr>
-                            <tr>
-                                <td class="menu-name">Caramel Pannacotta</td>
-                                <td class="reservation-qty">1</td>
-                                <td class="reservation-price">IDR 105.000</td>
-                            </tr>
-                            <tr>
-                                <td class="menu-name"> Lychee Rose Mocktail <div class="menu-note">less sugar</div>
-                                </td>
-                                <td class="reservation-qty">2</td>
-                                <td class="reservation-price">IDR 73.000</td>
-                            </tr>
-                            <tr>
-                                <td class="menu-name">Strawberry Smoothie <div class="menu-note">no ice</div>
-                                </td>
-                                <td class="reservation-qty">1</td>
-                                <td class="reservation-price">IDR 55.000</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                        @foreach ($reservation->orders as $items)
+                            <table class="reservation-menu-table" aria-label="Ordered menu">
+                                <thead>
+                                    <tr>
+                                        <th>Item</th>
+                                        <th class="reservation-qty">Qty</th>
+                                        <th class="reservation-price">Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($items->carts as $item)
+                                        <tr>
+                                            <td class="menu-name">{{ $item->menu->name }}</td>
+                                            <td class="reservation-qty">{{ $item->quantity }}</td>
+                                            <td class="reservation-price">@currency($item->price)</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
 
-                    <div class="reservation-summary">
-                        <div class="summary-row"><span>Subtotal</span><span>IDR 951.000</span></div>
-                        <div class="summary-row"><span>Tax (10%)</span><span>IDR 95.100</span></div>
-                        <div class="summary-row summary-total"><span>Total</span><span>IDR 1.046.100</span></div>
-                    </div>
+                            <div class="reservation-summary">
+                                <div class="summary-row"><span>Subtotal</span><span>@currency($items->total_amount)</span></div>
+                                <div class="summary-row"><span>Tax (10%)</span><span>@currency($items->total_amount * 0.1)</span></div>
+                                <div class="summary-row summary-total"><span>Total</span><span>@currency($items->total_amount + $items->total_amount * 0.1)</span>
+                                </div>
+                            </div>
+                        @endforeach
                 </div>
 
                 <div class="reservation-actions">
-                    <button class="reservation-btn reservation-btn-primary">Download Invoice (PDF)</button>
+                    <button class="reservation-btn reservation-btn-primary"
+                        {{ $reservation->status == 'Created' || $reservation->status == 'Pending Payment' ? 'disabled' : '' }}>Download
+                        Invoice (PDF)</button>
                     <div class="reservation-actions-row">
-                        <button class="reservation-btn reservation-btn-outline">Modify Reservation</button>
+                        <button class="reservation-btn reservation-btn-outline">Modify Menu</button>
                         <button class="reservation-btn reservation-btn-cancel">Cancel Reservation</button>
                     </div>
                 </div>
@@ -170,10 +157,8 @@
 
     @include('layout.components.footer')
 
-    <div id="popupContainer"></div>
-
-    <link rel="stylesheet" href="cancelPopup.css">
-    @endssection
+    {{-- <div id="popupContainer"></div> --}}
+@endsection
 
 @section('script')
     <script>

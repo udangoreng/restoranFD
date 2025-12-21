@@ -81,6 +81,10 @@ Route::middleware(['verifyrole:admin'])->prefix('admin')->group(function () {
         return view('payment');
     })->name('payment');
 
+    Route::get('/checkout', function () {
+        return view('checkout');
+    })->name('checkout');
+
     Route::get('/order', function () {
         return view('order');
     });
@@ -129,6 +133,10 @@ Route::middleware(['verifyrole:customer'])->group(function () {
     Route::controller(OrderController::class)->group(function(){
         Route::get('order/{resId}', 'index')->name('order.menu');
         Route::get('order/{resId}/{menuId}', 'detail')->name('order.menu.detail');
+        Route::get('cart/data', 'getCart')->name('cart.data');
+        Route::post('order/addcart', 'addToCart')->name('addToCart');
+        Route::put('cart/update/{id}', 'updateQuantity')->name('cart.update');
+        Route::delete('cart/remove/{id}', 'removeFromCart')->name('cart.remove');
     });
     
 

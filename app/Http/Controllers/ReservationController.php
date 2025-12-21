@@ -68,7 +68,6 @@ class ReservationController extends Controller
         
         $queue = Reservation::whereDate('created_at', Carbon::today())->count();
         $res_id = '#RSV-'.Carbon::Now()->format('Ymd').'-'.($queue+1);
-
         
         $data = $request->merge([
             'reservation_code'=>$res_id,

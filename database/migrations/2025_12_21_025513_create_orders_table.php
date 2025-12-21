@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('reservation_id')->constrained('reservations', 'id');
             $table->foreignId('user_id')->constrained('users', 'id');
             $table->string('order_code')->unique();
-            $table->decimal('total_amount', 10, 2);
+            $table->decimal('total_amount', 10, 2)->nullable();
             $table->decimal('down_payment_amount', 10, 2)->nullable();
             $table->decimal('remaining_amount', 10, 2)->nullable();
             $table->string('payment_method')->nullable();

@@ -1999,6 +1999,11 @@ p {
     color: #102827;
 }
 
+.reservation-btn-primary:disabled {
+    background: #978968;
+    color: #102827;
+}
+
 .reservation-btn-outline {
     background: transparent;
     color: #c89b3c;
