@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
-            $table->string('reservation_code');
+            $table->string('reservation_code')->unique();
             $table->foreignId('user_id')->constrained('users', 'id')->ondelete('cascade');     
             $table->foreignId('table_id')->nullable()->constrained('cust_tables', 'id');
             $table->enum('salutation', ['Ms.', 'Mr.', 'Mx.']);
@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('request')->nullable();
             $table->string('allergies')->nullable();
             $table->text('message')->nullable();
-            $table->enum('status', ['Created', 'Pending Payment', 'Confirmed', 'Cancelled', 'No Show'])->default('Pending Payment');
+            $table->enum('status', ['Created', 'Pending Payment', 'Confirmed', 'Dine', 'Cancelled', 'No Show'])->default('Created');
             $table->timestamps();
         });
     }

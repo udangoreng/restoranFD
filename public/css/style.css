@@ -1727,7 +1727,7 @@ p {
     position: relative;
     width: 100%;
     height: 80vh;
-    background: url("{{asset('img/heroreservasi.png')}}") center/cover no-repeat;
+    background: url('/img/heroreservasi.png') center/cover no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2019,7 +2019,7 @@ p {
 
 .history-hero {
     height: 80vh;
-    background: url("{{asset('img/heroreservasi.png')}}") center/cover no-repeat;
+    background: url('/img/heroreservasi.png') center/cover no-repeat;
     position: relative;
     display: flex;
     align-items: center;
