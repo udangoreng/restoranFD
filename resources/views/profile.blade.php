@@ -315,7 +315,6 @@
             transform: translateY(-2px);
         }
 
-        /* Responsive Breakpoints */
         @media (max-width: 1100px) {
             .profile-layout {
                 grid-template-columns: minmax(250px, 280px) 1fr;
@@ -495,7 +494,6 @@
             }
         }
 
-        /* Print styles */
         @media print {
             body {
                 background: white;
