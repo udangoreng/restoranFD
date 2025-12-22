@@ -19,6 +19,7 @@
             color: #f5f5f5;
             min-height: 100vh;
             padding: 20px;
+            overflow-x: hidden;
         }
 
         a {
@@ -28,15 +29,17 @@
 
         .profile-container {
             padding: 20px;
+            width: 100%;
         }
 
         .profile-box {
             max-width: 1200px;
-            margin: auto;
+            margin: 0 auto;
             border: 2px solid #d4af37;
             border-radius: 20px;
             padding: 30px;
             background: rgba(12, 40, 36, 0.95);
+            overflow: hidden;
         }
 
         .page-title {
@@ -45,20 +48,21 @@
             margin-bottom: 25px;
             padding-bottom: 15px;
             border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+            word-wrap: break-word;
         }
 
         .profile-layout {
             display: grid;
-            grid-template-columns: 300px 1fr;
+            grid-template-columns: minmax(280px, 300px) 1fr;
             gap: 25px;
         }
-
 
         .profile-card {
             background: linear-gradient(180deg, #143c37, #0d2a26);
             border-radius: 18px;
             padding: 25px;
             border: 1px solid rgba(212, 175, 55, 0.3);
+            width: 100%;
         }
 
         .profile-photo {
@@ -67,22 +71,28 @@
         }
 
         .profile-photo img {
-            width: 220px;
+            width: 100%;
+            max-width: 220px;
             height: 220px;
             border-radius: 50%;
             border: 3px solid #d4af37;
             object-fit: cover;
+            aspect-ratio: 1/1;
         }
 
         .profile-name {
             text-align: center;
             color: #e6c87a;
             margin-bottom: 20px;
+            font-size: clamp(20px, 2vw, 24px);
+            word-break: break-word;
+            padding: 0 5px;
         }
 
         .profile-about h4 {
             margin-bottom: 15px;
             color: #d4af37;
+            font-size: 18px;
         }
 
         .about-list {
@@ -94,26 +104,28 @@
             align-items: center;
             gap: 10px;
             margin-bottom: 12px;
-            font-size: 14px;
+            font-size: clamp(14px, 1.6vw, 16px);
+            word-break: break-word;
         }
 
         .about-list i {
             color: #d4af37;
             width: 20px;
+            flex-shrink: 0;
         }
-
 
         .activity-card {
             background: linear-gradient(180deg, #143c37, #0d2a26);
             border-radius: 18px;
             padding: 25px;
             border: 1px solid rgba(212, 175, 55, 0.3);
+            width: 100%;
         }
 
         .section-title {
             color: #e6c87a;
             margin-bottom: 25px;
-            font-size: 22px;
+            font-size: clamp(20px, 2vw, 22px);
             padding-bottom: 10px;
             border-bottom: 1px solid rgba(212, 175, 55, 0.2);
         }
@@ -123,14 +135,17 @@
             justify-content: space-between;
             align-items: center;
             margin: 25px 0 15px 0;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
         .section-subtitle {
             color: #d4af37;
-            font-size: 18px;
+            font-size: clamp(16px, 1.8vw, 18px);
             display: flex;
             align-items: center;
             gap: 10px;
+            flex-wrap: wrap;
         }
 
         .section-subtitle.history {
@@ -139,6 +154,7 @@
 
         .section-subtitle i {
             font-size: 16px;
+            flex-shrink: 0;
         }
 
         .detail-btn {
@@ -152,6 +168,15 @@
             gap: 8px;
             transition: all 0.3s ease;
             border: none;
+            white-space: nowrap;
+        }
+
+        .detail-btn a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            height: 100%;
         }
 
         .detail-btn.active-btn {
@@ -176,11 +201,11 @@
             transform: translateY(-2px);
         }
 
-
         .reservation-list {
             display: flex;
             flex-direction: column;
             gap: 15px;
+            width: 100%;
         }
 
         .reservation-list.history {
@@ -192,6 +217,7 @@
             border-radius: 16px;
             padding: 20px;
             border: 1px solid rgba(212, 175, 55, 0.25);
+            width: 100%;
         }
 
         .reservation-item.active {
@@ -205,13 +231,16 @@
         .reservation-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         .reservation-id {
-            font-size: 14px;
+            font-size: clamp(13px, 1.4vw, 14px);
             color: #e6c87a;
+            word-break: break-word;
         }
 
         .status {
@@ -222,6 +251,7 @@
             display: flex;
             align-items: center;
             gap: 6px;
+            flex-shrink: 0;
         }
 
         .status.active {
@@ -238,66 +268,22 @@
 
         .reservation-body p {
             margin-bottom: 10px;
-            font-size: 14px;
+            font-size: clamp(13px, 1.4vw, 14px);
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 8px;
+            flex-wrap: wrap;
         }
 
         .reservation-body i {
             color: #d4af37;
             width: 16px;
+            flex-shrink: 0;
+            margin-top: 2px;
         }
 
-
-        @media (max-width: 1024px) {
-            .profile-layout {
-                grid-template-columns: 1fr;
-            }
-
-            .profile-card {
-                max-width: 400px;
-                margin: 0 auto;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .profile-container {
-                padding: 15px;
-            }
-
-            .profile-box {
-                padding: 20px;
-            }
-
-            .page-title {
-                font-size: 24px;
-            }
-
-            .section-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-                margin: 20px 0 10px 0;
-            }
-
-            .detail-btn {
-                align-self: flex-start;
-            }
-
-            .reservation-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-
-            .section-title {
-                font-size: 20px;
-            }
-
-            .section-subtitle {
-                font-size: 16px;
-            }
+        .reservation-body strong {
+            margin-right: 5px;
         }
 
         .edit-btn {
@@ -314,11 +300,218 @@
             align-items: center;
             gap: 6px;
             transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .edit-btn a {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #d4af37;
         }
 
         .edit-btn:hover {
             background: rgba(212, 175, 55, 0.3);
             transform: translateY(-2px);
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 1100px) {
+            .profile-layout {
+                grid-template-columns: minmax(250px, 280px) 1fr;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .profile-layout {
+                grid-template-columns: 1fr;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+            
+            .profile-card {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            
+            .profile-container {
+                padding: 15px 10px;
+            }
+            
+            .profile-box {
+                padding: 20px 15px;
+                border-radius: 15px;
+            }
+            
+            .page-title {
+                font-size: 24px;
+                text-align: center;
+            }
+            
+            .profile-photo img {
+                max-width: 200px;
+                height: 200px;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+                margin: 20px 0 10px 0;
+            }
+            
+            .detail-btn {
+                align-self: stretch;
+                justify-content: center;
+            }
+            
+            .reservation-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .status {
+                align-self: flex-start;
+            }
+            
+            .section-title {
+                font-size: 20px;
+                text-align: center;
+            }
+            
+            .section-subtitle {
+                font-size: 17px;
+            }
+            
+            .about-list li {
+                font-size: 15px;
+            }
+            
+            .reservation-body p {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .profile-container {
+                padding: 10px 5px;
+            }
+            
+            .profile-box {
+                padding: 15px 10px;
+                border-width: 1px;
+            }
+            
+            .page-title {
+                font-size: 22px;
+                margin-bottom: 20px;
+            }
+            
+            .profile-photo img {
+                max-width: 180px;
+                height: 180px;
+            }
+            
+            .profile-name {
+                font-size: 20px;
+            }
+            
+            .profile-card,
+            .activity-card {
+                padding: 20px 15px;
+            }
+            
+            .section-title {
+                font-size: 19px;
+            }
+            
+            .section-subtitle {
+                font-size: 16px;
+            }
+            
+            .detail-btn {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+            
+            .reservation-item {
+                padding: 15px;
+            }
+            
+            .reservation-id {
+                font-size: 13px;
+            }
+            
+            .edit-btn {
+                padding: 5px 12px;
+                font-size: 11px;
+            }
+            
+            .about-list li {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .profile-photo img {
+                max-width: 160px;
+                height: 160px;
+            }
+            
+            .page-title {
+                font-size: 20px;
+            }
+            
+            .profile-name {
+                font-size: 18px;
+            }
+            
+            .detail-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .section-subtitle {
+                font-size: 15px;
+            }
+            
+            .profile-about h4 {
+                font-size: 16px;
+            }
+            
+            .about-list li {
+                font-size: 13px;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                padding: 0;
+            }
+            
+            .profile-box {
+                border: 1px solid #ccc;
+                background: white;
+                color: black;
+            }
+            
+            .detail-btn, .edit-btn {
+                display: none !important;
+            }
         }
     </style>
 </head>
