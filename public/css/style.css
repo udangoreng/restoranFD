@@ -479,24 +479,6 @@ body.nav-active {
     letter-spacing: 3px;
     line-height: 1.1;
 }
-/* TAMBAHIN MEDIA QUERY untuk responsive: */
-@media (max-width: 991px) {
-    #hero h1.serif {
-        font-size: 70px; /* Untuk tablet */
-    }
-    #hero h2.script {
-        font-size: 100px; /* Untuk tablet */
-    }
-}
-
-@media (max-width: 767px) {
-    #hero h1.serif {
-        font-size: 40px; /* Untuk HP */
-    }
-    #hero h2.script {
-        font-size: 60px; /* Untuk HP */
-    }
-}
 
 #hero h2.script {
     top: 55%;
@@ -505,6 +487,94 @@ body.nav-active {
     font-size: 150px;
     font-weight: 400;
     letter-spacing: 0.5px;
+    margin: 0; /* Tambahin ini */
+}
+/* ====== RESPONSIVE FIX ====== */
+
+/* Tablet (768px - 991px) */
+@media (max-width: 991px) {
+    #hero h1.serif {
+        font-size: 70px;
+        top: 35%; /* Adjust posisi */
+        line-height: 1.2;
+    }
+    #hero h2.script {
+        font-size: 100px;
+        top: 58%; /* Adjust posisi */
+    }
+}
+
+/* HP (max-width: 767px) */
+@media (max-width: 767px) {
+    #hero {
+        height: 85vh; /* Sedikit lebih pendek di HP */
+    }
+    
+    #hero h1.serif {
+        font-size: 40px;
+        top: 32%; /* Naikin dikit */
+        letter-spacing: 2px;
+        line-height: 1.3;
+    }
+    
+    #hero h2.script {
+        font-size: 60px;
+        top: 60%; /* Turunin dikit */
+        letter-spacing: 1px;
+    }
+    
+    /* Bikin video lebih aman di HP */
+    .banner video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+}
+
+/* HP kecil banget (< 480px) */
+@media (max-width: 480px) {
+    #hero h1.serif {
+        font-size: 32px;
+        top: 30%;
+        padding: 0 15px;
+    }
+    
+    #hero h2.script {
+        font-size: 50px;
+        top: 62%;
+    }
+}
+
+/* Landscape HP */
+@media (max-height: 500px) and (max-width: 900px) {
+    #hero h1.serif {
+        font-size: 50px;
+        top: 30%;
+    }
+    
+    #hero h2.script {
+        font-size: 70px;
+        top: 65%;
+    }
+}
+
+.banner video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+@media (min-aspect-ratio: 16/9) {
+    .banner video {
+        width: 100%;
+        height: auto;
+    }
 }
 
 .banner video {
