@@ -218,8 +218,35 @@
 
         .btn-book-now:hover {
             background-color: #c89b3c;
-            color: #18312E;
+            color: #0d2625;
             box-shadow: 0 0 15px rgba(200, 155, 60, 0.4);
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            margin-bottom: 20px;
+            border: 1px solid #c89b3c;
+            color: #c89b3c;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            width: fit-content;
+        }
+
+        .btn-back i {
+            font-size: 14px;
+        }
+
+        .btn-back:hover {
+            background-color: #c89b3c;
+            color: #0d2625;
+            box-shadow: 0 0 12px rgba(200, 155, 60, 0.4);
         }
 
         @media (max-width: 768px) {
@@ -256,6 +283,9 @@
         <div class="container">
 
             <div class="reservation-box">
+                <a href="javascript:history.back()" class="btn-back">
+                    <i class="fas fa-arrow-left"></i> Back
+                </a>
                 <h1 class="page-title">My Reservation</h1>
 
                 <div class="reservation-list">
