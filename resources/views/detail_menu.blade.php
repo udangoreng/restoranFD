@@ -283,7 +283,7 @@
             <div class="row g-3">
                 @foreach ($otherMenus as $item)
                     <div class="col-6 col-md-3">
-                        <div class="othermenu-item" style="background-image: url('appetizer1.jpg');"></div>
+                        <div class="othermenu-item" style="background-image: url({{ asset($item->img_path) }});"></div>
                         <a href="detail-appetizer1.html" class="othermenu-info">
                             <h5 class="othermenu-name">{{ $item->name }}</h5>
                             <p class="othermenu-price">@currency($item->price)</p>
