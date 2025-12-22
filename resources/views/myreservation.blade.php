@@ -256,19 +256,17 @@
 
                 <div class="reservation-list">
                     @if (count($reservation) == 0)
-                        @if (count($reservation) == 0)
-                            <div class="empty-state-box">
-                                <div class="empty-icon">
-                                    <i class="far fa-calendar-times"></i>
-                                </div>
-                                <h3 class="empty-title">No Reservations Found</h3>
-                                <p class="empty-subtitle">You haven't made any reservations with us yet.</p>
-
-                                <a href="{{ route('reservation') }}" class="btn-book-now">
-                                    Book a Table
-                                </a>
+                        <div class="empty-state-box">
+                            <div class="empty-icon">
+                                <i class="far fa-calendar-times"></i>
                             </div>
-                        @endif
+                            <h3 class="empty-title">No Reservations Found</h3>
+                            <p class="empty-subtitle">You haven't made any reservations with us yet.</p>
+
+                            <a href="{{ route('reservation') }}" class="btn-book-now">
+                                Book a Table
+                            </a>
+                        </div>
                     @endif
                     @foreach ($reservation as $item)
                         <div class="reservation-card active">

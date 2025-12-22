@@ -394,72 +394,92 @@
                         <h3 class="section-title">Activities</h3>
                         <div class="section-header">
                             <h4 class="section-subtitle">
-                                <i class="fa-solid fa-clock"></i> Active Reservations (3)
+                                <i class="fa-solid fa-clock"></i> Active Reservations ({{count($reservation)}})
                             </h4>
                             <button class="detail-btn active-btn">
-                                <i class="fa-solid fa-arrow-right"></i> Detail
+                                <a href="{{ route('reservation.see') }}">
+                                    <i class="fa-solid fa-arrow-right"></i> Detail
+                                </a>
                             </button>
                         </div>
                         <div class="reservation-list">
                             <div class="reservation-item active">
-                                <div class="reservation-header">
-                                    <span class="reservation-id">RESERVATION ID: <strong>#RSV-20251207-0098</strong></span>
-                                    <span class="status active">
-                                        <i class="fa-solid fa-clock"></i> ACTIVE
-                                    </span>
-                                </div>
-                                <div class="reservation-body">
-                                    <p>
-                                        <i class="fa-solid fa-calendar-days"></i>
-                                        <strong>Date & Time:</strong>
-                                        Friday, 30 Dec 2025 • 19:00
-                                    </p>
-                                    <p>
-                                        <i class="fa-solid fa-user-group"></i>
-                                        <strong>Guests:</strong>
-                                        4 Persons
-                                    </p>
-                                    <p>
-                                        <i class="fa-solid fa-phone"></i>
-                                        <strong>Contact:</strong>
-                                        0812-3456-7890
-                                    </p>
-                                </div>
+                                @if (count($reservation) == 0)
+                                    <p class="reservation-id">You haven't make any reservation with us Yet</p>
+                                @endif
+
+                                @foreach ($reservation as $item)
+                                    <div class="reservation-header">
+                                        <span class="reservation-id">RESERVATION ID:
+                                            <strong>{{ $item->reservation_code }}</strong></span>
+                                        <span class="status active">
+                                            <i class="fa-solid fa-clock"></i> {{ $item->status }}
+                                        </span>
+                                    </div>
+                                    <div class="reservation-body">
+                                        <p>
+                                            <i class="fa-solid fa-calendar-days"></i>
+                                            <strong>Date & Time:</strong>
+                                            {{ \Carbon\Carbon::parse($item->booking_date)->format('j F Y') }} •
+                                            {{ \Carbon\Carbon::parse($item->time_in)->format('H:i A') }}</span>
+                                        </p>
+                                        <p>
+                                            <i class="fa-solid fa-user-group"></i>
+                                            <strong>Guests:</strong>
+                                            {{ $item->person_attend }} Persons
+                                        </p>
+                                        <p>
+                                            <i class="fa-solid fa-phone"></i>
+                                            <strong>Contact:</strong>
+                                            {{ $item->phone }}
+                                        </p>
+                                    </div>
                             </div>
+                            @endforeach
                         </div>
                         <div class="section-header">
                             <h4 class="section-subtitle history">
-                                <i class="fa-solid fa-history"></i> History (3)
+                                <i class="fa-solid fa-history"></i> History ({{count($history)}})
                             </h4>
                             <button class="detail-btn history-btn">
-                                <i class="fa-solid fa-arrow-right"></i> Detail
+                                <a href="{{ route('history.see') }}">
+                                    <i class="fa-solid fa-arrow-right"></i> Detail
+                                </a>
                             </button>
                         </div>
                         <div class="reservation-list history">
                             <div class="reservation-item history">
-                                <div class="reservation-header">
-                                    <span class="reservation-id">RESERVATION ID: <strong>#RSV-20451207-0088</strong></span>
-                                    <span class="status history">
-                                        <i class="fa-solid fa-check"></i> COMPLETED
-                                    </span>
-                                </div>
-                                <div class="reservation-body">
-                                    <p>
-                                        <i class="fa-solid fa-calendar-days"></i>
-                                        <strong>Date & Time:</strong>
-                                        Saturday, 9 March 2024 • 20:30
-                                    </p>
-                                    <p>
-                                        <i class="fa-solid fa-user-group"></i>
-                                        <strong>Guests:</strong>
-                                        6 Persons
-                                    </p>
-                                    <p>
-                                        <i class="fa-solid fa-phone"></i>
-                                        <strong>Contact:</strong>
-                                        0812-3456-7890
-                                    </p>
-                                </div>
+                                @if (count($reservation) == 0)
+                                    <p class="reservation-id">You haven't make any reservation with us Yet</p>
+                                @endif
+
+                                @foreach ($reservation as $item)
+                                    <div class="reservation-header">
+                                        <span class="reservation-id">RESERVATION ID:
+                                            <strong>{{ $item->reservation_code }}</strong></span>
+                                        <span class="status history">
+                                            <i class="fa-solid fa-check"></i> {{ $item->status }}
+                                        </span>
+                                    </div>
+                                    <div class="reservation-body">
+                                        <p>
+                                            <i class="fa-solid fa-calendar-days"></i>
+                                            <strong>Date & Time:</strong>
+                                            {{ \Carbon\Carbon::parse($item->booking_date)->format('j F Y') }} •
+                                            {{ \Carbon\Carbon::parse($item->time_in)->format('H:i A') }}</span>
+                                        </p>
+                                        <p>
+                                            <i class="fa-solid fa-user-group"></i>
+                                            <strong>Guests:</strong>
+                                            {{ $item->person_attend }} Persons
+                                        </p>
+                                        <p>
+                                            <i class="fa-solid fa-phone"></i>
+                                            <strong>Contact:</strong>
+                                            {{ $item->phone }}
+                                        </p>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </section>

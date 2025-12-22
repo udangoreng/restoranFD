@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reservation;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -110,16 +111,18 @@ class UserController extends Controller
      */
     public function show()
     {
-        //Search latest resrvation based on user id
         $userdata = Auth::user();
-        return view('profile', compact('userdata'));
+        $reservation = Reservation::where('user_id', $userdata->id)->whereIn('status', ['Pending Payment', 'Created', 'Confirmed', 'Dine'])->get();
+        $history = Reservation::where('user_id', $userdata->id)->whereIn('status', ['Completed', 'Cancelled', 'No Show'])->get();
+        return view('profile', compact('userdata', 'reservation', 'history'));
     }
 
     public function detail()
     {
-        //Search latest resrvation based on user id
         $userdata = Auth::user();
-        return view('editprofile', compact('userdata'));
+        $reservation = Reservation::where('user_id', $userdata->id)->whereIn('status', ['Pending Payment', 'Created', 'Confirmed', 'Dine'])->get();
+        $history = Reservation::where('user_id', $userdata->id)->whereIn('status', ['Completed', 'Cancelled', 'No Show'])->get();
+        return view('editprofile', compact('userdata', 'reservation', 'history'));
     }
 
     public function userUpdate(Request $request, string $id)

@@ -86,13 +86,13 @@ class ReservationController extends Controller
 
     public function seeReservation(){
         $user = Auth::user();
-        $reservation = Reservation::where('user_id', $user->id)->whereIn('status', ['Pending Payment', 'Created', 'Confirmed', 'Dine'])->get();
+        $reservation = Reservation::where('user_id', $user->id)->whereIn('status', ['Pending Payment', 'Created', 'Confirmed', 'Dine'])->latest()->first();
         return view('myreservation', compact('reservation'));
     }
 
     public function seeHistory(){
         $user = Auth::user();
-        $reservation = Reservation::where('user_id', $user->id)->whereIn('status', ['Completed', 'Cancelled', 'No Show'])->get();
+        $reservation = Reservation::where('user_id', $user->id)->whereIn('status', ['Completed', 'Cancelled', 'No Show'])->latest()->first();
         return view('myhistory', compact('reservation'));
     }
 
