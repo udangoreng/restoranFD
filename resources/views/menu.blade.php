@@ -250,7 +250,6 @@
         </div>
     </section>
 
-
     <section class="additional-section container my-5">
         <h2 class="additional-title text-center mb-5">✦ Additional ✦</h2>
 
