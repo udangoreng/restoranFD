@@ -1896,6 +1896,27 @@ p {
     /* DIRAPETIN */
     color: white;
 }
+/* Tambahin ini di CSS lu, di bagian atas chef-section */
+.left-content {
+    flex: 1; /* Biar flexible */
+    max-width: 500px; /* Batas maksimal */
+    padding-right: 40px; /* Jarak dari foto chef */
+}
+
+/* Atau kalo mau lebih simple: */
+.left-content {
+    margin-right: 40px; /* Jarak dari foto chef */
+}
+
+/* Kalo mau center di HP, tambahin di responsive: */
+@media (max-width: 767px) {
+    .left-content {
+        margin-right: 0; /* Hapus margin di HP */
+        padding-right: 0; /* Hapus padding di HP */
+        text-align: center; /* Center text di HP */
+        max-width: 100%; /* Full width di HP */
+    }
+}
 /* ====== TAMBAHIN MEDIA QUERIES INI ====== */
 
 /* Tablet (768px - 991px) */
