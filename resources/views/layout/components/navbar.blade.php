@@ -22,7 +22,6 @@
         </div>
 
         <ul class="mobile-nav-list">
-             <!-- ====== TAMBAHIN INI ====== -->
         <li>
             <a href="{{ route('/') }}" class="mobile-link">
                 <span class="star">✦</span>
@@ -51,9 +50,6 @@
                 <span class="arrow">›</span>
             </a>
         </li>
-        <!-- ========================== -->
-        
-        <!-- Book a Table buat mobile -->
         <li>
             <a href="{{ route('reservation') }}" class="mobile-link">
                 <span class="star">✦</span>
@@ -62,10 +58,7 @@
             </a>
         </li>
         
-        <!-- Separator (opsional) -->
         <li><hr style="border-color: rgba(255,255,255,0.1); margin: 20px 0;"></li>
-
-            <!-- ... sisanya tetap ... -->
             @auth
                 <li>
                     <a href="{{route('profile')}}" class="mobile-link">

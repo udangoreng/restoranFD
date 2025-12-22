@@ -938,14 +938,87 @@ body.nav-active {
     margin: auto;
     gap: 40px;
 }
-/* TAMBAHIN ini di BAWAH: */
+/* ====== TAMBAHIN MEDIA QUERIES INI ====== */
+/* Untuk Tablet (768px - 991px) */
+@media (max-width: 991px) {
+    .footer-content {
+        gap: 30px;
+        padding: 0 20px;
+    }
+    .footer-img-container {
+        width: 25%; /* Sedikit lebih kecil */
+        padding-top: 150px;
+    }
+    .footer-center {
+        width: 45%; /* Sedikit lebih besar */
+    }
+    .footer-side-img {
+        width: 100%; /* Full width container */
+        height: 300px;
+    }
+}
+
+/* Untuk HP (max-width: 767px) */
 @media (max-width: 767px) {
     .footer-content {
-        flex-direction: column; /* Jadi vertikal di HP */
+        flex-direction: column; /* Jadi vertikal */
+        align-items: center;
+        gap: 60px;
+        padding: 0 20px;
     }
-    .footer-img-container, 
+    
+    .footer-img-container {
+        width: 100% !important; /* Full width */
+        padding-top: 0 !important; /* Hapus padding atas */
+        order: 2; /* Posisi: kiri-kanan jadi bawah */
+    }
+    
     .footer-center {
-        width: 100% !important; /* Full width di HP */
+        width: 100% !important; /* Full width */
+        order: 1; /* Posisi: tengah jadi atas */
+    }
+    
+    .footer-side-img {
+        width: 100%;
+        max-width: 300px; /* Batas maksimal */
+        height: 250px;
+        margin: 0 auto;
+        display: block;
+    }
+    
+    .footer-logo-img {
+        width: 200px; /* Sedikit lebih kecil di HP */
+    }
+    
+    .visit-us {
+        padding-bottom: 20px;
+        font-size: 14px;
+    }
+    
+    .newsletter-form {
+        flex-direction: column; /* Input & button jadi vertikal */
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .newsletter-form input {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .newsletter-form button {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    /* Padding footer di HP */
+    .footer {
+        padding-top: 80px;
+    }
+    
+    .footer-bottom {
+        margin-top: 30px;
+        padding-bottom: 30px;
     }
 }
 
