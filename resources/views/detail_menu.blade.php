@@ -159,8 +159,9 @@
 
         @media (max-width: 992px) {
         .detail-menu-box {
-            min-height: auto;
+            max-width: 100%;
             padding: 30px !important;
+            border-radius: 30px;
         }
 
         .detail-menu-image-circle {
@@ -176,8 +177,8 @@
     /* ================= MOBILE ================= */
     @media (max-width: 768px) {
         .detail-menu-box {
-            padding: 20px !important;
-            border-radius: 30px;
+            padding: 16px !important;
+            border-radius: 24px;
         }
 
         .detail-menu-image-circle {
