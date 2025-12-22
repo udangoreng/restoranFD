@@ -75,13 +75,12 @@
 
     <section class="chef-section">
         <div class="left-content">
-            <p class="sub-title">✦ MEET OUR CHEF ✦</p>
+            <p class="sub-title">✦ OUR MASTER CHEF ✦</p>
             <h1 class="chef-name">Master Chef Alessandro</h1>
             <p class="chef-desc">
                 A fine dine master chef crafts exquisite cuisine with precision, passion,
                 creativity, and elegance, delivering unforgettable culinary experiences and refined flavors.
             </p>
-            <button class="team-btn">Meet The Team</button>
         </div>
 
         <div class="chef-photo-wrapper">
