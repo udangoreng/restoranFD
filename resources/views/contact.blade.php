@@ -250,7 +250,7 @@
         .write-title {
     text-align: center;
     font-size: clamp(14px, 1.1vw, 16px);
-    margin-bottom: clamp(10px, 2vw, 15px); /* Responsif untuk semua layar */
+    margin-bottom: clamp(10px, 2vw, 15px); 
     color: #c89b3c;
     font-weight: 400;
     letter-spacing: 1px;
@@ -262,7 +262,7 @@
     text-align: center;
     font-size: clamp(24px, 2.5vw, 32px);
     margin-bottom: clamp(25px, 3vw, 35px);
-    margin-top: clamp(5px, 1vw, 10px); /* Tambah margin-top juga */
+    margin-top: clamp(5px, 1vw, 10px); 
     color: #c89b3c;
     font-weight: 600;
     letter-spacing: 0.5px;
@@ -331,7 +331,6 @@
             transform: translateY(-1px);
         }
 
-        /* Responsive Breakpoints */
         @media (max-width: 1100px) {
             .unified-container {
                 gap: 30px;
@@ -557,7 +556,6 @@
             }
         }
 
-        /* Landscape orientation */
         @media (max-height: 600px) and (orientation: landscape) {
             .contact-hero {
                 height: 100vh;
