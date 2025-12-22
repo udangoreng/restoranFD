@@ -26,10 +26,6 @@ Route::controller(MenuController::class)->group(function () {
     route::get('/menu/{id}', 'detail')->name('menu.detail');
 });
 
-Route::get('/popup', function () {
-    return view('popup');
-});
-
 Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
@@ -39,11 +35,11 @@ Route::get('/aboutus', function () {
 })->name('aboutus');
 
 
+Route::get('/reservation/{id}/payment/callback', [ReservationController::class, 'handlePaymentCallback'])->name('reservation.payment.callback');
 Route::middleware(['verifyrole:admin'])->prefix('admin')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('admin');
-
+    Route::get('/reservation/{id}/get-payment-token', [ReservationController::class, 'getPaymentToken'])->name("admin.reservation.payment-token");
+    Route::get('/dashboard', [AuthController::class, 'adminDash'])->name('admin');
+    
     Route::controller(MenuController::class)->group(function () {
         Route::get('/menu', 'index')->name('admin.menu');
         Route::post('/menu', 'store')->name('admin.menu.add');
@@ -59,14 +55,16 @@ Route::middleware(['verifyrole:admin'])->prefix('admin')->group(function () {
         Route::put('/table/{id}', 'update')->name('admin.table.update');
         Route::delete('/table/{id}', 'destroy')->name('admin.table.destroy');
     });
-
+    
     Route::controller(ReservationController::class)->group(function () {
         Route::get('/reservation', 'show')->name('admin.reservation');
-        Route::post('/reservation', 'store')->name('admin.reservation.add');
-        Route::get('/reservation/{id}', 'edit')->name('admin.reservation.detail');
-        Route::put('/reservation/{id}', 'update')->name('admin.reservation.update');
-        Route::delete('/reservation/{id}', 'destroy')->name('admin.reservation.destroy');
+        Route::get('/reservation/{id}/edit', 'edit')->name('admin.reservation.detail');
+        Route::put('/reservation/{id}/status', 'updateStatus')->name('admin.reservation.update-status');
+        Route::put('/reservation/{id}/table', 'tableStatus')->name('admin.reservation.update-table');
+        Route::post('/admin/reservation/{id}/process-payment', 'processPayment')->name('admin.reservation.process-payment');
+        Route::delete('/admin/reservation/{id}', 'destroyReservation')->name('admin.reservation.destroy');
     });
+
 
     Route::controller(UserController::class)->group(function () {
         Route::get('/user', 'index')->name('admin.user');
@@ -75,43 +73,6 @@ Route::middleware(['verifyrole:admin'])->prefix('admin')->group(function () {
         Route::put('/user/{id}', 'update')->name('admin.user.update');
         Route::delete('/user/{id}', 'destroy')->name('admin.user.destroy');
     });
-});
-
-
-Route::get('/payment', function () {
-    return view('payment');
-})->name('payment');
-
-Route::get('/checkout', function () {
-    return view('checkout');
-})->name('checkout');
-
-Route::get('/order', function () {
-    return view('order');
-});
-
-Route::get('/myreservation', function () {
-    return view('myreservation');
-});
-
-Route::get('/myhistory', function () {
-    return view('myhistory');
-});
-
-Route::get('/editprofile', function () {
-    return view('editprofile');
-});
-
-Route::get('/detail_history', function () {
-    return view('detail_history');
-});
-
-Route::get('/detail_menu', function () {
-    return view('detail_menu');
-});
-
-Route::get('/detail_reservation', function () {
-    return view('detail_reservation');
 });
 
 Route::controller(ReservationController::class)->group(function () {
@@ -138,8 +99,7 @@ Route::middleware(['verifyrole:customer'])->group(function () {
         Route::get('cart/data', 'getCart')->name('cart.data');
         Route::post('order/addcart', 'addToCart')->name('addToCart');
         Route::put('cart/update/{id}', 'updateQuantity')->name('cart.update');
-        Route::delete('cart/remove/{id}', 'removeFromCart')->name('cart.remove');
-        Route::get('/checkout')->name('checkout');
+        Route::delete('cart/remove/{id}', 'destroy')->name('cart.remove');
         Route::post('/checkout/process')->name('checkout.process');
     });
 

@@ -60,4 +60,17 @@ class Order extends Model
         
         return $hasAppetizer && $hasMainDish && $hasDessert;
     }
+
+    public function getFullPaymentPaidAttribute()
+    {
+        return $this->remaining_amount == 0 || $this->payment_type === 'Full_Settlement';
+    }
+
+    public function setFullPaymentPaidAttribute($value)
+    {
+        if ($value) {
+            $this->remaining_amount = 0;
+            $this->payment_type = 'Full_Settlement';
+        }
+    }
 }

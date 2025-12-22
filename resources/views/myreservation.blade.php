@@ -26,6 +26,10 @@
             min-height: 100vh;
         }
 
+        a{
+            text-decoration: none;
+        }
+
         .reservation-container {
             width: 100%;
             max-width: 1200px;
@@ -255,7 +259,7 @@
                 <h1 class="page-title">My Reservation</h1>
 
                 <div class="reservation-list">
-                    @if (count($reservation) == 0 )
+                    @if (count($reservation) == 0)
                         <div class="empty-state-box">
                             <div class="empty-icon">
                                 <i class="far fa-calendar-times"></i>
@@ -269,36 +273,39 @@
                         </div>
                     @endif
                     @foreach ($reservation as $item)
-                        <div class="reservation-card active">
-                            <div class="reservation-header">
-                                <div>
-                                    <span class="id-label">Reservation ID:</span>
-                                    <span class="id-value">{{ $item->reservation_code }}</span>
+                        <a href="{{route('reservation.detail', ['id' => $item->id])}}">
+                            <div class="reservation-card active">
+                                <div class="reservation-header">
+                                    <div>
+                                        <span class="id-label">Reservation ID:</span>
+                                        <span class="id-value">{{ $item->reservation_code }}</span>
+                                    </div>
+                                    <div class="reservation-status status-active">
+                                        <i class="fas fa-clock"></i><span>{{ $item->status }}</span>
+                                    </div>
                                 </div>
-                                <div class="reservation-status status-active">
-                                    <i class="fas fa-clock"></i><span>{{ $item->status }}</span>
-                                </div>
-                            </div>
 
-                            <div class="reservation-content">
-                                <div class="reservation-info">
-                                    <div class="info-group">
-                                        <span class="info-label"><i class="fas fa-calendar-alt"></i>Date & Time:</span>
-                                        <span class="info-value">
-                                            {{ \Carbon\Carbon::parse($item->booking_date)->format('j F Y') }} •
-                                            {{ \Carbon\Carbon::parse($item->time_in)->format('H:i A') }}</span>
-                                    </div>
-                                    <div class="info-group">
-                                        <span class="info-label"><i class="fas fa-users"></i>Guests:</span>
-                                        <span class="info-value">{{ $item->person_attend }} Persons</span>
-                                    </div>
-                                    <div class="info-group">
-                                        <span class="info-label"><i class="fas fa-phone"></i>Contact:</span>
-                                        <span class="info-value">{{ $item->phone }}</span>
+                                <div class="reservation-content">
+                                    <div class="reservation-info">
+                                        <div class="info-group">
+                                            <span class="info-label"><i class="fas fa-calendar-alt"></i>Date &
+                                                Time:</span>
+                                            <span class="info-value">
+                                                {{ \Carbon\Carbon::parse($item->booking_date)->format('j F Y') }} •
+                                                {{ \Carbon\Carbon::parse($item->time_in)->format('H:i A') }}</span>
+                                        </div>
+                                        <div class="info-group">
+                                            <span class="info-label"><i class="fas fa-users"></i>Guests:</span>
+                                            <span class="info-value">{{ $item->person_attend }} Persons</span>
+                                        </div>
+                                        <div class="info-group">
+                                            <span class="info-label"><i class="fas fa-phone"></i>Contact:</span>
+                                            <span class="info-value">{{ $item->phone }}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     @endforeach
 
                 </div>

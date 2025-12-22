@@ -20,7 +20,7 @@
         <nav id="sidebar" class="sidebar js-sidebar">
             <div class="sidebar-content js-simplebar">
                 <a class="sidebar-brand" href="index.html">
-                    <span class="align-middle">AdminKit</span>
+                    <span class="align-middle">Courvoiser</span>
                 </a>
 
                 <ul class="sidebar-nav">
@@ -28,7 +28,7 @@
                         Pages
                     </li>
 
-                    <li class="sidebar-item {{ request()->route()->getName() === '/admin/dashboard' ? 'active' : '' }}">
+                    <li class="sidebar-item {{ request()->route()->getName() === 'admin' ? 'active' : '' }}">
                         <a class="sidebar-link" href="{{route('admin')}}">
                             <i class="align-middle" data-feather="sliders"></i> <span
                                 class="align-middle">Dashboard</span>
@@ -102,9 +102,8 @@
                         <div class="col-6 text-start">
                             <p class="mb-0">
                                 <a class="text-muted" href="https://adminkit.io/"
-                                    target="_blank"><strong>AdminKit</strong></a> - <a class="text-muted"
-                                    href="https://adminkit.io/" target="_blank"><strong>Bootstrap Admin
-                                        Template</strong></a> &copy;
+                                    target="_blank"><strong>Courvoiser</strong></a> - <a class="text-muted"
+                                    href="https://adminkit.io/" target="_blank"><strong>Management</strong></a> &copy;
                             </p>
                         </div>
                         <div class="col-6 text-end">

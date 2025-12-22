@@ -1,6 +1,7 @@
 @extends('layout.index')
 @section('style')
     <link rel="stylesheet" href="{{ asset('css/cancelPopup.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/Popup.css') }}">
 @endsection
 @section('content')
     <div class="preload" data-preload>
@@ -122,6 +123,42 @@
                                 <div class="summary-row summary-total"><span>Total</span><span>@currency($items->total_amount + $items->total_amount * 0.1)</span>
                                 </div>
                             </div>
+
+                            @if (isset($reservation->orders))
+                                @foreach ($reservation->orders as $order)
+                                    @if ($order->down_payment_paid)
+                                        <div class="reservation-card-row summary-row">
+                                            <div class="reservation-label">Payment Status</div>
+                                            <div class="reservation-value">
+                                                <span class="reservation-badge reservation-badge-confirmed">
+                                                    Down Payment Paid
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="reservation-card-row summary-row">
+                                            <div class="reservation-label">Amount Paid</div>
+                                            <div class="reservation-value">@currency($order->total_amount * 0.5)</div>
+                                        </div>
+                                        <div class="reservation-card-row summary-row">
+                                            <div class="reservation-label">Remaining Balance</div>
+                                            <div class="reservation-value">@currency($order->total_amount * 0.5)</div>
+                                        </div>
+                                    @elseif ($order->status == 'Pending')
+                                        <div class="reservation-card-row summary-row">
+                                            <div class="reservation-label">Payment Status</div>
+                                            <div class="reservation-value">
+                                                <span class="reservation-badge reservation-badge-pending">
+                                                    Pending Down Payment (50%)
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="reservation-card-row summary-row">
+                                            <div class="reservation-label">Amount Due</div>
+                                            <div class="reservation-value">@currency($order->total_amount * 0.5)</div>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            @endif
                         @endforeach
                 </div>
 
@@ -152,13 +189,12 @@
     </section>
     @if (session('success'))
         @include('layout.popup.success_reservation_popup')
-        <script src="{{ asset('js/Popup.js') }}"></script>
         <script>
+            const modal = document.getElementById("successInfo");
             document.addEventListener('DOMContentLoaded', function() {
-                const modal = document.getElementById("loginInfoModal");
                 modal.style.display = "flex";
             });
-            const understoodBtn = document.getElementById('closeLoginInfoModal');
+            const understoodBtn = document.getElementById('closeSuccessInfo');
             understoodBtn.addEventListener('click', function() {
                 modal.style.display = "none";
             });

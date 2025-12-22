@@ -10,11 +10,10 @@ class MenuSeeder extends Seeder
 {
     public function run()
     {
-        // Data menu berdasarkan kategori yang ada di menu.blade.php
         $menus = [
             [
                 'name' => 'Grilled Pear & Cheese',
-                'category' => 'Appetizer', // Kategori 1
+                'category' => 'Appetizer',
                 'price' => 135000,
                 'description' => 'Sweet grilled pear paired with savory cheese, walnuts, and honey drizzle.',
                 'calories' => 320,
@@ -24,7 +23,7 @@ class MenuSeeder extends Seeder
             ],
             [
                 'name' => 'Lobster Tortellini',
-                'category' => 'Main Dish', // Kategori 2
+                'category' => 'Main Dish',
                 'price' => 289000,
                 'description' => 'Handcrafted tortellini filled with sweet lobster in rich butter cream sauce.',
                 'calories' => 580,
@@ -34,7 +33,7 @@ class MenuSeeder extends Seeder
             ],
             [
                 'name' => 'Caramel Pannacotta',
-                'category' => 'Dessert', // Kategori 3
+                'category' => 'Dessert',
                 'price' => 105000,
                 'description' => 'Silky smooth pannacotta topped with homemade salted caramel sauce.',
                 'calories' => 450,
@@ -44,7 +43,7 @@ class MenuSeeder extends Seeder
             ],
             [
                 'name' => 'Lychee Rose Mocktail',
-                'category' => 'Beverage', // Kategori 4 (Sesuai drink-section)
+                'category' => 'Beverages',
                 'price' => 73000,
                 'description' => 'Refreshing blend of lychee, rose syrup, and sparkling soda.',
                 'calories' => 120,
@@ -54,7 +53,7 @@ class MenuSeeder extends Seeder
             ],
             [
                 'name' => 'Garlic Butter Baguette',
-                'category' => 'Additional', // Kategori 5 (Sesuai additional-section)
+                'category' => 'Additional',
                 'price' => 45000,
                 'description' => 'Crunchy baguette slices brushed with premium garlic butter and herbs.',
                 'calories' => 210,

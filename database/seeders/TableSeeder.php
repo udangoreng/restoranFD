@@ -10,38 +10,37 @@ class TableSeeder extends Seeder
 {
     public function run()
     {
-        // Membuat variasi kapasitas untuk testing logika reservasi
         $tables = [
             [
-                'table_number' => '01', // Meja Couple
+                'table_number' => '01',
                 'capacity' => 2,
                 'is_occupied' => false,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
-                'table_number' => '02', // Meja Keluarga Kecil
+                'table_number' => '02',
                 'capacity' => 4,
                 'is_occupied' => false,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
-                'table_number' => '03', // Meja Keluarga Besar
+                'table_number' => '03',
                 'capacity' => 6,
                 'is_occupied' => false,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
-                'table_number' => '04', // Meja Group/Meeting
+                'table_number' => '04',
                 'capacity' => 10,
                 'is_occupied' => false,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
-                'table_number' => '05', // Meja Couple Lainnya
+                'table_number' => '05',
                 'capacity' => 2,
                 'is_occupied' => false,
                 'created_at' => Carbon::now(),

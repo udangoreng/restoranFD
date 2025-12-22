@@ -14,6 +14,7 @@
                     <th>Person Attending</th>
                     <th>Date</th>
                     <th>Time</th>
+                    <th>Status</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -26,6 +27,7 @@
                         <td>{{ $reservation->person_attend }}</td>
                         <td>{{$reservation->booking_date}}</td>
                         <td>{{$reservation->time_in}}</td>
+                        <td>{{$reservation->status}}</td>
                         <td>
                             <a href="{{ route('admin.reservation.detail', $reservation->id) }}" class="btn btn-warning btn-sm">Edit</a>
                             <button class="btn btn-danger btn-sm" data-bs-toggle="modal"

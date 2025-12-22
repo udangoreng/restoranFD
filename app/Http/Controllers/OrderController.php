@@ -45,6 +45,18 @@ class OrderController extends Controller
         return view('detail_menu', compact('menu'));
     }
 
+    public function destroy(string $id)
+    {
+        try {
+            $cart = Cart::findOrFail($id);
+            $cart->delete();
+
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
+    }
+
     public function addToCart(Request $request)
     {
         $user = Auth::user();
@@ -147,7 +159,6 @@ class OrderController extends Controller
         $order->save();
     }
 
-    // app/Http/Controllers/CartController.php
     public function getCart()
     {
         try {
@@ -160,7 +171,6 @@ class OrderController extends Controller
                 ], 401);
             }
 
-            // Cari reservasi aktif
             $activeReservation = Reservation::where('user_id', $user->id)
                 ->whereIn('status', ['Created', 'Pending Payment'])
                 ->first();
@@ -174,19 +184,16 @@ class OrderController extends Controller
                 ], 200);
             }
 
-            // Cari order untuk reservasi ini
             $order = Order::where('reservation_id', $activeReservation->id)->first();
 
             $cartItems = [];
             $total = 0;
 
             if ($order) {
-                // Gunakan relasi carts() bukan cartItems()
                 $cartItems = $order->carts()->with('menu')->get();
                 $total = $order->total_amount;
             }
 
-            // Validasi order
             $validationResult = $this->validateOrder($order ? $order->id : null);
 
             return response()->json([
@@ -203,7 +210,6 @@ class OrderController extends Controller
                 'user_id' => $user->id
             ]);
         } catch (\Exception $e) {
-            // \Log::error('OrderController getCart Error: ' . $e->getMessage());
             return response()->json([
                 'error' => 'Server error: ' . $e->getMessage(),
                 'has_active_reservation' => false
@@ -249,7 +255,6 @@ class OrderController extends Controller
         if (!$hasAppetizer) $missing[] = 'appetizer';
         if (!$hasMainDish) $missing[] = 'main dish';
         if (!$hasDessert) $missing[] = 'dessert';
-        // Beverage tidak mandatory, jadi tidak dimasukkan ke missing
 
         $isValid = $hasAppetizer && $hasMainDish && $hasDessert;
 

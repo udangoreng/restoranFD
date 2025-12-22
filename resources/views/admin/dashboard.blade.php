@@ -2,114 +2,104 @@
 @section('content')
     <main class="content">
         <div class="container-fluid p-0">
-
             <h1 class="h3 mb-3"><strong>Analytics</strong> Dashboard</h1>
 
             <div class="row">
-                <div class="col-xl-6 col-xxl-5 d-flex">
-                    <div class="w-100">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col mt-0">
-                                                <h5 class="card-title">Reservation</h5>
-                                            </div>
-
-                                            <div class="col-auto">
-                                                <div class="stat text-primary">
-                                                    <i class="align-middle" data-feather="truck"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h1 class="mt-1 mb-3">2.382</h1>
-                                        <div class="mb-0">
-                                            <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -3.65%
-                                            </span>
-                                            <span class="text-muted">Since last week</span>
-                                        </div>
-                                    </div>
+                <div class="col-xl-3 col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col mt-0">
+                                    <h5 class="card-title">Total Reservations</h5>
                                 </div>
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col mt-0">
-                                                <h5 class="card-title">Menus</h5>
-                                            </div>
-
-                                            <div class="col-auto">
-                                                <div class="stat text-primary">
-                                                    <i class="align-middle" data-feather="users"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h1 class="mt-1 mb-3">14.212</h1>
-                                        <div class="mb-0">
-                                            <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 5.25%
-                                            </span>
-                                            <span class="text-muted">Since last week</span>
-                                        </div>
+                                <div class="col-auto">
+                                    <div class="stat text-primary">
+                                        <i class="align-middle" data-feather="calendar"></i>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col mt-0">
-                                                <h5 class="card-title">Earnings</h5>
-                                            </div>
-
-                                            <div class="col-auto">
-                                                <div class="stat text-primary">
-                                                    <i class="align-middle" data-feather="dollar-sign"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h1 class="mt-1 mb-3">$21.300</h1>
-                                        <div class="mb-0">
-                                            <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 6.65%
-                                            </span>
-                                            <span class="text-muted">Since last week</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col mt-0">
-                                                <h5 class="card-title">Orders</h5>
-                                            </div>
-
-                                            <div class="col-auto">
-                                                <div class="stat text-primary">
-                                                    <i class="align-middle" data-feather="shopping-cart"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h1 class="mt-1 mb-3">64</h1>
-                                        <div class="mb-0">
-                                            <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -2.25%
-                                            </span>
-                                            <span class="text-muted">Since last week</span>
-                                        </div>
-                                    </div>
-                                </div>
+                            <h1 class="mt-1 mb-3">{{ $stats['reservations']['total'] }}</h1>
+                            <div class="mb-0">
+                                <span class="text-muted">
+                                    <i class="mdi mdi-calendar-month"></i> 
+                                    {{ $stats['reservations']['month'] }} this month
+                                </span>
                             </div>
                         </div>
                     </div>
                 </div>
+                
+                <div class="col-xl-3 col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col mt-0">
+                                    <h5 class="card-title">Total Earnings</h5>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="stat text-primary">
+                                        <i class="align-middle" data-feather="dollar-sign"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <h1 class="mt-1 mb-3">@currency($stats['earnings']['total'])</h1>
+                            <div class="mb-0">
+                                <span class="text-success">
+                                    <i class="mdi mdi-arrow-up"></i>
+                                    @currency($stats['earnings']['month']) this month
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-xl-3 col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col mt-0">
+                                    <h5 class="card-title">Total Orders</h5>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="stat text-primary">
+                                        <i class="align-middle" data-feather="shopping-cart"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <h1 class="mt-1 mb-3">{{ $stats['orders']['total'] }}</h1>
+                            <div class="mb-0">
+                                <span class="text-muted">
+                                    <i class="mdi mdi-cart"></i>
+                                    {{ $stats['orders']['month'] }} this month
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+            <div class="row">
                 <div class="col-xl-6 col-xxl-7">
                     <div class="card flex-fill w-100">
                         <div class="card-header">
-
-                            <h5 class="card-title mb-0">Recent Movement</h5>
+                            <h5 class="card-title mb-0">Monthly Earnings (Last 6 Months)</h5>
                         </div>
                         <div class="card-body py-3">
                             <div class="chart chart-sm">
-                                <canvas id="chartjs-dashboard-line"></canvas>
+                                <canvas id="earningsChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-xl-6 col-xxl-5">
+                    <div class="card flex-fill w-100">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Recent Orders (Last 7 Days)</h5>
+                        </div>
+                        <div class="card-body py-3">
+                            <div class="chart chart-sm">
+                                <canvas id="ordersChart"></canvas>
                             </div>
                         </div>
                     </div>
@@ -117,145 +107,97 @@
             </div>
 
             <div class="row">
-                <div class="col-12 col-md-6 col-xxl-4 d-flex order-2 order-xxl-3">
-                    <div class="card flex-fill w-100">
+                <div class="col-12 col-md-6">
+                    <div class="card flex-fill">
                         <div class="card-header">
-
-                            <h5 class="card-title mb-0">Browser Usage</h5>
+                            <h5 class="card-title mb-0">Recent Reservations</h5>
                         </div>
-                        <div class="card-body d-flex">
-                            <div class="align-self-center w-100">
-                                <div class="py-3">
-                                    <div class="chart chart-xs">
-                                        <canvas id="chartjs-dashboard-pie"></canvas>
-                                    </div>
+                        <div class="card-body">
+                            @if($recentReservations->count() > 0)
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Customer</th>
+                                                <th>Date</th>
+                                                <th>Time</th>
+                                                <th>Guests</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($recentReservations as $reservation)
+                                                <tr>
+                                                    <td>{{ $reservation->user->name ?? 'N/A' }}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($reservation->reservation_date)->format('M d, Y') }}</td>
+                                                    <td>{{ $reservation->time_in }}</td>
+                                                    <td>{{ $reservation->person_attend }}</td>
+                                                    <td>
+                                                        <span class="badge bg-{{ $reservation->status == 'confirmed' ? 'success' : ($reservation->status == 'pending' ? 'warning' : 'secondary') }}">
+                                                            {{ ucfirst($reservation->status) }}
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
-
-                                <table class="table mb-0">
-                                    <tbody>
-                                        <tr>
-                                            <td>Chrome</td>
-                                            <td class="text-end">4306</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Firefox</td>
-                                            <td class="text-end">3801</td>
-                                        </tr>
-                                        <tr>
-                                            <td>IE</td>
-                                            <td class="text-end">1689</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            @else
+                                <p class="text-muted">No recent reservations found.</p>
+                            @endif
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-6 col-xxl-8 d-flex order-1 order-xxl-1">
+                
+                <div class="col-12 col-md-6">
                     <div class="card flex-fill">
                         <div class="card-header">
-
-                            <h5 class="card-title mb-0">Calendar</h5>
+                            <h5 class="card-title mb-0">Recent Orders</h5>
                         </div>
-                        <div class="card-body d-flex">
-                            <div class="align-self-center w-100">
-                                <div class="chart">
-                                    <div id="datetimepicker-dashboard"></div>
+                        <div class="card-body">
+                            @if($recentOrders->count() > 0)
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Order ID</th>
+                                                <th>Customer</th>
+                                                <th>Amount</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($recentOrders as $order)
+                                                <tr>
+                                                    <td>#{{ $order->id }}</td>
+                                                    <td>{{ $order->user->name ?? 'N/A' }}</td>
+                                                    <td>@currency($order->total_amount)</td>
+                                                    <td>
+                                                        <span class="badge bg-{{ $order->status == 'completed' ? 'success' : ($order->status == 'processing' ? 'warning' : 'secondary') }}">
+                                                            {{ ucfirst($order->status) }}
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
-                            </div>
+                            @else
+                                <p class="text-muted">No recent orders found.</p>
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-12 col-lg-8 col-xxl-9 d-flex">
+                <div class="col-12">
                     <div class="card flex-fill">
                         <div class="card-header">
-
-                            <h5 class="card-title mb-0">Latest Projects</h5>
+                            <h5 class="card-title mb-0">Reservation Calendar</h5>
                         </div>
-                        <table class="table table-hover my-0">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th class="d-none d-xl-table-cell">Start Date</th>
-                                    <th class="d-none d-xl-table-cell">End Date</th>
-                                    <th>Status</th>
-                                    <th class="d-none d-md-table-cell">Assignee</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Project Apollo</td>
-                                    <td class="d-none d-xl-table-cell">01/01/2023</td>
-                                    <td class="d-none d-xl-table-cell">31/06/2023</td>
-                                    <td><span class="badge bg-success">Done</span></td>
-                                    <td class="d-none d-md-table-cell">Vanessa Tucker</td>
-                                </tr>
-                                <tr>
-                                    <td>Project Fireball</td>
-                                    <td class="d-none d-xl-table-cell">01/01/2023</td>
-                                    <td class="d-none d-xl-table-cell">31/06/2023</td>
-                                    <td><span class="badge bg-danger">Cancelled</span></td>
-                                    <td class="d-none d-md-table-cell">William Harris</td>
-                                </tr>
-                                <tr>
-                                    <td>Project Hades</td>
-                                    <td class="d-none d-xl-table-cell">01/01/2023</td>
-                                    <td class="d-none d-xl-table-cell">31/06/2023</td>
-                                    <td><span class="badge bg-success">Done</span></td>
-                                    <td class="d-none d-md-table-cell">Sharon Lessman</td>
-                                </tr>
-                                <tr>
-                                    <td>Project Nitro</td>
-                                    <td class="d-none d-xl-table-cell">01/01/2023</td>
-                                    <td class="d-none d-xl-table-cell">31/06/2023</td>
-                                    <td><span class="badge bg-warning">In progress</span></td>
-                                    <td class="d-none d-md-table-cell">Vanessa Tucker</td>
-                                </tr>
-                                <tr>
-                                    <td>Project Phoenix</td>
-                                    <td class="d-none d-xl-table-cell">01/01/2023</td>
-                                    <td class="d-none d-xl-table-cell">31/06/2023</td>
-                                    <td><span class="badge bg-success">Done</span></td>
-                                    <td class="d-none d-md-table-cell">William Harris</td>
-                                </tr>
-                                <tr>
-                                    <td>Project X</td>
-                                    <td class="d-none d-xl-table-cell">01/01/2023</td>
-                                    <td class="d-none d-xl-table-cell">31/06/2023</td>
-                                    <td><span class="badge bg-success">Done</span></td>
-                                    <td class="d-none d-md-table-cell">Sharon Lessman</td>
-                                </tr>
-                                <tr>
-                                    <td>Project Romeo</td>
-                                    <td class="d-none d-xl-table-cell">01/01/2023</td>
-                                    <td class="d-none d-xl-table-cell">31/06/2023</td>
-                                    <td><span class="badge bg-success">Done</span></td>
-                                    <td class="d-none d-md-table-cell">Christina Mason</td>
-                                </tr>
-                                <tr>
-                                    <td>Project Wombat</td>
-                                    <td class="d-none d-xl-table-cell">01/01/2023</td>
-                                    <td class="d-none d-xl-table-cell">31/06/2023</td>
-                                    <td><span class="badge bg-warning">In progress</span></td>
-                                    <td class="d-none d-md-table-cell">William Harris</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="col-12 col-lg-4 col-xxl-3 d-flex">
-                    <div class="card flex-fill w-100">
-                        <div class="card-header">
-
-                            <h5 class="card-title mb-0">Monthly Sales</h5>
-                        </div>
-                        <div class="card-body d-flex w-100">
-                            <div class="align-self-center chart chart-lg">
-                                <canvas id="chartjs-dashboard-bar"></canvas>
-                            </div>
+                        <div class="card-body">
+                            <div id="reservationCalendar"></div>
                         </div>
                     </div>
                 </div>
@@ -267,113 +209,85 @@
 
 @section('script')
 <script>
-		document.addEventListener("DOMContentLoaded", function() {
-			var ctx = document.getElementById("chartjs-dashboard-line").getContext("2d");
-			var gradient = ctx.createLinearGradient(0, 0, 0, 225);
-			gradient.addColorStop(0, "rgba(215, 227, 244, 1)");
-			gradient.addColorStop(1, "rgba(215, 227, 244, 0)");
-			// Line chart
-			new Chart(document.getElementById("chartjs-dashboard-line"), {
-				type: "line",
-				data: {
-					labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-					datasets: [{
-						label: "Sales ($)",
-						fill: true,
-						backgroundColor: gradient,
-						borderColor: window.theme.primary,
-						data: [
-							2115,
-							1562,
-							1584,
-							1892,
-							1587,
-							1923,
-							2566,
-							2448,
-							2805,
-							3438,
-							2917,
-							3327
-						]
-					}]
-				},
-				options: {
-					maintainAspectRatio: false,
-					legend: {
-						display: false
-					},
-					tooltips: {
-						intersect: false
-					},
-					hover: {
-						intersect: true
-					},
-					plugins: {
-						filler: {
-							propagate: false
-						}
-					},
-					scales: {
-						xAxes: [{
-							reverse: true,
-							gridLines: {
-								color: "rgba(0,0,0,0.0)"
-							}
-						}],
-						yAxes: [{
-							ticks: {
-								stepSize: 1000
-							},
-							display: true,
-							borderDash: [3, 3],
-							gridLines: {
-								color: "rgba(0,0,0,0.0)"
-							}
-						}]
-					}
-				}
-			});
-		});
-	</script>
-    <script>
-		document.addEventListener("DOMContentLoaded", function() {
-			// Pie chart
-			new Chart(document.getElementById("chartjs-dashboard-pie"), {
-				type: "pie",
-				data: {
-					labels: ["Chrome", "Firefox", "IE"],
-					datasets: [{
-						data: [4306, 3801, 1689],
-						backgroundColor: [
-							window.theme.primary,
-							window.theme.warning,
-							window.theme.danger
-						],
-						borderWidth: 5
-					}]
-				},
-				options: {
-					responsive: !window.MSInputMethodContext,
-					maintainAspectRatio: false,
-					legend: {
-						display: false
-					},
-					cutoutPercentage: 75
-				}
-			});
-		});
-	</script>
-    <script>
-		document.addEventListener("DOMContentLoaded", function() {
-			var date = new Date(Date.now() - 5 * 24 * 60 * 60 * 1000);
-			var defaultDate = date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
-			document.getElementById("datetimepicker-dashboard").flatpickr({
-				inline: true,
-				prevArrow: "<span title=\"Previous month\">&laquo;</span>",
-				nextArrow: "<span title=\"Next month\">&raquo;</span>",
-				defaultDate: defaultDate
-			});
-		});
-	</script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var earningsCtx = document.getElementById("earningsChart").getContext("2d");
+        new Chart(earningsCtx, {
+            type: "line",
+            data: {
+                labels: @json($earningsData['labels']),
+                datasets: [{
+                    label: "Earnings ($)",
+                    fill: true,
+                    backgroundColor: "rgba(215, 227, 244, 0.5)",
+                    borderColor: window.theme.primary,
+                    data: @json($earningsData['data'])
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + value;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        var ordersCtx = document.getElementById("ordersChart").getContext("2d");
+        new Chart(ordersCtx, {
+            type: "bar",
+            data: {
+                labels: @json($ordersData['labels']),
+                datasets: [{
+                    label: "Orders",
+                    backgroundColor: window.theme.success,
+                    borderColor: window.theme.success,
+                    data: @json($ordersData['data'])
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1
+                        }
+                    }
+                }
+            }
+        });
+
+        flatpickr("#reservationCalendar", {
+            inline: true,
+            mode: "multiple",
+            dateFormat: "Y-m-d",
+            disableMobile: "true",
+            onChange: function(selectedDates, dateStr, instance) {
+                
+                console.log('Selected dates:', selectedDates.map(d => d.toDateString()));
+            }
+        });
+        if (feather) {
+            feather.replace({ width: 14, height: 14 });
+        }
+    });
+</script>
 @endsection
