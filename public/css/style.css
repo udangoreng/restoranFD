@@ -404,6 +404,15 @@ body.nav-active {
     transform: translateX(3px);
 }
 
+/* Tambahin di CSS lu: */
+.mobile-link.active {
+    color: #c89b3c !important;
+}
+
+.mobile-link.active .star {
+    opacity: 1 !important;
+}
+
 #overlay {
     position: fixed;
     top: 0;

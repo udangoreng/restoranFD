@@ -22,6 +22,58 @@
         </div>
 
         <ul class="mobile-nav-list">
+             <!-- ====== TAMBAHIN INI ====== -->
+        <li>
+            <a href="{{ route('/') }}" class="mobile-link">
+                <span class="star">✦</span>
+                Home
+                <span class="arrow">›</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('menu') }}" class="mobile-link">
+                <span class="star">✦</span>
+                Menu
+                <span class="arrow">›</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('aboutus') }}" class="mobile-link">
+                <span class="star">✦</span>
+                About
+                <span class="arrow">›</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('contact') }}" class="mobile-link">
+                <span class="star">✦</span>
+                Contact
+                <span class="arrow">›</span>
+            </a>
+        </li>
+        <!-- ========================== -->
+        
+        <!-- Book a Table buat mobile -->
+        <li>
+            <a href="{{ route('reservation') }}" class="mobile-link">
+                <span class="star">✦</span>
+                Book a Table
+                <span class="arrow">›</span>
+            </a>
+        </li>
+        
+        <!-- Separator (opsional) -->
+        <li><hr style="border-color: rgba(255,255,255,0.1); margin: 20px 0;"></li>
+
+        @auth
+            <li>
+                <a href="{{route('profile')}}" class="mobile-link">
+                    <span class="star">✦</span>
+                    My Profile
+                    <span class="arrow">›</span>
+                </a>
+            </li>
+            <!-- ... sisanya tetap ... -->
             @auth
                 <li>
                     <a href="{{route('profile')}}" class="mobile-link">
