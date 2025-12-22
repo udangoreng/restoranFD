@@ -12,12 +12,8 @@
             "dest": "/public/build/"
         },
         {
-            "src": "/img/(.*)",
-            "dest": "/public/img/"
-        },
-        {
-            "src": "/profile/(.*)",
-            "dest": "/public/profile/"
+            "src": "/(css|js|img|storage|build)/.*",
+            "dest": "/public/$0"
         },
         {
             "src": "/(.*)",
