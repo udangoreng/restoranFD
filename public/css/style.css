@@ -2212,11 +2212,14 @@ p {
     position: relative;
     width: 100%;
     overflow: hidden;
+    -webkit-overflow-scrolling: touch; /* Buat smooth scroll di iOS */
 }
 
 .gallery-track {
     display: flex;
     transition: transform 0.05s linear;
+    cursor: grab; /* Biar keliatan bisa di-drag */
+    user-select: none; /* Biar gak bisa select text */
 }
 
 .gallery-track img {
@@ -2228,6 +2231,48 @@ p {
     border-radius: 12px;
 }
 
+/* Buat HP: hover zone gak bisa dipake, jadi hide */
+@media (max-width: 767px) {
+    .gallery-title {
+        font-size: 32px;
+        margin-bottom: 30px;
+    }
+    
+    .gallery-track img {
+        width: 300px; /* Lebih kecil di HP */
+        height: 200px;
+        margin: 0 15px;
+    }
+    
+    /* Hover zone cuma buat desktop */
+    .hover-zone {
+        display: none !important;
+    }
+    
+    /* Gallery track biar bisa di-scroll horizontal */
+    .gallery-wrapper {
+        overflow-x: auto; /* Biar bisa scroll horizontal di HP */
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; /* Hide scrollbar Firefox */
+        -ms-overflow-style: none; /* Hide scrollbar IE/Edge */
+    }
+    
+    .gallery-wrapper::-webkit-scrollbar {
+        display: none; /* Hide scrollbar Chrome/Safari */
+    }
+    
+    .gallery-track {
+        display: flex;
+        transition: none; /* Matiin transition kalo scroll manual */
+        cursor: grab;
+    }
+    
+    /* Efek ketika di-drag */
+    .gallery-track:active {
+        cursor: grabbing;
+    }
+}
 .hover-zone {
     position: absolute;
     top: 0;
