@@ -26,6 +26,10 @@
             background-image: linear-gradient(135deg, #0a1f1c 0%, #18312E 100%);
         }
 
+        a{
+            text-decoration: none;
+        }
+
         .reservation-container {
             width: 100%;
             max-width: 1200px;
@@ -364,6 +368,7 @@
                     </div>
                 @endif
                 @foreach ($reservation as $item)
+                <a href="{{route('history.detail', ['id' => $item->id])}}">
                     <div class="reservation-card active">
                         <div class="reservation-header">
                             <div>
@@ -394,6 +399,7 @@
                             </div>
                         </div>
                     </div>
+                </a>
                 @endforeach
             </div>
 

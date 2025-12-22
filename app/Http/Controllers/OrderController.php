@@ -9,6 +9,7 @@ use App\Models\Reservation;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class OrderController extends Controller
 {
@@ -151,9 +152,21 @@ class OrderController extends Controller
 
         $order->total_amount = $total;
 
-        if ($order->down_payment_amount === null) {
+        // Hanya set jika null atau jika ada kesalahan signifikan
+        if (
+            $order->down_payment_amount === null ||
+            abs($order->down_payment_amount - ($total * 0.5)) > 1000
+        ) {
+
             $order->down_payment_amount = $total * 0.5;
             $order->remaining_amount = $total * 0.5;
+
+            Log::info('Updated down payment amount', [
+                'order_id' => $orderId,
+                'total' => $total,
+                'down_payment' => $total * 0.5,
+                'remaining' => $total * 0.5
+            ]);
         }
 
         $order->save();
@@ -205,6 +218,7 @@ class OrderController extends Controller
                 'order_id' => $order ? $order->id : null,
                 'order_code' => $order ? $order->order_code : null,
                 'has_active_reservation' => true,
+                'is_downpayment_paid' => !isset($order->down_payment_paid) || $order->down_payment_paid == 0 ? 0 : 1,
                 'is_valid_order' => $validationResult['is_valid'],
                 'missing_categories' => $validationResult['missing'],
                 'user_id' => $user->id

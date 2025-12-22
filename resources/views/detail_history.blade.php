@@ -29,65 +29,42 @@
             <div class="history-card">
                 <div class="history-status">
                     <span class="status-completed">Completed</span>
-                    <span class="history-id">ID: RSV-20251207-0098</span>
+                    <span class="history-id">{{ $reservation->reservation_code }}</span>
                 </div>
 
                 <div class="history-info-grid">
-                    <div><strong>Name:</strong> Princy Timberlake</div>
-                    <div><strong>Phone:</strong> +62 812-3456-7890</div>
-                    <div><strong>Guests:</strong> 4 People</div>
-                    <div><strong>Date:</strong> 25 December 2025</div>
-                    <div><strong>Time:</strong> 07:30 PM</div>
+                    <div><strong>Name:</strong> {{ $reservation->first_name . ' ' . $reservation->last_name }}</div>
+                    <div><strong>Phone:</strong> {{ $reservation->phone }}</div>
+                    <div><strong>Guests:</strong>{{ $reservation->person_attend }} People</div>
+                    <div><strong>Date:</strong> {{ \Carbon\Carbon::parse($reservation->booking_date)->format('j F Y') }}
+                    </div>
+                    <div><strong>Time:</strong> {{ \Carbon\Carbon::parse($reservation->time_in)->format('H:i A') }}</div>
                 </div>
 
                 <div class="history-box">
                     <h3>Special Request (During Your Visit)</h3>
                     <ul>
-                        <li>Window seat</li>
-                        <li>Birthday setup</li>
-                        <li>Non-smoking area</li>
+                        <li>{{ $reservation->request }}</li>
                     </ul>
                 </div>
 
                 <div class="history-box">
                     <h3>Ordered Menu</h3>
-
-                    <div class="history-menu-row">
-                        <span>Peach Bruschetta × 1</span>
-                        <span>IDR 140.000</span>
-                    </div>
-
-                    <div class="history-menu-row">
-                        <span>Herb Roasted Salmon × 1</span>
-                        <span>IDR 185.000</span>
-                    </div>
-
-                    <div class="history-menu-row">
-                        <span>Garlic Butter Lobster × 1</span>
-                        <span>IDR 320.000</span>
-                    </div>
-
-                    <div class="history-menu-row">
-                        <span>Caramel Pannacotta × 1</span>
-                        <span>IDR 105.000</span>
-                    </div>
-
-                    <div class="history-menu-row">
-                        <span>Lychee Rose Mocktail × 2</span>
-                        <span>IDR 73.000</span>
-                    </div>
-
-                    <div class="history-menu-row">
-                        <span>Strawberry Mocktail × 1</span>
-                        <span>IDR 55.000</span>
-                    </div>
+                    @foreach ($reservation->orders as $items)
+                        @foreach ($items->carts as $item)
+                            <div class="history-menu-row">
+                                <span>{{ $item->menu->name }}</span>
+                                <span>@currency($item->subtotal)</span>
+                            </div>
+                        @endforeach
+                    @endforeach
 
                     <div class="history-total">
-                        <div><span>Subtotal</span><span>IDR 951.000</span></div>
-                        <div><span>Tax</span><span>IDR 95.100</span></div>
+                        <div><span>Subtotal</span><span>@currency($items->total_amount)</span></div>
+                        <div><span>Tax</span><span>@currency($items->total_amount * 0.1)</span></div>
                         <div class="grand-total">
                             <span>Total</span>
-                            <span>IDR 1.046.100</span>
+                            <span>@currency($items->total_amount + $items->total_amount * 0.1)</span>
                         </div>
                     </div>
                 </div>
@@ -117,7 +94,7 @@
 
 @section('script')
     <script src="{{ asset('js/script.js') }}"></script>
-    <script src="{{asset('js/history.js')}}"></script>
+    <script src="{{ asset('js/history.js') }}"></script>
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>

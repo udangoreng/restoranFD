@@ -137,7 +137,7 @@
                 <input type="password" name="password" id="Password-input" placeholder="Password">
             </div>
             <div class="login-link">
-                Belum punya akun? <a href="{{ route('auth.register') }}">Sign UP</a>
+                Didn't Have An Account? <a href="{{ route('auth.register') }}">Register</a>
             </div>
             <button type="submit" name="login">Login</button>
         </form>

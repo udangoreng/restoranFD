@@ -1,186 +1,276 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COURVOISER - Fine Dining Restaurant</title>
-    <meta name="title" content="COURVOISER - Fine Dining Restaurant">
+    <meta charset="utf-8">
+    <title>Invoice - {{ $reservation->reservation_code }}</title>
+    <style>
+        @page {
+            margin: 50px 40px;
+        }
 
-    <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Forum&display=swap" rel="stylesheet">
+        body {
+            font-family: DejaVu Sans, sans-serif;
+            font-size: 12px;
+            line-height: 1.5;
+            color: #333;
+        }
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #d4af37;
+            padding-bottom: 20px;
+        }
 
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="invoice.css">
+        .restaurant-name {
+            font-size: 28px;
+            font-weight: bold;
+            color: #000;
+            margin: 0;
+        }
 
-    <link rel="preload" as="image" href="slider-1.jpg">
-    <link rel="preload" as="image" href="slider-2.jpg">
-    <link rel="preload" as="image" href="slider-3.jpg">
+        .tagline {
+            font-size: 14px;
+            color: #666;
+            margin: 5px 0 15px;
+        }
+
+        .invoice-title {
+            font-size: 20px;
+            color: #000;
+            margin: 10px 0;
+        }
+
+        .invoice-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .info-box {
+            width: 48%;
+        }
+
+        .info-box p {
+            display: flex;
+            justify-content: space-between;
+            margin: 8px 0;
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .info-box span:first-child {
+            font-weight: bold;
+        }
+
+        .status {
+            background-color: #d4ffd4;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        .payment-summary {
+            margin: 30px 0;
+        }
+
+        .summary-box {
+            max-width: 400px;
+            margin-left: auto;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+        }
+
+        .grand-total {
+            font-weight: bold;
+            font-size: 16px;
+            border-top: 2px solid #333;
+            padding-top: 10px;
+        }
+
+        .dp {
+            color: #d4af37;
+            font-weight: bold;
+        }
+
+        .remaining {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .special-request {
+            margin: 20px 0;
+        }
+
+        .special-request ul {
+            padding-left: 20px;
+        }
+
+        .terms-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+
+        .signature-block {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .signature-line {
+            width: 200px;
+            height: 1px;
+            background-color: #000;
+            margin: 20px auto;
+        }
+
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 10px;
+            color: #666;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="preload" data-preload> 
-        <div class="circle"></div> 
-        <p class="text">Courvoiser</p> 
-    </div>
-
-    <div class="invoice-container">
-
-    <header class="invoice-header">
+    <div class="header">
         <h1 class="restaurant-name">Courvoiser Fine Dining</h1>
         <p class="tagline">Fine Dining with a Modern Twist</p>
-        <div class="divider-gold"></div>
-        <h2 class="invoice-title">Reservation Comfirmation</h2>
-    </header>
+        <h2 class="invoice-title">Reservation Confirmation</h2>
+    </div>
 
     <section class="invoice-info">
         <div class="info-box">
-            <p><span>Invoice Number</span><span>INV-20251207-001</span></p>
-            <p><span>Reservation ID</span><span>RSV-20251207-0098</span></p>
-            <p><span>Invoice Date</span><span>07 December 2025</span></p>
-            <p><span>Payment Method</span><span>Down Payment (50%)</span></p>
-            <p class="status paid"><span>Status</span><span>DP Paid</span></p>
+            <p><span>Invoice Number</span><span>{{ $invoiceNumber }}</span></p>
+            <p><span>Reservation ID</span><span>{{ $reservation->reservation_code }}</span></p>
+            <p><span>Invoice Date</span><span>{{ $invoiceDate }}</span></p>
+            <p><span>Payment Method</span><span>{{ $order->payment_type ?? 'Down Payment' }}</span></p>
+            <p class="status">
+                <span>Status</span>
+                <span>
+                    @if ($order->down_payment_paid ?? false)
+                        DP Paid
+                    @elseif($order->status == 'Completed')
+                        Paid in Full
+                    @else
+                        Pending
+                    @endif
+                </span>
+            </p>
         </div>
 
         <div class="info-box">
-            <p><span>Guest Name</span><span>Princy Timberlake</span></p>
-            <p><span>Phone</span><span>+62 812-3456-7890</span></p>
-            <p><span>Guests</span><span>4 Persons</span></p>
-            <p><span>Date</span><span>25 December 2025</span></p>
-            <p><span>Time</span><span>07:30 PM</span></p>
+            <p><span>Guest Name</span><span>{{ $reservation->salutation }} {{ $reservation->first_name }}
+                    {{ $reservation->last_name }}</span></p>
+            <p><span>Phone</span><span>{{ $reservation->phone }}</span></p>
+            <p><span>Guests</span><span>{{ $reservation->person_attend }} Persons</span></p>
+            <p><span>Date</span><span>{{ \Carbon\Carbon::parse($reservation->booking_date)->format('j F Y') }}</span>
+            </p>
+            <p><span>Time</span><span>{{ \Carbon\Carbon::parse($reservation->time_in)->format('H:i A') }}</span></p>
         </div>
     </section>
 
-    <section class="order-section">
-        <h3>Ordered Menu</h3>
+    @if ($order)
+        <section class="order-section">
+            <h3>Ordered Menu</h3>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Item Name</th>
-                    <th>Notes</th>
-                    <th>Qty</th>
-                    <th>Price</th>
-                    <th>Subtotal</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Peach Bruschetta</td>
-                    <td>-</td>
-                    <td>1</td>
-                    <td>IDR 140.000</td>
-                    <td>IDR 140.000</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Herb Roasted Salmon</td>
-                    <td>-</td>
-                    <td>1</td>
-                    <td>IDR 185.000</td>
-                    <td>IDR 185.000</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Garlic Butter Lobster</td>
-                    <td>-</td>
-                    <td>1</td>
-                    <td>IDR 320.000</td>
-                    <td>IDR 320.000</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Caramel Pannacotta</td>
-                    <td>-</td>
-                    <td>1</td>
-                    <td>IDR 105.000</td>
-                    <td>IDR 105.000</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Lychee Rose Mocktail</td>
-                    <td>Less sugar</td>
-                    <td>2</td>
-                    <td>IDR 73.000</td>
-                    <td>IDR 146.000</td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td>Lychee Rose Mocktail</td>
-                    <td>No Ice</td>
-                    <td>1</td>
-                    <td>IDR 55.000</td>
-                    <td>IDR 55.000</td>
-                </tr>
-            </tbody>
-        </table>
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Item Name</th>
+                        <th>Qty</th>
+                        <th>Price</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($order->carts as $index => $item)
+                        <tr>
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ $item->menu->name }}</td>
+                            <td>{{ $item->quantity }}</td>
+                            <td>IDR {{ number_format($item->price, 0, ',', '.') }}</td>
+                            <td>IDR {{ number_format($item->subtotal, 0, ',', '.') }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </section>
 
-        <p class="menu-note">
-            Menu prices may be adjusted if additional orders are made during dine-in.
-        </p>
-    </section>
+        <section class="payment-summary">
+            <div class="summary-box">
+                <div class="row"><span>Subtotal</span><span>IDR {{ number_format($subtotal, 0, ',', '.') }}</span>
+                </div>
+                <div class="row"><span>Tax ({{ $taxRate }}%)</span><span>IDR
+                        {{ number_format($tax, 0, ',', '.') }}</span></div>
 
-    <section class="payment-summary">
-        <p class="payment-note">
-            This invoice confirms a 50% down payment for your reservation.<br>
-            The remaining balance is payable upon arrival at the restaurant during check-in.
-        </p>
+                <div style="height: 10px; margin: 10px 0;"></div>
 
-        <div class="summary-box">
-            <div class="row"><span>Subtotal</span><span>IDR 951.000</span></div>
-            <div class="row"><span>Tax (10%)</span><span>IDR 95.100</span></div>
-
-            <div class="summary-divider"></div>
-
-            <div class="row grand-total"><span>Grand Total</span><span>IDR 1.046.100</span></div>
-            <div class="row dp"><span>Down Payment (50%)</span><span>IDR 523.050</span></div>
-            <div class="row remaining"><span>Remaining Balance</span><span>IDR 523.050</span></div>
-        </div>
-    </section>
+                <div class="row grand-total"><span>Grand Total</span><span>IDR
+                        {{ number_format($grandTotal, 0, ',', '.') }}</span></div>
+                @if ($order->down_payment_amount > 0)
+                    <div class="row dp"><span>Down Payment (50%)</span><span>IDR
+                            {{ number_format($downPayment, 0, ',', '.') }}</span></div>
+                    <div class="row remaining"><span>Remaining Balance</span><span>IDR
+                            {{ number_format($remaining, 0, ',', '.') }}</span></div>
+                @endif
+            </div>
+        </section>
+    @endif
 
     <section class="special-request">
-        <h4>Special Requests</h4>
-        <ul>
-            <li>Table near window</li>
-            <li>Birthday setup (one small candle)</li>
-            <li>Non-smoking area</li>
-        </ul>
+        @if ($reservation->request)
+            <h4>Special Requests</h4>
+            <p>{{ $reservation->request }}</p>
+        @endif
 
-        <h4>Message from Guest</h4>
-        <p class="guest-message">
-            Please place the cake on the center table and dim lights around 9:00 PM.
-            Thank you!
-        </p>
+        @if ($reservation->allergies)
+            <h4>Allergies</h4>
+            <p>{{ $reservation->allergies }}</p>
+        @endif
     </section>
 
-    <section class="terms-section letter-style">
-        <div class="terms-left">
-            <p>Reservation will be held for 15 minutes after the scheduled time.</p>
-            <p>Down payment is non-refundable within 24 hours before reservation time.</p>
+    <section class="terms-section">
+        <div style="margin-bottom: 20px;">
+            <p>• Reservation will be held for 15 minutes after the scheduled time.</p>
+            <p>• Down payment is non-refundable within 24 hours before reservation time.</p>
         </div>
 
         <div class="signature-block">
-            <p class="thank-you">Thank you for dining with us</p>
+            <p style="margin-bottom: 20px;">Thank you for dining with us</p>
             <div class="signature-line"></div>
-            <p class="signature-name">COURVOISIER RESTAURANT</p>
-            <p class="signature-tagline">Fine Dining Experience</p>
+            <p style="font-weight: bold; margin-top: 10px;">COURVOISIER RESTAURANT</p>
+            <p>Fine Dining Experience</p>
         </div>
     </section>
 
+    <div class="footer">
+        <p>Generated on {{ now()->format('Y-m-d H:i:s') }} | Courvoiser Fine Dining Restaurant</p>
     </div>
-
-    <script src="script.js"></script>
-    <script src="cancel.js"></script>
-
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
 </body>
+
 </html>

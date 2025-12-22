@@ -27,3 +27,4 @@ package-lock.json
 .env railway
 .env1
 .env biasa
+.env vercel

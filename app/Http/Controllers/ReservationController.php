@@ -6,6 +6,8 @@ use App\Mail\ReservationConfirmed;
 use App\Models\CustTable;
 use App\Models\Order;
 use App\Models\Reservation;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+use Barryvdh\DomPDF\PDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -86,10 +88,16 @@ class ReservationController extends Controller
         return redirect()->route('reservation.detail', $res->id)->with('success', 'Reservation created. Please complete your payment.');
     }
 
-    public function detail(string $id)
+    public function detailReservation(string $id)
     {
         $reservation = Reservation::with(['orders.carts.menu'])->findOrFail($id);
         return view('detail_reservation', compact('reservation'));
+    }
+
+    public function detailHistory(string $id)
+    {
+        $reservation = Reservation::with(['orders.carts.menu'])->findOrFail($id);
+        return view('detail_history', compact('reservation'));
     }
 
     public function seeReservation()
@@ -498,5 +506,41 @@ class ReservationController extends Controller
     public function destroy(string $id)
     {
         abort(404);
+    }
+
+    public function generateInvoice($reservationId)
+    {
+        $user = Auth::user();
+
+        $reservation = Reservation::with(['orders.carts.menu'])
+            ->where('id', $reservationId)
+            ->where('user_id', $user->id)
+            ->firstOrFail();
+
+        $order = $reservation->orders->first();
+        $taxRate = 0.10;
+        $subtotal = $order->total_amount ?? 0;
+        $tax = $subtotal * $taxRate;
+        $grandTotal = $subtotal + $tax;
+        $downPayment = $order->down_payment_amount ?? ($grandTotal * 0.5);
+        $remaining = $order->remaining_amount ?? ($grandTotal * 0.5);
+
+        $data = [
+            'reservation' => $reservation,
+            'order' => $order,
+            'invoiceNumber' => 'INV-' . date('Ymd') . '-' . str_pad($reservation->id, 4, '0', STR_PAD_LEFT),
+            'invoiceDate' => now()->format('j F Y'),
+            'subtotal' => $subtotal,
+            'tax' => $tax,
+            'grandTotal' => $grandTotal,
+            'downPayment' => $downPayment,
+            'remaining' => $remaining,
+            'taxRate' => $taxRate * 100,
+        ];
+
+        $pdf = FacadePdf::loadView('invoice', $data);
+
+        $filename = 'Invoice-' . $reservation->reservation_code . '.pdf';
+        return $pdf->download($filename);
     }
 }

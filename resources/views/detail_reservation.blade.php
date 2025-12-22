@@ -49,7 +49,7 @@
 
                     <div class="reservation-card-row">
                         <div class="reservation-label">Guests</div>
-                        <div class="reservation-value">{{ $reservation->person_attending }} Persons</div>
+                        <div class="reservation-value">{{ $reservation->person_attend }} Persons</div>
                     </div>
 
                     <div class="reservation-card-row">
@@ -163,12 +163,16 @@
                 </div>
 
                 <div class="reservation-actions">
-                    <button class="reservation-btn reservation-btn-primary"
-                        {{ $reservation->status == 'Created' || $reservation->status == 'Pending Payment' ? 'disabled' : '' }}>Download
-                        Invoice (PDF)</button>
+                    <button
+                        class="reservation-btn reservation-btn-primary"{{ $reservation->status == 'Created' || $reservation->status == 'Pending Payment' ? 'disabled' : '' }}>
+                        <a href="{{ route('invoice.download', $reservation->id) }}">
+                            Download
+                            Invoice (PDF)
+                        </a>
+                    </button>
                     <div class="reservation-actions-row">
                         <a href={{ route('order.menu', $reservation->id) }}><button
-                                class="reservation-btn reservation-btn-outline">Modify Menu</button></a>
+                                class="reservation-btn reservation-btn-outline">{{isset($order) ? "Modify Menu" : "Add Menu"}}</button></a>
                         @foreach ($reservation->orders as $order)
                             @if (!$order->down_payment_paid && $order->status == 'Pending')
                                 <a href="{{ route('checkout', ['order_id' => $order->id]) }}">

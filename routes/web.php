@@ -35,6 +35,7 @@ Route::get('/aboutus', function () {
 })->name('aboutus');
 
 
+Route::get('/order/{id}/payment/callback', [CheckoutController::class, 'handlePaymentCallback'])->name('order.payment.callback');
 Route::get('/reservation/{id}/payment/callback', [ReservationController::class, 'handlePaymentCallback'])->name('reservation.payment.callback');
 Route::middleware(['verifyrole:admin'])->prefix('admin')->group(function () {
     Route::get('/reservation/{id}/get-payment-token', [ReservationController::class, 'getPaymentToken'])->name("admin.reservation.payment-token");
@@ -88,9 +89,11 @@ Route::middleware(['verifyrole:customer'])->group(function () {
 
     Route::controller(ReservationController::class)->group(function () {
         Route::post('reservation', 'create')->name('reservation.create');
-        Route::get('reservation/{id}', 'detail')->name('reservation.detail');
+        Route::get('reservation/{id}', 'detailReservation')->name('reservation.detail');
+        Route::get('history/{id}', 'detailHistory')->name('history.detail');
         Route::get('myreservation', 'seeReservation')->name('reservation.see');
         Route::get('myhistory', 'seeHistory')->name('history.see');
+        Route::get('/invoice/{reservationId}/download', 'generateInvoice')->name('invoice.download');
     });
 
     Route::controller(OrderController::class)->group(function () {
@@ -106,6 +109,7 @@ Route::middleware(['verifyrole:customer'])->group(function () {
     Route::controller(CheckoutController::class)->group(function () {
         Route::get('/checkout', 'show')->name('checkout');
         Route::post('/checkout/callback', 'callback');
+        Route::post('/checkout/process', 'process')->name('checkout.process');
         Route::get('/checkout/success', 'success')->name('checkout.success');
         Route::get('/checkout/error', 'geterror')->name('checkout.error');
         Route::get('/checkout/pending', 'pending')->name('checkout.pending');

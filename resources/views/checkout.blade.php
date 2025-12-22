@@ -9,6 +9,10 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
+        body{
+            height: 120% !important;
+        }
+
         main {
             background-color: #0a1f1c;
             color: #e8e4dc;
@@ -602,6 +606,115 @@
 
         .snap-container {
             min-height: 500px;
+        }.payment-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .load-payment-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #c89b3c, #e6c780, #c89b3c);
+            color: #18312E;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s;
+            letter-spacing: 1px;
+            font-family: 'Georgia', serif;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .load-payment-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s;
+            z-index: -1;
+        }
+        
+        .load-payment-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(200, 155, 60, 0.4);
+            color: #0a1f1c;
+        }
+        
+        .load-payment-btn:hover::before {
+            left: 100%;
+        }
+        
+        .load-payment-btn i {
+            font-size: 20px;
+        }
+        
+        .payment-status {
+            text-align: center;
+            padding: 15px;
+            background-color: rgba(10, 31, 28, 0.7);
+            border-radius: 8px;
+            border-left: 4px solid #c89b3c;
+            margin-bottom: 20px;
+        }
+        
+        .payment-status.paid {
+            background-color: rgba(46, 204, 113, 0.1);
+            border-left-color: #2ecc71;
+            color: #2ecc71;
+        }
+        
+        .payment-status.pending {
+            background-color: rgba(243, 156, 18, 0.1);
+            border-left-color: #f39c12;
+            color: #f39c12;
+        }
+        
+        .payment-frame {
+            margin: 20px 0;
+            border: 1px solid #c89b3c;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: rgba(10, 31, 28, 0.8);
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .payment-instructions {
+            margin-top: 15px;
+            color: #e6c780;
+            font-size: 14px;
+        }
+        
+        .load-payment-btn:disabled {
+            background: linear-gradient(135deg, #5c5c5c, #7a7a7a, #5c5c5c);
+            color: #d9d9d9;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .load-payment-btn:disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .payment-icon {
+            font-size: 48px;
+            color: #c89b3c;
+            margin-bottom: 15px;
         }
     </style>
 @endsection
@@ -616,21 +729,21 @@
     <main class="checkout-container">
         <div class="container">
             <div class="checkout-box">
-                <h1 class="page-title">Detail Pembayaran</h1>
+                <h1 class="page-title">Payment Details</h1>
 
                 <div class="checkout-content">
                     <div class="customer-details">
-                        <h2>Informasi Pelanggan</h2>
+                        <h2>Personal Information</h2>
 
                         <div class="detail-group">
-                            <div class="detail-label">Nama :</div>
+                            <div class="detail-label">Name :</div>
                             <div class="detail-value">
                                 {{ $order->user->first_name }} {{ $order->user->last_name }}
                             </div>
                         </div>
 
                         <div class="detail-group">
-                            <div class="detail-label">No.Tlp :</div>
+                            <div class="detail-label">Phone :</div>
                             <div class="detail-value">
                                 {{ $order->user->phone ?? $order->reservation->phone }}
                             </div>
@@ -649,6 +762,19 @@
                                 {{ $order->reservation->reservation_code }}
                             </div>
                         </div>
+
+                        {{-- Payment Status Indicator --}}
+                        @if($order->payment_status == 'paid')
+                            <div class="payment-status paid">
+                                <i class="fas fa-check-circle"></i>
+                                <p>Downpayment already paid</p>
+                            </div>
+                        @elseif($order->payment_status == 'pending')
+                            <div class="payment-status pending">
+                                <i class="fas fa-clock"></i>
+                                <p>Payment pending confirmation</p>
+                            </div>
+                        @endif
                     </div>
 
                     <div class="divider"></div>
@@ -685,23 +811,49 @@
                             </div>
                         </div>
 
-                        <div class="payment-method">
-                            <h3>Metode Pembayaran</h3>
-                            <div class="payment-info">
-                                <p class="payment-text">Pilih metode pembayaran di bawah:</p>
-                            </div>
-                        </div>
-
                         <div class="payment-frame">
-                            <div id="snap-container" class="snap-container">
-                            </div>
+                            @if($order->down_payment_paid == 0 || $order->status == 'Pending')
+                                <div class="payment-icon">
+                                    <i class="fas fa-credit-card"></i>
+                                </div>
+                                <h3 style="color: #e6c780; margin-bottom: 15px;">Complete Your Payment</h3>
+                                <p style="color: #d1ccc3; margin-bottom: 20px;">
+                                    Pay your downpayment of <strong>IDR {{ number_format($order->down_payment_amount, 0, ',', '.') }}</strong> to confirm your reservation
+                                </p>
+                                
+                                <div class="payment-actions">
+                                    <button id="loadPaymentBtn" class="load-payment-btn">
+                                        <i class="fas fa-lock"></i>
+                                        Pay Now with Midtrans
+                                    </button>
+                                </div>
+                                
+                                <div class="payment-instructions">
+                                    <i class="fas fa-shield-alt"></i>
+                                    Secure payment powered by Midtrans
+                                </div>
+                            @elseif($order->payment_status == 'paid')
+                                <div class="payment-icon">
+                                    <i class="fas fa-check-circle" style="color: #2ecc71;"></i>
+                                </div>
+                                <h3 style="color: #2ecc71; margin-bottom: 15px;">Payment Completed</h3>
+                                <p style="color: #d1ccc3; margin-bottom: 20px;">
+                                    Your downpayment of <strong>IDR {{ number_format($order->down_payment_amount, 0, ',', '.') }}</strong> has been received
+                                </p>
+                                <div class="payment-actions">
+                                    <a href="{{ route('reservation.show', $order->reservation_id) }}" class="load-payment-btn" style="background: linear-gradient(135deg, #2ecc71, #27ae60);">
+                                        <i class="fas fa-calendar-check"></i>
+                                        View Reservation Details
+                                    </a>
+                                </div>
+                            @endif
                         </div>
 
                         <div class="payment-info">
                             <p class="dp-subtitle">
                                 <i class="fas fa-info-circle"></i>
-                                Sisa 50% (IDR {{ number_format($order->remaining_amount, 0, ',', '.') }})
-                                akan dibayar saat dine-in
+                                Full Payment (IDR {{ number_format($order->remaining_amount, 0, ',', '.') }})
+                                will be billed after Dine-In
                             </p>
                         </div>
                     </div>
@@ -717,30 +869,46 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            @if ($order->snap_token)
-                var snapToken = '{{ $order->snap_token }}';
-
-                snap.pay(snapToken, {
-                    onSuccess: function(result) {
-                        console.log('Payment success:', result);
-                        window.location.href = '{{ route('checkout.success') }}?order_id=' + result
-                            .order_id;
-                    },
-                    onPending: function(result) {
-                        console.log('Payment pending:', result);
-                        window.location.href = '{{ route('checkout.pending') }}?order_id=' + result
-                            .order_id;
-                    },
-                    onError: function(result) {
-                        console.log('Payment error:', result);
-                        window.location.href = '{{ route('checkout.error') }}';
-                    },
-                    onClose: function() {
-                        console.log('Payment popup closed');
-                    }
+            const loadPaymentBtn = document.getElementById('loadPaymentBtn');
+            
+            @if ($order->snap_token && ($order->down_payment_paid == 0 || $order->status == 'Pending'))
+                loadPaymentBtn.addEventListener('click', function() {
+                    const snapToken = '{{ $order->snap_token }}';
+                    const button = this;
+                    button.disabled = true;
+                    button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading Payment...';
+                    
+                    snap.pay(snapToken, {
+                        onSuccess: function(result) {
+                            console.log('Payment success:', result);
+                            window.location.href = '{{ route('checkout.success') }}?order_id=' + result.order_id;
+                        },
+                        onPending: function(result) {
+                            console.log('Payment pending:', result);
+                            window.location.href = '{{ route('checkout.pending') }}?order_id=' + result.order_id;
+                        },
+                        onError: function(result) {
+                            console.log('Payment error:', result);
+                            button.disabled = false;
+                            button.innerHTML = '<i class="fas fa-lock"></i> Pay Now with Midtrans';
+                            alert('Payment failed. Please try again.');
+                        },
+                        onClose: function() {
+                            console.log('Payment popup closed');
+                            button.disabled = false;
+                            button.innerHTML = '<i class="fas fa-lock"></i> Pay Now with Midtrans';
+                        }
+                    });
                 });
-            @else
-                alert('Error: Payment token not available. Please try again.');
+            @elseif(!$order->snap_token && ($order->payment_status == 'unpaid' || $order->payment_status == 'pending'))
+                if (loadPaymentBtn) {
+                    loadPaymentBtn.disabled = true;
+                    loadPaymentBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Payment Not Available';
+                    loadPaymentBtn.style.background = 'linear-gradient(135deg, #e74c3c, #c0392b)';
+                }
+            @endif
+            
+            @if($order->payment_status == 'pending' && $order->snap_token)
             @endif
         });
     </script>
