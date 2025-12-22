@@ -1598,6 +1598,40 @@ body.nav-active {
 }
 
 @media (max-width: 768px) {
+
+    .best-seller-section .row {
+        gap: 24px;
+    }
+
+    .best-seller-img {
+        height: 260px;
+        border-radius: 16px;
+    }
+
+    .best-seller-title {
+        text-align: center;
+        font-size: 18px;
+        margin-bottom: 16px;
+    }
+
+    .best-seller-name {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .best-seller-desc {
+        font-size: 14px;
+        text-align: center;
+        margin-bottom: 14px;
+    }
+
+    .best-seller-price {
+        font-size: 16px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
     .drink-section {
         padding: 60px 0;
     }
