@@ -26,3 +26,4 @@ composer.lock
 package-lock.json
 .env railway
 .env1
+.env biasa

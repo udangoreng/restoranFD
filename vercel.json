@@ -1,0 +1,51 @@
+{
+    "version": 2,
+    "framework": null,
+    "functions": {
+        "api/index.php": {
+            "runtime": "vercel-php@0.6.0"
+        }
+    },
+    "routes": [
+        {
+            "src": "/build/(.*)",
+            "dest": "/public/build/"
+        },
+        {
+            "src": "/img/(.*)",
+            "dest": "/public/img/"
+        },
+        {
+            "src": "/profile/(.*)",
+            "dest": "/public/profile/"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "/api/index.php"
+        }
+    ],
+    "public": true,
+    "buildCommand": "vite build",
+    "outputDirectory": "public",
+    "env": {
+        "APP_ENV": "production",
+        "APP_DEBUG": "false",
+        "APP_URL": "",
+        "APP_KEY": "base64:KOSlZeMH1j4AV9iyTj0aKj+0wtk9dBGAgM2xMBdmWC0=",
+        "APP_CONFIG_CACHE": "/tmp/config.php",
+        "APP_EVENTS_CACHE": "/tmp/events.php",
+        "APP_PACKAGES_CACHE": "/tmp/packages.php",
+        "APP_ROUTES_CACHE": "/tmp/routes.php",
+        "APP_SERVICES_CACHE": "/tmp/services.php",
+        "VIEW_COMPILED_PATH": "/tmp",
+        "CACHE_DRIVER": "array",
+        "LOG_CHANNEL": "stderr",
+        "SESSION_DRIVER": "cookie",
+        "DB_CONNECTION": "mysql",
+        "DB_HOST": "u7o2cb.h.filess.io",
+        "DB_PORT": "3306",        
+        "DB_DATABASE": "courvoiser_leaderdoes",
+        "DB_USERNAME": "courvoiser_leaderdoes",
+        "DB_PASSWORD": "ef0fb5f51ff2175159a53da86ec69650a6e390c4"
+    }
+}

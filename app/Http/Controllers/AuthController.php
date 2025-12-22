@@ -62,7 +62,7 @@ class AuthController extends Controller
 
         $user = User::create($validate);
         if ($user) {
-            return redirect('login')->with('Success', 'Account Sucessfully Created');
+            return redirect('/login')->with('Success', 'Account Sucessfully Created');
         }
     }
 
