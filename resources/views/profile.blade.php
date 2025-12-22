@@ -20,8 +20,8 @@
             min-height: 100vh;
             padding: 20px;
         }
-        
-        a{
+
+        a {
             text-decoration: none;
             color: #f5f5f5;
         }
@@ -379,7 +379,8 @@
                         <h3 class="section-title">Activities</h3>
                         <div class="section-header">
                             <h4 class="section-subtitle">
-                                <i class="fa-solid fa-clock"></i> Active Reservations ({{count($reservation)}})
+                                <i class="fa-solid fa-clock"></i> Active Reservations
+                                ({{ isset($reservation) ? $reservation->count() : '0' }})
                             </h4>
                             <button class="detail-btn active-btn">
                                 <a href="{{ route('reservation.see') }}">
@@ -389,42 +390,41 @@
                         </div>
                         <div class="reservation-list">
                             <div class="reservation-item active">
-                                @if (count($reservation) == 0)
+                                @if (!isset($reservation))
                                     <p class="reservation-id">You haven't make any reservation with us Yet</p>
-                                @endif
-
-                                @foreach ($reservation as $item)
+                                @else
                                     <div class="reservation-header">
                                         <span class="reservation-id">RESERVATION ID:
-                                            <strong>{{ $item->reservation_code }}</strong></span>
+                                            <strong>{{ $reservation->reservation_code }}</strong></span>
                                         <span class="status active">
-                                            <i class="fa-solid fa-clock"></i> {{ $item->status }}
+                                            <i class="fa-solid fa-clock"></i> {{ $reservation->status }}
                                         </span>
                                     </div>
                                     <div class="reservation-body">
                                         <p>
                                             <i class="fa-solid fa-calendar-days"></i>
                                             <strong>Date & Time:</strong>
-                                            {{ \Carbon\Carbon::parse($item->booking_date)->format('j F Y') }} •
-                                            {{ \Carbon\Carbon::parse($item->time_in)->format('H:i A') }}</span>
+                                            {{ \Carbon\Carbon::parse($reservation->booking_date)->format('j F Y') }} •
+                                            {{ \Carbon\Carbon::parse($reservation->time_in)->format('H:i A') }}</span>
                                         </p>
                                         <p>
                                             <i class="fa-solid fa-user-group"></i>
                                             <strong>Guests:</strong>
-                                            {{ $item->person_attend }} Persons
+                                            {{ $reservation->person_attend }} Persons
                                         </p>
                                         <p>
                                             <i class="fa-solid fa-phone"></i>
                                             <strong>Contact:</strong>
-                                            {{ $item->phone }}
+                                            {{ $reservation->phone }}
                                         </p>
                                     </div>
+                                @endif
                             </div>
-                            @endforeach
                         </div>
                         <div class="section-header">
                             <h4 class="section-subtitle history">
-                                <i class="fa-solid fa-history"></i> History ({{count($history)}})
+                                <i class="fa-solid fa-history"></i> History
+                                ({{ isset($history) ? $history->count() : '0' }})
                             </h4>
                             <button class="detail-btn history-btn">
                                 <a href="{{ route('history.see') }}">
@@ -434,37 +434,35 @@
                         </div>
                         <div class="reservation-list history">
                             <div class="reservation-item history">
-                                @if (count($reservation) == 0)
+                                @if (!isset($history))
                                     <p class="reservation-id">You haven't make any reservation with us Yet</p>
-                                @endif
-
-                                @foreach ($reservation as $item)
+                                @else
                                     <div class="reservation-header">
                                         <span class="reservation-id">RESERVATION ID:
-                                            <strong>{{ $item->reservation_code }}</strong></span>
+                                            <strong>{{ $history->reservation_code }}</strong></span>
                                         <span class="status history">
-                                            <i class="fa-solid fa-check"></i> {{ $item->status }}
+                                            <i class="fa-solid fa-check"></i> {{ $history->status }}
                                         </span>
                                     </div>
                                     <div class="reservation-body">
                                         <p>
                                             <i class="fa-solid fa-calendar-days"></i>
                                             <strong>Date & Time:</strong>
-                                            {{ \Carbon\Carbon::parse($item->booking_date)->format('j F Y') }} •
-                                            {{ \Carbon\Carbon::parse($item->time_in)->format('H:i A') }}</span>
+                                            {{ \Carbon\Carbon::parse($history->booking_date)->format('j F Y') }} •
+                                            {{ \Carbon\Carbon::parse($history->time_in)->format('H:i A') }}</span>
                                         </p>
                                         <p>
                                             <i class="fa-solid fa-user-group"></i>
                                             <strong>Guests:</strong>
-                                            {{ $item->person_attend }} Persons
+                                            {{ $history->person_attend }} Persons
                                         </p>
                                         <p>
                                             <i class="fa-solid fa-phone"></i>
                                             <strong>Contact:</strong>
-                                            {{ $item->phone }}
+                                            {{ $history->phone }}
                                         </p>
                                     </div>
-                                @endforeach
+                                @endif
                             </div>
                         </div>
                     </section>

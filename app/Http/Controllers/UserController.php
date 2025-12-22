@@ -112,16 +112,16 @@ class UserController extends Controller
     public function show()
     {
         $userdata = Auth::user();
-        $reservation = Reservation::where('user_id', $userdata->id)->whereIn('status', ['Pending Payment', 'Created', 'Confirmed', 'Dine'])->get();
-        $history = Reservation::where('user_id', $userdata->id)->whereIn('status', ['Completed', 'Cancelled', 'No Show'])->get();
+        $reservation = Reservation::where('user_id', $userdata->id)->whereIn('status', ['Pending Payment', 'Created', 'Confirmed', 'Dine'])->latest()->first();
+        $history = Reservation::where('user_id', $userdata->id)->whereIn('status', ['Completed', 'Cancelled', 'No Show'])->latest()->first();
         return view('profile', compact('userdata', 'reservation', 'history'));
     }
 
     public function detail()
     {
         $userdata = Auth::user();
-        $reservation = Reservation::where('user_id', $userdata->id)->whereIn('status', ['Pending Payment', 'Created', 'Confirmed', 'Dine'])->get();
-        $history = Reservation::where('user_id', $userdata->id)->whereIn('status', ['Completed', 'Cancelled', 'No Show'])->get();
+        $reservation = Reservation::where('user_id', $userdata->id)->whereIn('status', ['Pending Payment', 'Created', 'Confirmed', 'Dine'])->latest()->first();
+        $history = Reservation::where('user_id', $userdata->id)->whereIn('status', ['Completed', 'Cancelled', 'No Show'])->latest()->first();
         return view('editprofile', compact('userdata', 'reservation', 'history'));
     }
 

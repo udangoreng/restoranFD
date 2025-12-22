@@ -255,7 +255,7 @@
                 <h1 class="page-title">My Reservation</h1>
 
                 <div class="reservation-list">
-                    @if (count($reservation) == 0)
+                    @if (count($reservation) == 0 )
                         <div class="empty-state-box">
                             <div class="empty-icon">
                                 <i class="far fa-calendar-times"></i>

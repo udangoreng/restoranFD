@@ -321,52 +321,50 @@
             <h1 class="page-title">My History</h1>
 
             <div class="reservation-list">
-                @if (count($reservation) == 0)
-                    @if (count($reservation) == 0)
-                        <div class="empty-state-box">
-                            <div class="empty-icon">
-                                <i class="far fa-calendar-times"></i>
-                            </div>
-                            <h3 class="empty-title">No Reservations Found</h3>
-                            <p class="empty-subtitle">You haven't made any reservations with us yet.</p>
-
-                            <a href="{{ route('reservation') }}" class="btn-book-now">
-                                Book a Table
-                            </a>
+                @if (count($reservation) == 0 )
+                    <div class="empty-state-box">
+                        <div class="empty-icon">
+                            <i class="far fa-calendar-times"></i>
                         </div>
-                    @endif
+                        <h3 class="empty-title">No Reservations Found</h3>
+                        <p class="empty-subtitle">You haven't made any reservations with us yet.</p>
+
+                        <a href="{{ route('reservation') }}" class="btn-book-now">
+                            Book a Table
+                        </a>
+                    </div>
                 @endif
                 @foreach ($reservation as $item)
                     <div class="reservation-card active">
-                            <div class="reservation-header">
-                                <div>
-                                    <span class="id-label">Reservation ID:</span>
-                                    <span class="id-value">{{ $item->reservation_code }}</span>
-                                </div>
-                                <div class="reservation-status status-active">
-                                    <i class="fas fa-clock"></i><span>{{ $item->status }}</span>
-                                </div>
+                        <div class="reservation-header">
+                            <div>
+                                <span class="id-label">Reservation ID:</span>
+                                <span class="id-value">{{ $item->reservation_code }}</span>
                             </div>
+                            <div class="reservation-status status-active">
+                                <i class="fas fa-clock"></i><span>{{ $item->status }}</span>
+                            </div>
+                        </div>
 
-                            <div class="reservation-content">
-                                <div class="reservation-info">
-                                    <div class="info-group">
-                                        <span class="info-label"><i class="fas fa-calendar-alt"></i>Date & Time:</span>
-                                        <span class="info-value">
-                                            {{ \Carbon\Carbon::parse($item->booking_date)->format('j F Y') }} •
-                                            {{ \Carbon\Carbon::parse($item->time_in)->format('H:i A') }}</span>
-                                    </div>
-                                    <div class="info-group">
-                                        <span class="info-label"><i class="fas fa-users"></i>Guests:</span>
-                                        <span class="info-value">{{ $item->person_attend }} Persons</span>
-                                    </div>
-                                    <div class="info-group">
-                                        <span class="info-label"><i class="fas fa-phone"></i>Contact:</span>
-                                        <span class="info-value">{{ $item->phone }}</span>
-                                    </div>
+                        <div class="reservation-content">
+                            <div class="reservation-info">
+                                <div class="info-group">
+                                    <span class="info-label"><i class="fas fa-calendar-alt"></i>Date & Time:</span>
+                                    <span class="info-value">
+                                        {{ \Carbon\Carbon::parse($item->booking_date)->format('j F Y') }} •
+                                        {{ \Carbon\Carbon::parse($item->time_in)->format('H:i A') }}</span>
+                                </div>
+                                <div class="info-group">
+                                    <span class="info-label"><i class="fas fa-users"></i>Guests:</span>
+                                    <span class="info-value">{{ $item->person_attend }} Persons</span>
+                                </div>
+                                <div class="info-group">
+                                    <span class="info-label"><i class="fas fa-phone"></i>Contact:</span>
+                                    <span class="info-value">{{ $item->phone }}</span>
                                 </div>
                             </div>
                         </div>
+                    </div>
                 @endforeach
             </div>
 
