@@ -12,7 +12,7 @@
             "dest": "/public/build/"
         },
         {
-            "src": "/(css|js|img|storage|build)/.*",
+            "src": "/(css|js|img|video|storage|build)/.*",
             "dest": "/public/$0"
         },
         {
