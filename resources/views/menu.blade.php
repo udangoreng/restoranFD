@@ -28,7 +28,7 @@
                 @foreach ($appetizers as $appetizer)
                     <div class="col-6 col-md-3">
                         <div class="menu-item"
-                            style="background-image: url({{ asset('storage/' . $appetizer->img_path) }});"></div>
+                            style="background-image: url({{ asset($appetizer->img_path) }});"></div>
                         <a href="{{ isset($reservation) ? route('order.menu.detail', [$reservation->id, $appetizer->id]) : route('menu.detail', $appetizer->id) }}"
                             class="menu-info">
                             <h5 class="menu-name">{{ $appetizer->name }}</h5>
@@ -37,7 +37,7 @@
                     </div>
                     <div class="col-6 col-md-3">
                         <div class="menu-item"
-                            style="background-image: url({{ asset('storage/' . $appetizer->img_path) }});"></div>
+                            style="background-image: url({{ asset($appetizer->img_path) }});"></div>
                         <a href="{{ isset($reservation) ? route('order.menu.detail', [$reservation->id, $appetizer->id]) : route('menu.detail', $appetizer->id) }}"
                             class="menu-info">
                             <h5 class="menu-name">{{ $appetizer->name }}</h5>
@@ -46,7 +46,7 @@
                     </div>
                     <div class="col-6 col-md-3">
                         <div class="menu-item"
-                            style="background-image: url({{ asset('storage/' . $appetizer->img_path) }});"></div>
+                            style="background-image: url({{ asset($appetizer->img_path) }});"></div>
                         <a href="{{ isset($reservation) ? route('order.menu.detail', [$reservation->id, $appetizer->id]) : route('menu.detail', $appetizer->id) }}"
                             class="menu-info">
                             <h5 class="menu-name">{{ $appetizer->name }}</h5>
@@ -55,7 +55,7 @@
                     </div>
                     <div class="col-6 col-md-3">
                         <div class="menu-item"
-                            style="background-image: url({{ asset('storage/' . $appetizer->img_path) }});"></div>
+                            style="background-image: url({{ asset($appetizer->img_path) }});"></div>
                         <a href="{{ isset($reservation) ? route('order.menu.detail', [$reservation->id, $appetizer->id]) : route('menu.detail', $appetizer->id) }}"
                             class="menu-info">
                             <h5 class="menu-name">{{ $appetizer->name }}</h5>
@@ -72,7 +72,7 @@
                 @foreach ($mainDishes as $mainDish)
                     <div class="col-6 col-md-3">
                         <div class="menu-item"
-                            style="background-image: url({{ asset('storage/' . $mainDish->img_path) }});"></div>
+                            style="background-image: url({{ asset($mainDish->img_path) }});"></div>
                         <a href="{{ isset($reservation) ? route('order.menu.detail', [$reservation->id, $mainDish->id]) : route('menu.detail', $mainDish->id) }}"
                             class="menu-info">
                             <h5 class="menu-name">{{ $mainDish->name }}</h5>
@@ -81,7 +81,7 @@
                     </div>
                     <div class="col-6 col-md-3">
                         <div class="menu-item"
-                            style="background-image: url({{ asset('storage/' . $mainDish->img_path) }});"></div>
+                            style="background-image: url({{ asset($mainDish->img_path) }});"></div>
                         <a href="{{ isset($reservation) ? route('order.menu.detail', [$reservation->id, $mainDish->id]) : route('menu.detail', $mainDish->id) }}"
                             class="menu-info">
                             <h5 class="menu-name">{{ $mainDish->name }}</h5>
@@ -90,7 +90,7 @@
                     </div>
                     <div class="col-6 col-md-3">
                         <div class="menu-item"
-                            style="background-image: url({{ asset('storage/' . $mainDish->img_path) }});"></div>
+                            style="background-image: url({{ asset($mainDish->img_path) }});"></div>
                         <a href="{{ isset($reservation) ? route('order.menu.detail', [$reservation->id, $mainDish->id]) : route('menu.detail', $mainDish->id) }}"
                             class="menu-info">
                             <h5 class="menu-name">{{ $mainDish->name }}</h5>
@@ -99,7 +99,7 @@
                     </div>
                     <div class="col-6 col-md-3">
                         <div class="menu-item"
-                            style="background-image: url({{ asset('storage/' . $mainDish->img_path) }});"></div>
+                            style="background-image: url({{ asset($mainDish->img_path) }});"></div>
                         <a href="{{ isset($reservation) ? route('order.menu.detail', [$reservation->id, $mainDish->id]) : route('menu.detail', $mainDish->id) }}"
                             class="menu-info">
                             <h5 class="menu-name">{{ $mainDish->name }}</h5>
@@ -116,7 +116,7 @@
                 @foreach ($desserts as $dessert)
                     <div class="col-6 col-md-3">
                         <div class="menu-item"
-                            style="background-image: url({{ asset('storage/' . $dessert->img_path) }});">
+                            style="background-image: url({{ asset($dessert->img_path) }});">
                         </div>
                         <a href="{{ isset($reservation) ? route('order.menu.detail', [$reservation->id, $dessert->id]) : route('menu.detail', $dessert->id) }}"
                             class="menu-info">
@@ -126,7 +126,7 @@
                     </div>
                     <div class="col-6 col-md-3">
                         <div class="menu-item"
-                            style="background-image: url({{ asset('storage/' . $dessert->img_path) }});">
+                            style="background-image: url({{ asset($dessert->img_path) }});">
                         </div>
                         <a href="{{ isset($reservation) ? route('order.menu.detail', [$reservation->id, $dessert->id]) : route('menu.detail', $dessert->id) }}"
                             class="menu-info">
@@ -136,7 +136,7 @@
                     </div>
                     <div class="col-6 col-md-3">
                         <div class="menu-item"
-                            style="background-image: url({{ asset('storage/' . $dessert->img_path) }});">
+                            style="background-image: url({{ asset($dessert->img_path) }});">
                         </div>
                         <a href="{{ isset($reservation) ? route('order.menu.detail', [$reservation->id, $dessert->id]) : route('menu.detail', $dessert->id) }}"
                             class="menu-info">
@@ -146,7 +146,7 @@
                     </div>
                     <div class="col-6 col-md-3">
                         <div class="menu-item"
-                            style="background-image: url({{ asset('storage/' . $dessert->img_path) }});">
+                            style="background-image: url({{ asset($dessert->img_path) }});">
                         </div>
                         <a href="{{ isset($reservation) ? route('order.menu.detail', [$reservation->id, $dessert->id]) : route('menu.detail', $dessert->id) }}"
                             class="menu-info">
@@ -258,7 +258,7 @@
             @foreach ($additionals as $additional)
                 <div class="col-md-6 d-flex additional-item">
                     <div class="additional-img hover-img"
-                        style="background-image: url({{ asset('storage/' . $additional->img_path) }});">
+                        style="background-image: url({{ asset($additional->img_path) }});">
                     </div>
                     <a
                         href="{{ isset($reservation) ? route('order.menu.detail', [$reservation->id, $appetizer->id]) : route('menu.detail', $appetizer->id) }}">
@@ -272,7 +272,7 @@
                 </div>
                 <div class="col-md-6 d-flex additional-item">
                     <div class="additional-img hover-img"
-                        style="background-image: url({{ asset('storage/' . $additional->img_path) }});">
+                        style="background-image: url({{ asset($additional->img_path) }});">
                     </div>
                     <a
                         href="{{ isset($reservation) ? route('order.menu.detail', [$reservation->id, $appetizer->id]) : route('menu.detail', $appetizer->id) }}">
@@ -286,7 +286,7 @@
                 </div>
                 <div class="col-md-6 d-flex additional-item">
                     <div class="additional-img hover-img"
-                        style="background-image: url({{ asset('storage/' . $additional->img_path) }});">
+                        style="background-image: url({{ asset($additional->img_path) }});">
                     </div>
                     <a
                         href="{{ isset($reservation) ? route('order.menu.detail', [$reservation->id, $appetizer->id]) : route('menu.detail', $appetizer->id) }}">
@@ -300,7 +300,7 @@
                 </div>
                 <div class="col-md-6 d-flex additional-item">
                     <div class="additional-img hover-img"
-                        style="background-image: url({{ asset('storage/' . $additional->img_path) }});">
+                        style="background-image: url({{ asset($additional->img_path) }});">
                     </div>
                     <a
                         href="{{ isset($reservation) ? route('order.menu.detail', [$reservation->id, $appetizer->id]) : route('menu.detail', $appetizer->id) }}">
