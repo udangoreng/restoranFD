@@ -503,7 +503,7 @@ body.nav-active {
         font-size: 100px;
         font-family: 'Parisienne';
         font-style: italic;
-        top: 15%; /* Adjust posisi */
+        top: 40%; /* Adjust posisi */
     }
 }
 
@@ -525,7 +525,7 @@ body.nav-active {
         font-size: 60px;
         font-family: 'Parisienne';
         font-style: italic;
-        top: 10%; /* Turunin dikit */
+        top: 40%; /* Turunin dikit */
         letter-spacing: 1px;
     }
     
@@ -549,7 +549,7 @@ body.nav-active {
     
     #hero h2.script {
         font-size: 50px;
-        top: 10%;
+        top: 40%;
         font-family: 'Parisienne';
         font-style: italic;
     }
@@ -565,7 +565,7 @@ body.nav-active {
     
     #hero h2.script {
         font-size: 70px;
-        top: 10%;
+        top: 40%;
         font-family: 'Parisienne';
         font-style: italic;
     }
