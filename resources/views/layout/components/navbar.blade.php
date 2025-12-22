@@ -69,18 +69,4 @@
     <div id="overlay"></div>
 
 </section>
-<script>
-    const bar = document.getElementById("bar");
-    const mobileMenu = document.getElementById("mobile-menu");
-    const overlay = document.getElementById("overlay");
 
-    bar.addEventListener("click", () => {
-        mobileMenu.classList.add("active");
-        overlay.classList.add("active");
-    });
-
-    overlay.addEventListener("click", () => {
-        mobileMenu.classList.remove("active");
-        overlay.classList.remove("active");
-    });
-</script>

@@ -2223,27 +2223,3 @@ p {
     background: #0d2625;
     border: 2px solid #c89b3c;
 }
-/* ===================== */
-/* RESPONSIVE NAVBAR */
-/* ===================== */
-#mobile {
-    display: none; /* default desktop */
-}
-
-@media (max-width: 992px) {
-
-    /* Navbar desktop disembunyikan */
-    #navbar {
-        display: none;
-    }
-
-    /* Tombol BOOK A TABLE disembunyikan */
-    .book-btn {
-        display: none;
-    }
-
-    /* Icon hamburger ditampilkan */
-    #mobile {
-        display: flex;
-    }
-}
