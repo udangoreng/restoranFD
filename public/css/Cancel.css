@@ -64,3 +64,14 @@
   color: #ff7b7b;
   border: 1px solid rgba(255,80,80,0.12);
 }
+
+.cancel-modal-content {
+    width: 90%;
+    max-width: 420px;
+}
+
+@media (max-width: 480px) {
+    .cancel-modal-content {
+        padding: 18px;
+    }
+}

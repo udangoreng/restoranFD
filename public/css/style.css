@@ -315,7 +315,6 @@ body.nav-active {
     }
 }
 
-
 #mobile {
     display: flex;
     align-items: center;
@@ -2331,6 +2330,23 @@ p {
     letter-spacing: 1px;
 }
 
+@media (max-width: 768px) {
+    .reservation-hero {
+        height: 60vh;
+    }
+
+    .reservation-hero-text {
+        font-size: 26px;
+        line-height: 1.5;
+    }
+}
+
+@media (max-width: 480px) {
+    .reservation-hero-text {
+        font-size: 22px;
+    }
+}
+
 .reservation-gold-text {
     color: #c89b3c;
     font-weight: 400;
@@ -2369,6 +2385,20 @@ p {
     font-size: 20px;
 }
 
+@media (max-width: 768px) {
+    .reservation-title {
+        font-size: 32px;
+    }
+
+    .reservation-subtitle {
+        font-size: 18px;
+        letter-spacing: 2px;
+    }
+
+    .reservation-note {
+        font-size: 16px;
+    }
+}
 
 .reservation-grid {
     width: 86%;
@@ -2377,6 +2407,13 @@ p {
     grid-template-columns: 1fr 520px;
     gap: 36px;
     align-items: start;
+}
+
+@media (max-width: 1024px) {
+    .reservation-grid {
+        grid-template-columns: 1fr;
+        width: 92%;
+    }
 }
 
 .reservation-card {
@@ -2419,6 +2456,22 @@ p {
     color: #ffffff;
     font-weight: 600;
     text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+    .reservation-info-card .reservation-card-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .reservation-label {
+        font-size: 12px;
+    }
+
+    .reservation-value {
+        font-size: 14px;
+    }
 }
 
 .reservation-badge {
@@ -2595,6 +2648,29 @@ p {
 .reservation-actions-row {
     display: flex;
     gap: 12px;
+}
+
+@media (max-width: 768px) {
+    .reservation-actions-row {
+        flex-direction: column;
+    }
+
+    .reservation-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* =========================
+   RESPONSIVE MENU TABLE
+   ========================= */
+
+.reservation-order {
+    overflow-x: auto;
+}
+
+.reservation-menu-table {
+    min-width: 420px;
 }
 
 .history-section {
