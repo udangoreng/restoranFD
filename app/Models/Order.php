@@ -27,8 +27,37 @@ class Order extends Model
         return $this->belongsTo(Reservation::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function carts()
     {
         return $this->hasMany(Cart::class);
+    }
+
+    public function hasMinimumOrder()
+    {
+        $categories = $this->cartItems()
+            ->with('menu')
+            ->get()
+            ->pluck('menu.category')
+            ->map(function($category) {
+                return strtolower($category);
+            })
+            ->toArray();
+        
+        $hasAppetizer = in_array('appetizer', $categories) || 
+                       collect($categories)->contains(fn($cat) => str_contains($cat, 'appetizer'));
+        
+        $hasMainDish = in_array('main dish', $categories) || 
+                      in_array('main_dish', $categories) ||
+                      collect($categories)->contains(fn($cat) => str_contains($cat, 'main'));
+        
+        $hasDessert = in_array('dessert', $categories) ||
+                     collect($categories)->contains(fn($cat) => str_contains($cat, 'dessert'));
+        
+        return $hasAppetizer && $hasMainDish && $hasDessert;
     }
 }

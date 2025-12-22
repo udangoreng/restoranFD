@@ -32,7 +32,7 @@
                 </li>
 
                 <li>
-                    <a href="my_reservation.html" class="mobile-link">
+                    <a href="{{route('reservation.see')}}" class="mobile-link">
                         <span class="star">✦</span>
                         My Reservation
                         <span class="arrow">›</span>
@@ -40,7 +40,7 @@
                 </li>
 
                 <li>
-                    <a href="my_history.html" class="mobile-link">
+                    <a href="{{route('history.see')}}" class="mobile-link">
                         <span class="star">✦</span>
                         My History
                         <span class="arrow">›</span>

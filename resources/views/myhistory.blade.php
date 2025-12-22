@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -178,6 +179,7 @@
             font-size: 15px;
             flex: 1;
         }
+
         .detail-button-container {
             display: flex;
             justify-content: flex-end;
@@ -218,18 +220,67 @@
             font-size: 11px;
         }
 
+        .empty-state-box {
+            text-align: center;
+            padding: 60px 20px;
+            border: 1px dashed rgba(200, 155, 60, 0.3);
+            border-radius: 12px;
+            background-color: rgba(10, 31, 28, 0.4);
+            margin-top: 20px;
+        }
+
+        .empty-icon {
+            font-size: 60px;
+            color: #c89b3c;
+            opacity: 0.5;
+            margin-bottom: 20px;
+        }
+
+        .empty-title {
+            font-family: 'Georgia', serif;
+            font-size: 24px;
+            color: #e6c780;
+            margin-bottom: 10px;
+        }
+
+        .empty-subtitle {
+            color: #b0a48a;
+            font-size: 16px;
+            margin-bottom: 25px;
+        }
+
+        .btn-book-now {
+            display: inline-block;
+            padding: 10px 30px;
+            border: 1px solid #c89b3c;
+            color: #c89b3c;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        .btn-book-now:hover {
+            background-color: #c89b3c;
+            color: #18312E;
+            box-shadow: 0 0 15px rgba(200, 155, 60, 0.4);
+        }
+
         @media (max-width: 768px) {
             .reservation-header {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 15px;
             }
-            
+
             .detail-button-container {
                 justify-content: center;
                 padding: 0 20px 15px 20px;
             }
-            
+
             .detail-button {
                 padding: 6px 16px;
             }
@@ -240,7 +291,7 @@
                 flex-direction: column;
                 gap: 5px;
             }
-            
+
             .detail-button {
                 width: auto;
                 justify-content: center;
@@ -249,8 +300,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
@@ -263,123 +321,58 @@
             <h1 class="page-title">My History</h1>
 
             <div class="reservation-list">
-                <div class="reservation-card completed">
-                    <div class="reservation-header">
-                        <div class="reservation-id">
-                            <span class="id-label">Reservation ID:</span>
-                            <span class="id-value">#RSV-20251207-0098</span>
-                        </div>
-                        <div class="reservation-status status-completed">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Completed</span>
-                        </div>
-                    </div>
+                @if (count($reservation) == 0)
+                    @if (count($reservation) == 0)
+                        <div class="empty-state-box">
+                            <div class="empty-icon">
+                                <i class="far fa-calendar-times"></i>
+                            </div>
+                            <h3 class="empty-title">No Reservations Found</h3>
+                            <p class="empty-subtitle">You haven't made any reservations with us yet.</p>
 
-                    <div class="reservation-content">
-                        <div class="reservation-info">
-                            <div class="info-group">
-                                <span class="info-label"><i class="fas fa-calendar-alt"></i> Date & Time:</span>
-                                <span class="info-value">Saturday, 25 Dec 2025 • 07:30</span>
+                            <a href="{{ route('reservation') }}" class="btn-book-now">
+                                Book a Table
+                            </a>
+                        </div>
+                    @endif
+                @endif
+                @foreach ($reservation as $item)
+                    <div class="reservation-card active">
+                            <div class="reservation-header">
+                                <div>
+                                    <span class="id-label">Reservation ID:</span>
+                                    <span class="id-value">{{ $item->reservation_code }}</span>
+                                </div>
+                                <div class="reservation-status status-active">
+                                    <i class="fas fa-clock"></i><span>{{ $item->status }}</span>
+                                </div>
                             </div>
 
-                            <div class="info-group">
-                                <span class="info-label"><i class="fas fa-users"></i> Guests:</span>
-                                <span class="info-value">4 Persons</span>
-                            </div>
-
-                            <div class="info-group">
-                                <span class="info-label"><i class="fas fa-phone"></i> Contact:</span>
-                                <span class="info-value">0812-3456-7890</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="detail-button-container">
-                        <button class="detail-button">
-                            <i class="fas fa-info-circle"></i>
-                            Details
-                        </button>
-                    </div>
-                </div>
-
-                <div class="reservation-card completed">
-                    <div class="reservation-header">
-                        <div class="reservation-id">
-                            <span class="id-label">Reservation ID:</span>
-                            <span class="id-value">#RSV-20251207-0089</span>
-                        </div>
-                        <div class="reservation-status status-completed">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Completed</span>
-                        </div>
-                    </div>
-
-                    <div class="reservation-content">
-                        <div class="reservation-info">
-                            <div class="info-group">
-                                <span class="info-label"><i class="fas fa-calendar-alt"></i> Date & Time:</span>
-                                <span class="info-value">Sunday, 20 Aug 2025 • 18:00</span>
-                            </div>
-
-                            <div class="info-group">
-                                <span class="info-label"><i class="fas fa-users"></i> Guests:</span>
-                                <span class="info-value">6 Persons</span>
-                            </div>
-
-                            <div class="info-group">
-                                <span class="info-label"><i class="fas fa-phone"></i> Contact:</span>
-                                <span class="info-value">0812-3456-7890</span>
+                            <div class="reservation-content">
+                                <div class="reservation-info">
+                                    <div class="info-group">
+                                        <span class="info-label"><i class="fas fa-calendar-alt"></i>Date & Time:</span>
+                                        <span class="info-value">
+                                            {{ \Carbon\Carbon::parse($item->booking_date)->format('j F Y') }} •
+                                            {{ \Carbon\Carbon::parse($item->time_in)->format('H:i A') }}</span>
+                                    </div>
+                                    <div class="info-group">
+                                        <span class="info-label"><i class="fas fa-users"></i>Guests:</span>
+                                        <span class="info-value">{{ $item->person_attend }} Persons</span>
+                                    </div>
+                                    <div class="info-group">
+                                        <span class="info-label"><i class="fas fa-phone"></i>Contact:</span>
+                                        <span class="info-value">{{ $item->phone }}</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="detail-button-container">
-                        <button class="detail-button">
-                            <i class="fas fa-info-circle"></i>
-                            Details
-                        </button>
-                    </div>
-                </div>
-                <div class="reservation-card completed">
-                    <div class="reservation-header">
-                        <div class="reservation-id">
-                            <span class="id-label">Reservation ID:</span>
-                            <span class="id-value">#RSV-20241207-0090</span>
-                        </div>
-                        <div class="reservation-status status-completed">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Completed</span>
-                        </div>
-                    </div>
+                @endforeach
+            </div>
 
-                    <div class="reservation-content">
-                        <div class="reservation-info">
-                            <div class="info-group">
-                                <span class="info-label"><i class="fas fa-calendar-alt"></i> Date & Time:</span>
-                                <span class="info-value">Friday, 24 July 2024 • 19:00</span>
-                            </div>
-
-                            <div class="info-group">
-                                <span class="info-label"><i class="fas fa-users"></i> Guests:</span>
-                                <span class="info-value">2 Persons</span>
-                            </div>
-
-                            <div class="info-group">
-                                <span class="info-label"><i class="fas fa-phone"></i> Contact:</span>
-                                <span class="info-value">0812-3456-7890</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="detail-button-container">
-                        <button class="detail-button">
-                            <i class="fas fa-info-circle"></i>
-                            Details
-                        </button>
-                    </div>
-                </div>
-
-            </div> 
-        </div> 
+        </div>
     </main>
 
 </body>
+
 </html>

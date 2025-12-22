@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\TableController;
@@ -128,6 +129,7 @@ Route::middleware(['verifyrole:customer'])->group(function () {
         Route::post('reservation', 'create')->name('reservation.create');
         Route::get('reservation/{id}', 'detail')->name('reservation.detail');
         Route::get('myreservation', 'seeReservation')->name('reservation.see');
+        Route::get('myhistory', 'seeHistory')->name('history.see');
     });
 
     Route::controller(OrderController::class)->group(function () {
@@ -139,5 +141,13 @@ Route::middleware(['verifyrole:customer'])->group(function () {
         Route::delete('cart/remove/{id}', 'removeFromCart')->name('cart.remove');
         Route::get('/checkout')->name('checkout');
         Route::post('/checkout/process')->name('checkout.process');
+    });
+
+    Route::controller(CheckoutController::class)->group(function () {
+        Route::get('/checkout', 'show')->name('checkout');
+        Route::post('/checkout/callback', 'callback');
+        Route::get('/checkout/success', 'success')->name('checkout.success');
+        Route::get('/checkout/error', 'geterror')->name('checkout.error');
+        Route::get('/checkout/pending', 'pending')->name('checkout.pending');
     });
 });

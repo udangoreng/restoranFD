@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->decimal('price', 10, 2);
             $table->decimal('subtotal', 10, 2);
-            $table->enum('category', ['appetizer', 'main_dish', 'dessert', 'drink', 'other']);
+            $table->enum('category', ['Appetizer', 'Main Dish', 'Dessert', 'Beverages','Other']);
             $table->timestamps();
         });
     }

@@ -4,52 +4,95 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function loadCart() {
         console.log('Loading cart data...');
-        
+
         fetch('/cart/data', {
             headers: {
                 'Accept': 'application/json',
                 'X-Requested-With': 'XMLHttpRequest'
             }
         })
-        .then(response => {
-            console.log('Response status:', response.status);
-        
-            const contentType = response.headers.get("content-type");
-            if (contentType && contentType.includes("application/json")) {
-                return response.json();
-            } else {
-                throw new Error('Response is not JSON');
-            }
-        })
-        .then(data => {
-            console.log('Cart data received:', data);
-            
-            if (data.error) {
-                console.log('Error from server:', data.error);
-                showNoReservationPopup();
-                updateCartUI([], 0);
-                hideBackToReservationBtn();
-            } else {
-                currentReservationId = data.reservation_id;
-                currentOrderId = data.order_id;
-                
-                console.log('Current reservation ID:', currentReservationId);
-                console.log('Current order ID:', currentOrderId);
-                
-                updateCartUI(data.cart || [], data.total || 0);
+            .then(response => {
+                console.log('Response status:', response.status);
 
-                if (currentReservationId) {
-                    showBackToReservationBtn(currentReservationId);
+                const contentType = response.headers.get("content-type");
+                if (contentType && contentType.includes("application/json")) {
+                    return response.json();
                 } else {
-                    hideBackToReservationBtn();
+                    throw new Error('Response is not JSON');
                 }
-                updateCheckoutButton(data.cart || []);
+            })
+            .then(data => {
+                console.log('Cart data received:', data);
+
+                if (data.error) {
+                    console.log('Error from server:', data.error);
+                    showNoReservationPopup();
+                    updateCartUI([], 0);
+                    hideBackToReservationBtn();
+                } else {
+                    // Update UI
+                    updateCartUI(data.cart || [], data.total || 0);
+
+                    // Update tombol checkout
+                    updateCheckoutButton(data.cart || [], data.is_valid_order);
+
+                    // Tampilkan warning jika order tidak valid
+                    if (!data.is_valid_order && data.missing_categories && data.missing_categories.length > 0) {
+                        showOrderWarning(data.missing_categories);
+                    }
+                }
+            });
+    }
+
+    function updateCheckoutButton(cartItems, isValidOrder = false) {
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        if (!checkoutBtn) return;
+
+        // Disable jika cart kosong ATAU order tidak valid
+        if (cartItems.length === 0 || !isValidOrder) {
+            checkoutBtn.disabled = true;
+
+            // Tambah tooltip untuk info
+            if (cartItems.length > 0 && !isValidOrder) {
+                checkoutBtn.title = 'Please add at least 1 Appetizer, 1 Main Dish, and 1 Dessert';
             }
-        })
-        .catch(error => {
-            console.error('Error loading cart:', error);
-            showErrorPopup('Failed to load cart: ' + error.message);
-        });
+        } else {
+            checkoutBtn.disabled = false;
+            checkoutBtn.title = '';
+        }
+    }
+
+    function showOrderWarning(missingCategories) {
+        const container = document.getElementById('cartItemsContainer');
+        if (!container) return;
+
+        const warningHtml = `
+        <div class="order-warning" style="
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px auto;
+            width: 90%;
+            color: #856404;
+        ">
+            <strong><i class="fas fa-exclamation-triangle"></i> Minimum Order Required:</strong>
+            <p>Please add at least 1 item from each category:</p>
+            <ul style="margin-bottom: 0;">
+                ${missingCategories.includes('appetizer') ? '<li>Appetizer</li>' : ''}
+                ${missingCategories.includes('main dish') ? '<li>Main Dish</li>' : ''}
+                ${missingCategories.includes('dessert') ? '<li>Dessert</li>' : ''}
+            </ul>
+        </div>
+    `;
+
+        // Tambah warning di atas cart items
+        const existingWarning = container.querySelector('.order-warning');
+        if (existingWarning) {
+            existingWarning.remove();
+        }
+
+        container.insertAdjacentHTML('afterbegin', warningHtml);
     }
 
     function showBackToReservationBtn(reservationId) {
@@ -58,20 +101,20 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Back button element not found!');
             return;
         }
-        
+
         console.log('Showing back button for reservation:', reservationId);
-        
+
         backBtn.style.display = 'block';
-        
+
         const newBackBtn = backBtn.cloneNode(true);
         backBtn.parentNode.replaceChild(newBackBtn, backBtn);
-        
+
         const updatedBackBtn = document.getElementById('backToReservationBtn');
-        
-        updatedBackBtn.addEventListener('click', function(e) {
+
+        updatedBackBtn.addEventListener('click', function (e) {
             e.preventDefault();
             console.log('Back button clicked! Reservation ID:', reservationId);
-            
+
             if (reservationId) {
                 window.location.href = `/reservation/${reservationId}`;
             } else {
@@ -90,12 +133,12 @@ document.addEventListener('DOMContentLoaded', function () {
     function updateCheckoutButton(cartItems) {
         const checkoutBtn = document.getElementById('checkoutBtn');
         if (!checkoutBtn) return;
-        
+
         if (cartItems.length > 0 && currentOrderId) {
             checkoutBtn.disabled = false;
             checkoutBtn.onclick = null;
-            
-            checkoutBtn.addEventListener('click', function() {
+
+            checkoutBtn.addEventListener('click', function () {
                 console.log('Checkout clicked! Order ID:', currentOrderId);
                 goToCheckout(currentOrderId);
             });
@@ -161,16 +204,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function attachCartItemEvents() {
         document.querySelectorAll('.quantity-btn[data-action="plus"], .quantity-btn[data-action="minus"]').forEach(btn => {
-            btn.addEventListener('click', function() {
+            btn.addEventListener('click', function () {
                 const cartId = this.dataset.cartId;
                 const action = this.dataset.action;
                 const change = action === 'plus' ? 1 : -1;
-                
+
                 updateQuantity(cartId, change);
             });
         });
         document.querySelectorAll('.trash-btn[data-action="delete"]').forEach(btn => {
-            btn.addEventListener('click', function() {
+            btn.addEventListener('click', function () {
                 const cartId = this.dataset.cartId;
                 removeFromCart(cartId);
             });
@@ -179,20 +222,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function updateQuantity(cartId, change) {
         console.log('Updating quantity for cart item:', cartId, 'change:', change);
-        
+
         const quantityElement = document.querySelector(`[data-cart-id="${cartId}"] .quantity`);
         if (!quantityElement) {
             console.error('Quantity element not found for cart ID:', cartId);
             return;
         }
-        
+
         let currentQty = parseInt(quantityElement.textContent);
         let newQty = currentQty + change;
-        
+
         if (newQty < 1) newQty = 1;
-        
+
         console.log('Current quantity:', currentQty, 'New quantity:', newQty);
-        
+
         fetch(`/cart/update/${cartId}`, {
             method: 'PUT',
             headers: {
@@ -204,26 +247,26 @@ document.addEventListener('DOMContentLoaded', function () {
                 quantity: newQty
             })
         })
-        .then(response => {
-            console.log('Update response status:', response.status);
-            if (!response.ok) {
-                throw new Error('Update failed with status: ' + response.status);
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Update successful:', data);
-            loadCart();
-        })
-        .catch(error => {
-            console.error('Error updating quantity:', error);
-            showErrorPopup('Failed to update quantity: ' + error.message);
-        });
+            .then(response => {
+                console.log('Update response status:', response.status);
+                if (!response.ok) {
+                    throw new Error('Update failed with status: ' + response.status);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Update successful:', data);
+                loadCart();
+            })
+            .catch(error => {
+                console.error('Error updating quantity:', error);
+                showErrorPopup('Failed to update quantity: ' + error.message);
+            });
     }
 
     function removeFromCart(cartId) {
         console.log('Removing cart item:', cartId);
-        
+
         if (confirm('Hapus item dari keranjang?')) {
             fetch(`/cart/remove/${cartId}`, {
                 method: 'DELETE',
@@ -232,21 +275,21 @@ document.addEventListener('DOMContentLoaded', function () {
                     'Accept': 'application/json'
                 }
             })
-            .then(response => {
-                console.log('Delete response status:', response.status);
-                if (!response.ok) {
-                    throw new Error('Delete failed with status: ' + response.status);
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Delete successful:', data);
-                loadCart();
-            })
-            .catch(error => {
-                console.error('Error removing item:', error);
-                showErrorPopup('Failed to remove item: ' + error.message);
-            });
+                .then(response => {
+                    console.log('Delete response status:', response.status);
+                    if (!response.ok) {
+                        throw new Error('Delete failed with status: ' + response.status);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Delete successful:', data);
+                    loadCart();
+                })
+                .catch(error => {
+                    console.error('Error removing item:', error);
+                    showErrorPopup('Failed to remove item: ' + error.message);
+                });
         }
     }
 
@@ -254,8 +297,8 @@ document.addEventListener('DOMContentLoaded', function () {
         button.addEventListener('click', function () {
             const menuId = this.dataset.menuId;
             console.log('Adding to cart, menu ID:', menuId);
-            
-            fetch('/cart/add', {
+
+            fetch('/order/addcart', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -267,21 +310,21 @@ document.addEventListener('DOMContentLoaded', function () {
                     quantity: 1
                 })
             })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Add to cart response:', data);
-                if (data.success) {
-                    loadCart();
-                    updateCartCount();
-                    showSuccessPopup('Item added to cart!');
-                } else if (data.error) {
-                    showNoReservationPopup();
-                }
-            })
-            .catch(error => {
-                console.error('Error adding to cart:', error);
-                showErrorPopup('Failed to add item to cart');
-            });
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Add to cart response:', data);
+                    if (data.success) {
+                        loadCart();
+                        updateCartCount();
+                        showSuccessPopup('Item added to cart!');
+                    } else if (data.error) {
+                        showNoReservationPopup();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error adding to cart:', error);
+                    showErrorPopup('Failed to add item to cart');
+                });
         });
     });
     function showNoReservationPopup() {

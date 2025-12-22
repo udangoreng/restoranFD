@@ -132,8 +132,15 @@
                     <div class="reservation-actions-row">
                         <a href={{ route('order.menu', $reservation->id) }}><button
                                 class="reservation-btn reservation-btn-outline">Modify Menu</button></a>
-                        <a href={{ route('order.menu', $reservation->id) }}><button
-                                class="reservation-btn reservation-btn-outline">Checkout</button></a>
+                        @foreach ($reservation->orders as $order)
+                            @if (!$order->down_payment_paid && $order->status == 'Pending')
+                                <a href="{{ route('checkout', ['order_id' => $order->id]) }}">
+                                    <button class="reservation-btn reservation-btn-primary">
+                                        Pay Down Payment (50%)
+                                    </button>
+                                </a>
+                            @endif
+                        @endforeach
                         <button class="reservation-btn reservation-btn-cancel">Cancel Reservation</button>
                     </div>
                 </div>

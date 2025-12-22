@@ -50,7 +50,7 @@ class OrderController extends Controller
         $user = Auth::user();
 
         $activeReservation = $this->getActiveReservation();
-        
+
         if (!$activeReservation) {
             return redirect()->back()->with('error', 'You Currently Don\'t Have An Active Reservation');
         }
@@ -148,60 +148,143 @@ class OrderController extends Controller
     }
 
     // app/Http/Controllers/CartController.php
-public function getCart()
-{
-    try {
-        $user = Auth::user();
-        
-        if (!$user) {
+    public function getCart()
+    {
+        try {
+            $user = Auth::user();
+
+            if (!$user) {
+                return response()->json([
+                    'error' => 'User not authenticated',
+                    'has_active_reservation' => false
+                ], 401);
+            }
+
+            // Cari reservasi aktif
+            $activeReservation = Reservation::where('user_id', $user->id)
+                ->whereIn('status', ['Created', 'Pending Payment'])
+                ->first();
+
+            if (!$activeReservation) {
+                return response()->json([
+                    'error' => 'No active reservation found. Please create a reservation first.',
+                    'has_active_reservation' => false,
+                    'cart' => [],
+                    'total' => 0
+                ], 200);
+            }
+
+            // Cari order untuk reservasi ini
+            $order = Order::where('reservation_id', $activeReservation->id)->first();
+
+            $cartItems = [];
+            $total = 0;
+
+            if ($order) {
+                // Gunakan relasi carts() bukan cartItems()
+                $cartItems = $order->carts()->with('menu')->get();
+                $total = $order->total_amount;
+            }
+
+            // Validasi order
+            $validationResult = $this->validateOrder($order ? $order->id : null);
+
             return response()->json([
-                'error' => 'User not authenticated',
+                'success' => true,
+                'cart' => $cartItems,
+                'total' => $total,
+                'reservation_id' => $activeReservation->id,
+                'reservation_code' => $activeReservation->reservation_code,
+                'order_id' => $order ? $order->id : null,
+                'order_code' => $order ? $order->order_code : null,
+                'has_active_reservation' => true,
+                'is_valid_order' => $validationResult['is_valid'],
+                'missing_categories' => $validationResult['missing'],
+                'user_id' => $user->id
+            ]);
+        } catch (\Exception $e) {
+            // \Log::error('OrderController getCart Error: ' . $e->getMessage());
+            return response()->json([
+                'error' => 'Server error: ' . $e->getMessage(),
                 'has_active_reservation' => false
-            ], 401);
+            ], 500);
         }
-        
-        // Cari reservasi aktif
-        $activeReservation = Reservation::where('user_id', $user->id)
-            ->whereIn('status', ['Created', 'Pending Payment'])
-            ->first();
-
-        if (!$activeReservation) {
-            return response()->json([
-                'error' => 'No active reservation found. Please create a reservation first.',
-                'has_active_reservation' => false,
-                'cart' => [],
-                'total' => 0
-            ], 200); // Return 200 dengan error message
-        }
-
-        // Cari order untuk reservasi ini
-        $order = Order::where('reservation_id', $activeReservation->id)->first();
-
-        $cartItems = [];
-        $total = 0;
-        
-        if ($order) {
-            $cartItems = Cart::with('menu')->where('order_id', $order->id)->get();
-            $total = $order->total_amount;
-        }
-
-        return response()->json([
-            'success' => true,
-            'cart' => $cartItems,
-            'total' => $total,
-            'reservation_id' => $activeReservation->id,
-            'reservation_code' => $activeReservation->reservation_code,
-            'order_id' => $order ? $order->id : null,
-            'order_code' => $order ? $order->order_code : null,
-            'has_active_reservation' => true,
-            'user_id' => $user->id
-        ]);
-        
-    } catch (\Exception $e) {
-        return response()->json([
-            'error' => 'Server error: ' . $e->getMessage(),
-            'has_active_reservation' => false
-        ], 500);
     }
-}
+
+    private function validateOrder($orderId)
+    {
+        if (!$orderId) {
+            return [
+                'is_valid' => false,
+                'missing' => ['appetizer', 'main_dish', 'dessert']
+            ];
+        }
+
+        $order = Order::with('carts.menu')->find($orderId);
+
+        if (!$order || $order->carts->isEmpty()) {
+            return [
+                'is_valid' => false,
+                'missing' => ['appetizer', 'main_dish', 'dessert']
+            ];
+        }
+
+        $hasAppetizer = false;
+        $hasMainDish = false;
+        $hasDessert = false;
+        $hasBeverage = false;
+
+        foreach ($order->carts as $item) {
+            if ($item->menu) {
+                $category = strtolower($item->menu->category);
+
+                if (str_contains($category, 'appetizer')) $hasAppetizer = true;
+                if (str_contains($category, 'main') || str_contains($category, 'dish')) $hasMainDish = true;
+                if (str_contains($category, 'dessert')) $hasDessert = true;
+                if (str_contains($category, 'drink') || str_contains($category, 'beverage')) $hasBeverage = true;
+            }
+        }
+
+        $missing = [];
+        if (!$hasAppetizer) $missing[] = 'appetizer';
+        if (!$hasMainDish) $missing[] = 'main dish';
+        if (!$hasDessert) $missing[] = 'dessert';
+        // Beverage tidak mandatory, jadi tidak dimasukkan ke missing
+
+        $isValid = $hasAppetizer && $hasMainDish && $hasDessert;
+
+        return [
+            'is_valid' => $isValid,
+            'missing' => $missing,
+            'has_beverage' => $hasBeverage
+        ];
+    }
+
+    private function getMissingCategories($orderId)
+    {
+        if (!$orderId) {
+            return ['appetizer', 'main_dish', 'dessert'];
+        }
+
+        $order = Order::with('carts.menu')->find($orderId);
+        $missing = [];
+
+        $hasAppetizer = false;
+        $hasMainDish = false;
+        $hasDessert = false;
+
+        foreach ($order->cartItems as $item) {
+            $category = strtolower($item->menu->category);
+
+            if (str_contains($category, 'appetizer')) $hasAppetizer = true;
+            if (str_contains($category, 'main') || str_contains($category, 'dish')) $hasMainDish = true;
+            if (str_contains($category, 'dessert')) $hasDessert = true;
+        }
+
+        if (!$hasAppetizer) $missing[] = 'appetizer';
+        if (!$hasMainDish) $missing[] = 'main dish';
+        if (!$hasDessert) $missing[] = 'dessert';
+
+        return $missing;
+    }
 }

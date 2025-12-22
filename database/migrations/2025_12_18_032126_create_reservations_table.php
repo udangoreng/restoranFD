@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('request')->nullable();
             $table->string('allergies')->nullable();
             $table->text('message')->nullable();
-            $table->enum('status', ['Created', 'Pending Payment', 'Confirmed', 'Dine', 'Cancelled', 'No Show'])->default('Created');
+            $table->enum('status', ['Created', 'Pending Payment', 'Confirmed', 'Dine', 'Completed', 'Cancelled', 'No Show'])->default('Created');
             $table->timestamps();
         });
     }

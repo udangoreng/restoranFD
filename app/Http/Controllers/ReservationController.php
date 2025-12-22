@@ -76,7 +76,7 @@ class ReservationController extends Controller
         ]);
 
         $res = Reservation::create($data->all());
-        return redirect()->route('reservation/'.$res->id)->with('success', 'Reservation created successfully.');
+        return redirect()->route('reservation.detail', $res->id)->with('success', 'Reservation created successfully.');
     }
 
     public function detail(string $id){
@@ -85,7 +85,15 @@ class ReservationController extends Controller
     }
 
     public function seeReservation(){
-        return view('myreservation');
+        $user = Auth::user();
+        $reservation = Reservation::where('user_id', $user->id)->whereIn('status', ['Pending Payment', 'Created', 'Confirmed', 'Dine'])->get();
+        return view('myreservation', compact('reservation'));
+    }
+
+    public function seeHistory(){
+        $user = Auth::user();
+        $reservation = Reservation::where('user_id', $user->id)->whereIn('status', ['Completed', 'Cancelled', 'No Show'])->get();
+        return view('myhistory', compact('reservation'));
     }
 
     //Admin

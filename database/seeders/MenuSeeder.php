@@ -2,24 +2,68 @@
 
 namespace Database\Seeders;
 
-use App\Models\Menu;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class MenuSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public function run()
     {
-        Menu::create([
-            'name'=>'Grilled Caesar Salad',
-            'category' => 'Appetizer',
-            'price' => 175000,
-            'calories' => 380,
-            'description' => "The Grilled Caesar Salad features lightly charred romaine lettuce that brings a subtle smoky aroma, paired with a rich, creamy house-made Caesar dressing. Finished with crisp croutons, parmesan shavings, and tender grilled chicken, this appetizer offers a perfect balance of freshness and savory depth light yet indulgent. Approximately 320–380 kcal per serving (depending on the amount of dressing and added grilled chicken).",
-            'img_path' => "img/appetizer1.jpg",
-        ]);
+        // Data menu berdasarkan kategori yang ada di menu.blade.php
+        $menus = [
+            [
+                'name' => 'Grilled Pear & Cheese',
+                'category' => 'Appetizer', // Kategori 1
+                'price' => 135000,
+                'description' => 'Sweet grilled pear paired with savory cheese, walnuts, and honey drizzle.',
+                'calories' => 320,
+                'img_path' => 'img/appetizer1.jpg',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'name' => 'Lobster Tortellini',
+                'category' => 'Main Dish', // Kategori 2
+                'price' => 289000,
+                'description' => 'Handcrafted tortellini filled with sweet lobster in rich butter cream sauce.',
+                'calories' => 580,
+                'img_path' => 'img/maindish1.jpg',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'name' => 'Caramel Pannacotta',
+                'category' => 'Dessert', // Kategori 3
+                'price' => 105000,
+                'description' => 'Silky smooth pannacotta topped with homemade salted caramel sauce.',
+                'calories' => 450,
+                'img_path' => 'img/dessert1.jpg',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'name' => 'Lychee Rose Mocktail',
+                'category' => 'Beverage', // Kategori 4 (Sesuai drink-section)
+                'price' => 73000,
+                'description' => 'Refreshing blend of lychee, rose syrup, and sparkling soda.',
+                'calories' => 120,
+                'img_path' => 'img/gambar3.jpg',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'name' => 'Garlic Butter Baguette',
+                'category' => 'Additional', // Kategori 5 (Sesuai additional-section)
+                'price' => 45000,
+                'description' => 'Crunchy baguette slices brushed with premium garlic butter and herbs.',
+                'calories' => 210,
+                'img_path' => 'img/additional1.jpg',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+        ];
+
+        DB::table('menus')->insert($menus);
     }
 }

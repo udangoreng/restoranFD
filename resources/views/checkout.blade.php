@@ -592,6 +592,17 @@
         .method-box:hover span {
             color: #18312E;
         }
+
+        .payment-frame {
+            margin: 20px 0;
+            border: 1px solid #c89b3c;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .snap-container {
+            min-height: 500px;
+        }
     </style>
 @endsection
 
@@ -603,7 +614,6 @@
 
     @include('layout.components.navbar')
     <main class="checkout-container">
-
         <div class="container">
             <div class="checkout-box">
                 <h1 class="page-title">Detail Pembayaran</h1>
@@ -614,22 +624,29 @@
 
                         <div class="detail-group">
                             <div class="detail-label">Nama :</div>
-                            <div class="detail-value" id="customer-name">
+                            <div class="detail-value">
                                 {{ $order->user->first_name }} {{ $order->user->last_name }}
                             </div>
                         </div>
 
                         <div class="detail-group">
                             <div class="detail-label">No.Tlp :</div>
-                            <div class="detail-value" id="customer-phone">
+                            <div class="detail-value">
                                 {{ $order->user->phone ?? $order->reservation->phone }}
                             </div>
                         </div>
 
                         <div class="detail-group">
                             <div class="detail-label">Email Address :</div>
-                            <div class="detail-value" id="customer-email">
+                            <div class="detail-value">
                                 {{ $order->user->email }}
+                            </div>
+                        </div>
+
+                        <div class="detail-group">
+                            <div class="detail-label">Reservation Code :</div>
+                            <div class="detail-value">
+                                {{ $order->reservation->reservation_code }}
                             </div>
                         </div>
                     </div>
@@ -644,14 +661,15 @@
                                 <span class="subtotal-col">Subtotal</span>
                             </div>
 
-                            @foreach($order->cartItems as $item)
-                            <div class="order-item">
-                                <div class="product-info">
-                                    <span class="product-name">{{ $item->menu->name }}</span>
-                                    <span class="product-quantity">× {{ $item->quantity }}</span>
+                            @foreach ($order->carts as $item)
+                                <div class="order-item">
+                                    <div class="product-info">
+                                        <span class="product-name">{{ $item->menu->name }}</span>
+                                        <span class="product-quantity">× {{ $item->quantity }}</span>
+                                    </div>
+                                    <span class="product-price">IDR
+                                        {{ number_format($item->subtotal, 0, ',', '.') }}</span>
                                 </div>
-                                <span class="product-price">IDR {{ number_format($item->subtotal, 0, ',', '.') }}</span>
-                            </div>
                             @endforeach
 
                             <div class="order-totals">
@@ -661,70 +679,69 @@
                                 </div>
                                 <div class="total-row">
                                     <span>Down Payment (50%)</span>
-                                    <span class="grand-total">IDR {{ number_format($order->down_payment_amount, 0, ',', '.') }}</span>
+                                    <span class="grand-total">IDR
+                                        {{ number_format($order->down_payment_amount, 0, ',', '.') }}</span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="payment-method">
-                            <h3>DP</h3>
-                            <div class="payment-info">
-                                <span class="payment-text">DP 50%:</span>
-                                <span class="grand-total">IDR {{ number_format($order->down_payment_amount, 0, ',', '.') }}</span>
-                            </div>
-                            <div class="dp-subtitle">Sisa 50% dibayar saat dine-in</div>
-                        </div>
-
-                        <div class="payment-method">
                             <h3>Metode Pembayaran</h3>
                             <div class="payment-info">
-                                <span class="payment-text">Metode yang dipilih:</span>
-                                <button class="btn btn-dark m-3" data-bs-toggle="modal" data-bs-target="#paymentModal">
-                                    Change Payment Method
-                                </button>
+                                <p class="payment-text">Pilih metode pembayaran di bawah:</p>
                             </div>
                         </div>
 
-                        <form action="{{ route('checkout.process') }}" method="POST" id="checkoutForm">
-                            @csrf
-                            <input type="hidden" name="order_id" value="{{ $order->id }}">
-                            <input type="hidden" name="payment_method" id="paymentMethodInput">
-                            
-                            <button type="submit" class="place-order-btn">
-                                Bayar Down Payment
-                            </button>
-                        </form>
+                        <div class="payment-frame">
+                            <div id="snap-container" class="snap-container">
+                            </div>
+                        </div>
+
+                        <div class="payment-info">
+                            <p class="dp-subtitle">
+                                <i class="fas fa-info-circle"></i>
+                                Sisa 50% (IDR {{ number_format($order->remaining_amount, 0, ',', '.') }})
+                                akan dibayar saat dine-in
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </main>
-
-    @include('payment')
 @endsection
 
 @section('script')
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const checkoutForm = document.getElementById('checkoutForm');
-        const paymentMethodInput = document.getElementById('paymentMethodInput');
-        
-        // Set payment method dari modal
-        document.querySelectorAll('.bank-radio').forEach(radio => {
-            radio.addEventListener('change', function() {
-                if (this.checked) {
-                    paymentMethodInput.value = this.value;
-                }
-            });
+    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
+        data-client-key="{{ env('MIDTRANS_CLIENT_KEY') }}"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            @if ($order->snap_token)
+                var snapToken = '{{ $order->snap_token }}';
+
+                snap.pay(snapToken, {
+                    onSuccess: function(result) {
+                        console.log('Payment success:', result);
+                        window.location.href = '{{ route('checkout.success') }}?order_id=' + result
+                            .order_id;
+                    },
+                    onPending: function(result) {
+                        console.log('Payment pending:', result);
+                        window.location.href = '{{ route('checkout.pending') }}?order_id=' + result
+                            .order_id;
+                    },
+                    onError: function(result) {
+                        console.log('Payment error:', result);
+                        window.location.href = '{{ route('checkout.error') }}';
+                    },
+                    onClose: function() {
+                        console.log('Payment popup closed');
+                    }
+                });
+            @else
+                alert('Error: Payment token not available. Please try again.');
+            @endif
         });
-        
-        // Validasi form sebelum submit
-        checkoutForm.addEventListener('submit', function(e) {
-            if (!paymentMethodInput.value) {
-                e.preventDefault();
-                alert('Silakan pilih metode pembayaran terlebih dahulu');
-            }
-        });
-    });
-</script>
+    </script>
 @endsection
