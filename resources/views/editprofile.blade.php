@@ -20,7 +20,11 @@
             background: radial-gradient(circle at top, #0f2b28, #071a18);
             color: #f5f5f5;
             min-height: 100vh;
-            padding: 20px;
+            padding: 20px
+        }
+        a {
+            text-decoration: none;
+            color: #f5f5f5;
         }
 
         .profile-container {
