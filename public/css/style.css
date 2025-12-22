@@ -497,10 +497,13 @@ body.nav-active {
         font-size: 70px;
         top: 35%; /* Adjust posisi */
         line-height: 1.2;
+        font-family: 'Playfair Display';
     }
     #hero h2.script {
         font-size: 100px;
-        top: 58%; /* Adjust posisi */
+        font-family: 'Parisienne';
+        font-style: italic;
+        top: 20%; /* Adjust posisi */
     }
 }
 
@@ -515,11 +518,14 @@ body.nav-active {
         top: 32%; /* Naikin dikit */
         letter-spacing: 2px;
         line-height: 1.3;
+        font-family: 'Playfair Display';
     }
     
     #hero h2.script {
         font-size: 60px;
-        top: 60%; /* Turunin dikit */
+        font-family: 'Parisienne';
+        font-style: italic;
+        top: 20%; /* Turunin dikit */
         letter-spacing: 1px;
     }
     
