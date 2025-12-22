@@ -22,94 +22,6 @@
         </div>
 
         <ul class="mobile-nav-list">
-             <!-- ====== NAVBAR ITEMS (HANYA UNTUK HP) ====== -->
-        <!-- Items ini cuma keluar di HP -->
-        <li class="mobile-only">
-            <a href="{{ route('/') }}" class="mobile-link">
-                <span class="star">✦</span>
-                Home
-                <span class="arrow">›</span>
-            </a>
-        </li>
-        <li class="mobile-only">
-            <a href="{{ route('menu') }}" class="mobile-link">
-                <span class="star">✦</span>
-                Menu
-                <span class="arrow">›</span>
-            </a>
-        </li>
-        <li class="mobile-only">
-            <a href="{{ route('aboutus') }}" class="mobile-link">
-                <span class="star">✦</span>
-                About
-                <span class="arrow">›</span>
-            </a>
-        </li>
-        <li class="mobile-only">
-            <a href="{{ route('contact') }}" class="mobile-link">
-                <span class="star">✦</span>
-                Contact
-                <span class="arrow">›</span>
-            </a>
-        </li>
-        <li class="mobile-only">
-            <a href="{{ route('reservation') }}" class="mobile-link">
-                <span class="star">✦</span>
-                Book a Table
-                <span class="arrow">›</span>
-            </a>
-        </li>
-        
-        <!-- Separator -->
-        <li class="mobile-only"><hr style="border-color: rgba(255,255,255,0.1); margin: 20px 0;"></li>
-        <!-- ========================================== -->
-
-        <!-- ====== USER MENU (SELALU ADA DI SEMUA DEVICE) ====== -->
-        @auth
-            <!-- Ini selalu ada di sidebar, desktop & HP -->
-            <li>
-                <a href="{{route('profile')}}" class="mobile-link">
-                    <span class="star">✦</span>
-                    My Profile
-                    <span class="arrow">›</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{route('reservation.see')}}" class="mobile-link">
-                    <span class="star">✦</span>
-                    My Reservation
-                    <span class="arrow">›</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{route('history.see')}}" class="mobile-link">
-                    <span class="star">✦</span>
-                    My History
-                    <span class="arrow">›</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{route('logout')}}" class="mobile-link">
-                    <span class="star">✦</span>
-                    Logout
-                    <span class="arrow">›</span>
-                </a>
-            </li>
-        @endauth
-
-        @guest
-            <!-- Ini juga selalu ada -->
-            <li>
-                <a href="{{ route('login') }}" class="mobile-link">
-                    <span class="star">✦</span>
-                    Log In
-                    <span class="arrow">›</span>
-                </a>
-            </li>
-        @endguest
-        <!-- ================================================== -->
-    </ul>
-</div>
         <li>
             <a href="{{ route('/') }}" class="mobile-link">
                 <span class="star">✦</span>
@@ -194,4 +106,3 @@
     <div id="overlay"></div>
 
 </section>
-

@@ -2970,3 +2970,17 @@ p {
     background: #0d2625;
     border: 2px solid #c89b3c;
 }
+
+@media (max-width: 480px) {
+    .history-review-input {
+        font-size: 16px;
+        height: 100px;
+    }
+
+    .history-review-btn {
+        width: 100%;
+        text-align: center;
+        padding: 12px 0;
+        font-size: 16px;
+    }
+}
