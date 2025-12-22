@@ -248,26 +248,27 @@
         }
 
         .write-title {
-            text-align: center;
-            font-size: clamp(14px, 1.1vw, 16px);
-            margin-bottom: -10px;
-            color: #c89b3c;
-            font-weight: 400;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            word-wrap: break-word;
-        }
+    text-align: center;
+    font-size: clamp(14px, 1.1vw, 16px);
+    margin-bottom: clamp(10px, 2vw, 15px); /* Responsif untuk semua layar */
+    color: #c89b3c;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    word-wrap: break-word;
+}
 
-        .message-title {
-            text-align: center;
-            font-size: clamp(24px, 2.5vw, 32px);
-            margin-bottom: clamp(25px, 3vw, 35px);
-            color: #c89b3c;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-            word-wrap: break-word;
-        }
+.message-title {
+    text-align: center;
+    font-size: clamp(24px, 2.5vw, 32px);
+    margin-bottom: clamp(25px, 3vw, 35px);
+    margin-top: clamp(5px, 1vw, 10px); /* Tambah margin-top juga */
+    color: #c89b3c;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    word-wrap: break-word;
+}
 
         form input,
         form textarea {
