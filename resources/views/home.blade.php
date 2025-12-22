@@ -130,7 +130,7 @@
                 <p class="req">Booking Request :</p>
                 <p class="phone">+80 (400) 123 4567</p>
 
-                <a href="#" class="book-table-btn">BOOK A TABLE</a>
+                <a href="{{route('reservation')}}" class="book-table-btn">BOOK A TABLE</a>
             </div>
         </div>
 
