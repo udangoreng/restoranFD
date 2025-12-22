@@ -495,7 +495,7 @@ body.nav-active {
 @media (max-width: 991px) {
     #hero h1.serif {
         font-size: 70px;
-        top: 32%; /* Adjust posisi */
+        top: 0; /* Adjust posisi */
         line-height: 1.2;
         font-family: 'Playfair Display';
     }
@@ -515,7 +515,7 @@ body.nav-active {
     
     #hero h1.serif {
         font-size: 40px;
-        top: 32%; /* Naikin dikit */
+        top: 0; /* Naikin dikit */
         letter-spacing: 2px;
         line-height: 1.3;
         font-family: 'Playfair Display';
@@ -542,13 +542,16 @@ body.nav-active {
 @media (max-width: 480px) {
     #hero h1.serif {
         font-size: 32px;
-        top: 30%;
+        top: 0;
         padding: 0 15px;
+        font-family: 'Playfair Display';
     }
     
     #hero h2.script {
         font-size: 50px;
-        top: 62%;
+        top: 0;
+        font-family: 'Parisienne';
+        font-style: italic;
     }
 }
 
@@ -556,12 +559,15 @@ body.nav-active {
 @media (max-height: 500px) and (max-width: 900px) {
     #hero h1.serif {
         font-size: 50px;
-        top: 30%;
+        top: 0;
+        font-family: 'Playfair Display';
     }
     
     #hero h2.script {
         font-size: 70px;
-        top: 65%;
+        top: 0;
+        font-family: 'Parisienne';
+        font-style: italic;
     }
 }
 
