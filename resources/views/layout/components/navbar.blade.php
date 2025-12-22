@@ -22,35 +22,35 @@
         </div>
 
         <ul class="mobile-nav-list">
-        <li>
+        <li class="mobile-only">
             <a href="{{ route('/') }}" class="mobile-link">
                 <span class="star">✦</span>
                 Home
                 <span class="arrow">›</span>
             </a>
         </li>
-        <li>
+       <li class="mobile-only">
             <a href="{{ route('menu') }}" class="mobile-link">
                 <span class="star">✦</span>
                 Menu
                 <span class="arrow">›</span>
             </a>
         </li>
-        <li>
+        <li class="mobile-only">
             <a href="{{ route('aboutus') }}" class="mobile-link">
                 <span class="star">✦</span>
                 About
                 <span class="arrow">›</span>
             </a>
         </li>
-        <li>
+        <li class="mobile-only">
             <a href="{{ route('contact') }}" class="mobile-link">
                 <span class="star">✦</span>
                 Contact
                 <span class="arrow">›</span>
             </a>
         </li>
-        <li>
+        <li class="mobile-only">
             <a href="{{ route('reservation') }}" class="mobile-link">
                 <span class="star">✦</span>
                 Book a Table
@@ -58,7 +58,7 @@
             </a>
         </li>
         
-        <li><hr style="border-color: rgba(255,255,255,0.1); margin: 20px 0;"></li>
+       <li class="mobile-only"><hr style="border-color: rgba(255,255,255,0.1); margin: 20px 0;"></li>
             @auth
                 <li>
                     <a href="{{route('profile')}}" class="mobile-link">
