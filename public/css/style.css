@@ -81,7 +81,10 @@
     --transition-2: 500ms ease;
     --transition-3: 1000ms ease;
 }
-
+/* ====== TAMBAHIN 3 BARIS INI ====== */
+* { box-sizing: border-box; }
+img, video { max-width: 100%; height: auto; }
+/* ================================= */
 *,
 *::before,
 *::after {
@@ -294,6 +297,24 @@ body.nav-active {
     bottom: -4px;
     left: 10px;
 }
+@media (max-width: 991px) {
+    #navbar {
+        display: none; /* Sembunyiin navbar di tablet/HP */
+    }
+    #mobile {
+        display: flex; /* Tampilin menu hamburger */
+    }
+}
+
+@media (min-width: 992px) {
+    #navbar {
+        display: flex; /* Tampilin navbar di desktop */
+    }
+    #mobile {
+        display: none; /* Sembunyiin menu hamburger di desktop */
+    }
+}
+
 
 #mobile {
     display: flex;
@@ -448,6 +469,24 @@ body.nav-active {
     font-weight: 700;
     letter-spacing: 3px;
     line-height: 1.1;
+}
+/* TAMBAHIN MEDIA QUERY untuk responsive: */
+@media (max-width: 991px) {
+    #hero h1.serif {
+        font-size: 70px; /* Untuk tablet */
+    }
+    #hero h2.script {
+        font-size: 100px; /* Untuk tablet */
+    }
+}
+
+@media (max-width: 767px) {
+    #hero h1.serif {
+        font-size: 40px; /* Untuk HP */
+    }
+    #hero h2.script {
+        font-size: 60px; /* Untuk HP */
+    }
 }
 
 #hero h2.script {
@@ -697,6 +736,22 @@ body.nav-active {
     background: #0d2625;
     color: #fff;
 }
+/* TAMBAHIN ini di BAWAH: */
+@media (max-width: 991px) {
+    .story-section {
+        padding: 0px 50px; /* Untuk tablet */
+    }
+}
+
+@media (max-width: 767px) {
+    .story-section {
+        padding: 0px 20px; /* Untuk HP */
+        flex-direction: column; /* Jadi vertikal di HP */
+    }
+    .story-left, .story-right {
+        max-width: 100% !important; /* Full width di HP */
+    }
+}
 
 .story-left {
     max-width: 45%;
@@ -873,6 +928,16 @@ body.nav-active {
     max-width: 1200px;
     margin: auto;
     gap: 40px;
+}
+/* TAMBAHIN ini di BAWAH: */
+@media (max-width: 767px) {
+    .footer-content {
+        flex-direction: column; /* Jadi vertikal di HP */
+    }
+    .footer-img-container, 
+    .footer-center {
+        width: 100% !important; /* Full width di HP */
+    }
 }
 
 .footer-img-container {
@@ -2222,4 +2287,43 @@ p {
 .history-review-btn:hover {
     background: #0d2625;
     border: 2px solid #c89b3c;
+}
+/* ======================================== */
+/* RESPONSIVE EMERGENCY FIX - TARUH PALING BAWAH */
+/* ======================================== */
+
+/* Untuk HP kecil */
+@media (max-width: 767px) {
+    /* Semua section */
+    .delicious-section,
+    .menu-section,
+    .drink-section,
+    .why-dine,
+    .chef-section,
+    .gallery-section,
+    .reservation-section,
+    .history-section {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+    
+    /* Flex jadi kolom */
+    .story-row,
+    .features,
+    .stats {
+        flex-direction: column !important;
+    }
+    
+    /* Width 100% */
+    .menu-card,
+    .feature-card {
+        width: 100% !important;
+    }
+}
+
+/* Untuk tablet */
+@media (min-width: 768px) and (max-width: 991px) {
+    .menu-card {
+        width: 45% !important; /* 2 kolom di tablet */
+    }
 }
