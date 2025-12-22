@@ -495,7 +495,7 @@ body.nav-active {
 @media (max-width: 991px) {
     #hero h1.serif {
         font-size: 70px;
-        top: 35%; /* Adjust posisi */
+        top: 32%; /* Adjust posisi */
         line-height: 1.2;
         font-family: 'Playfair Display';
     }
@@ -503,7 +503,7 @@ body.nav-active {
         font-size: 100px;
         font-family: 'Parisienne';
         font-style: italic;
-        top: 20%; /* Adjust posisi */
+        top: 0; /* Adjust posisi */
     }
 }
 
@@ -525,7 +525,7 @@ body.nav-active {
         font-size: 60px;
         font-family: 'Parisienne';
         font-style: italic;
-        top: 20%; /* Turunin dikit */
+        top: 0; /* Turunin dikit */
         letter-spacing: 1px;
     }
     
