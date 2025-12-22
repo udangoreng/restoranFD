@@ -8,8 +8,8 @@
 }
 
 body {
-    background: #18312E;
-    overflow-x: hidden;
+    background: #0d2625;
+  
 }
 
 .contact-her0, .contact-section, .left-content, .right-content{
@@ -331,10 +331,9 @@ form button:active {
     }
     
     .unified-container {
-        flex-direction: column;
-        gap: 40px;
-        padding: 40px 30px;
-    }
+    background: #0d2625;
+}
+
     
     .left-content, .right-content {
         width: 100%;
@@ -484,8 +483,9 @@ form button:active {
 
                     <p class="address">
                         Courvoisier, Jl Ketintang Barat A <br>
-                        Lunch Time - 10.00 am to 03.30 pm <br>
-                        Dinner Time - 08.00 pm to 10.30 pm <br>
+                        Breakfast - 08.00 am to 10.00 am <br>
+                        Lunch Time - 11.00 am to 05.00 pm <br>
+                        Dinner Time - 06.00 pm to 08.00 pm <br>
                     </p>
                 </div>
             </div>
@@ -498,7 +498,7 @@ form button:active {
                     <input type="text" placeholder="Nama">
                     <input type="email" placeholder="Email">
                     <input type="text" placeholder="No.Tlp">
-                    <textarea placeholder="Special Request"></textarea>
+                    <textarea placeholder="Message"></textarea>
 
                     <button type="submit">Send Your Message</button>
                 </form>
