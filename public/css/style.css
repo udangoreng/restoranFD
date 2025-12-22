@@ -2109,12 +2109,15 @@ p {
         display: flex;
         flex-direction: column;
         align-items: center;
+        position: relative;
     }
     
     .chef-photo {
         width: 100%;
         max-width: 280px;
         height: 450px;
+        position: relative; /* Pastiin ini */
+        z-index: 2; /* Biar di atas badge */
     }
     
     .experience-badge {
