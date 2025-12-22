@@ -333,11 +333,14 @@ body.nav-active {
     top: 0;
     right: -300px;
     width: 300px;
-    height: 100vh;
+    height: 100%;
     background-color: #0f2b28;
-    padding: 40px 25px;
+    padding: 40px 25px 30px;
     transition: right 0.3s ease;
     z-index: 2000;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .mobile-menu.active {
@@ -346,18 +349,23 @@ body.nav-active {
 
 .mobile-menu-logo {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
+    flex-shrink: 0; /* Biar gak kecut */
 }
 
 .mobile-menu-logo img {
     width: 190px;
     height: auto;
+    max-width: 100%;
 }
 
 .mobile-nav-list {
     list-style: none;
     padding: 0;
     margin: 0;
+    flex: 1; /* Ambil sisa space */
+    overflow-y: auto;
+    padding-bottom: 20px; /* Space bawah */
 }
 
 .mobile-nav-list li {
