@@ -65,14 +65,6 @@
         <!-- Separator (opsional) -->
         <li><hr style="border-color: rgba(255,255,255,0.1); margin: 20px 0;"></li>
 
-        @auth
-            <li>
-                <a href="{{route('profile')}}" class="mobile-link">
-                    <span class="star">✦</span>
-                    My Profile
-                    <span class="arrow">›</span>
-                </a>
-            </li>
             <!-- ... sisanya tetap ... -->
             @auth
                 <li>
