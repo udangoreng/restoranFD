@@ -158,88 +158,88 @@
         }
 
         @media (max-width: 992px) {
-        .detail-menu-box {
-            max-width: 100%;
-            padding: 30px !important;
-            border-radius: 30px;
+            .detail-menu-box {
+                max-width: 100%;
+                padding: 30px !important;
+                border-radius: 30px;
+            }
+
+            .detail-menu-image-circle {
+                width: 360px;
+                height: 360px;
+            }
+
+            .detail-menu-desc {
+                font-size: 20px;
+            }
         }
 
-        .detail-menu-image-circle {
-            width: 360px;
-            height: 360px;
+        /* ================= MOBILE ================= */
+        @media (max-width: 768px) {
+            .detail-menu-box {
+                padding: 16px !important;
+                border-radius: 24px;
+            }
+
+            .detail-menu-image-circle {
+                width: 220px;
+                height: 220px;
+            }
+
+            .detail-menu-title {
+                font-size: 24px;
+                text-align: center;
+            }
+
+            .detail-menu-sub,
+            .detail-menu-desc,
+            .detail-menu-price {
+                text-align: center;
+            }
+
+            .detail-menu-desc {
+                font-size: 16px;
+            }
+
+            .add-to-cart-btn {
+                width: 100%;
+                margin-top: 20px;
+            }
         }
 
-        .detail-menu-desc {
-            font-size: 20px;
-        }
-    }
+        /* ================= SMALL MOBILE ================= */
+        @media (max-width: 480px) {
+            .othermenu-name {
+                font-size: 14px;
+            }
 
-    /* ================= MOBILE ================= */
-    @media (max-width: 768px) {
-        .detail-menu-box {
-            padding: 16px !important;
-            border-radius: 24px;
-        }
+            .othermenu-price {
+                font-size: 13px;
+            }
 
-        .detail-menu-image-circle {
-            width: 220px;
-            height: 220px;
-        }
+            .floating-cart {
+                bottom: 16px;
+                right: 16px;
+                width: 54px;
+                height: 54px;
+                font-size: 18px;
+            }
 
-        .detail-menu-title {
-            font-size: 24px;
-            text-align: center;
-        }
+            .cart-count {
+                font-size: 12px;
+            }
 
-        .detail-menu-sub,
-        .detail-menu-desc,
-        .detail-menu-price {
-            text-align: center;
-        }
+            .order-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
 
-        .detail-menu-desc {
-            font-size: 16px;
+            .checkout-btn {
+                font-size: 16px;
+                padding: 12px;
+            }
         }
-
-        .add-to-cart-btn {
-            width: 100%;
-            margin-top: 20px;
-        }
-    }
-
-    /* ================= SMALL MOBILE ================= */
-    @media (max-width: 480px) {
-        .othermenu-name {
-            font-size: 14px;
-        }
-
-        .othermenu-price {
-            font-size: 13px;
-        }
-
-        .floating-cart {
-            bottom: 16px;
-            right: 16px;
-            width: 54px;
-            height: 54px;
-            font-size: 18px;
-        }
-
-        .cart-count {
-            font-size: 12px;
-        }
-
-        .order-item {
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        .checkout-btn {
-            font-size: 16px;
-            padding: 12px;
-        }
-    }
-</style>
+    </style>
     </style>
 @endsection
 @section('content')
@@ -254,7 +254,7 @@
 
             <div class="col-md-4 d-flex justify-content-center">
                 <div class="detail-menu-image-circle">
-                    <img src="{{ asset('storage/' . $menu->img_path) }}" alt="Gambar Menu" class="detail-menu-image">
+                    <img src="{{ asset($menu->img_path) }}" alt="Gambar Menu" class="detail-menu-image">
                 </div>
             </div>
 
@@ -269,7 +269,7 @@
                 <h4 class="detail-menu-price">@currency($menu->price)</h4>
             </div>
             <button class="add-to-cart-btn" data-menu-id="{{ $menu->id }}" data-name="{{ $menu->name }}"
-                data-price="{{ $menu->price }}" data-image="{{ asset('storage/' . $menu->img_path) }}">
+                data-price="{{ $menu->price }}" data-image="{{ asset($menu->img_path) }}">
                 Add to Order
             </button>
         </div>
@@ -281,44 +281,23 @@
 
         <div class="othermenu-category mb-4">
             <div class="row g-3">
-                <div class="col-6 col-md-3">
-                    <div class="othermenu-item" style="background-image: url('appetizer1.jpg');"></div>
-                    <a href="detail-appetizer1.html" class="othermenu-info">
-                        <h5 class="othermenu-name">Grilled Pear & Cheese</h5>
-                        <p class="othermenu-price">IDR 135.000</p>
-                    </a>
-                </div>
-
-                <div class="col-6 col-md-3">
-                    <div class="othermenu-item" style="background-image: url('appetizer2.jpg');"></div>
-                    <a href="detail-appetizer2.html" class="othermenu-info">
-                        <h5 class="othermenu-name">Shrimp Tartlet</h5>
-                        <p class="othermenu-price">IDR 150.000</p>
-                    </a>
-                </div>
-
-                <div class="col-6 col-md-3">
-                    <div class="othermenu-item" style="background-image: url('appetizer3.jpg');"></div>
-                    <a href="detail-appetizer3.html" class="othermenu-info">
-                        <h5 class="othermenu-name">Peach Bruschetta</h5>
-                        <p class="othermenu-price">IDR 140.000</p>
-                    </a>
-                </div>
-
-                <div class="col-6 col-md-3">
-                    <div class="othermenu-item" style="background-image: url('appetizer4.jpg');"></div>
-                    <a href="detail-appetizer4.html" class="othermenu-info">
-                        <h5 class="othermenu-name">Antipasto Bites</h5>
-                        <p class="othermenu-price">IDR 160.000</p>
-                    </a>
-                </div>
+                @foreach ($otherMenus as $item)
+                    <div class="col-6 col-md-3">
+                        <div class="othermenu-item" style="background-image: url('appetizer1.jpg');"></div>
+                        <a href="detail-appetizer1.html" class="othermenu-info">
+                            <h5 class="othermenu-name">{{ $item->name }}</h5>
+                            <p class="othermenu-price">@currency($item->price)</p>
+                        </a>
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>
 
     @include('layout.components.footer')
 
-    <div class="floating-cart" id="floatingCartBtn" style="visibility: hidden;" data-bs-toggle="modal" data-bs-target="#orderModal">
+    <div class="floating-cart" id="floatingCartBtn" style="visibility: hidden;" data-bs-toggle="modal"
+        data-bs-target="#orderModal">
         <i class="fa-solid fa-cart-shopping"></i>
         <span class="cart-count" id="cartCount">0</span>
     </div>

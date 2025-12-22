@@ -96,9 +96,28 @@ class MenuController extends Controller
         return view('menu', compact('appetizers', 'mainDishes', 'desserts', 'beverages', 'additionals'));
     }
 
-    public function detail(string $id)
+    public function detail(string $menuId)
     {
-        $menu = Menu::findOrFail($id);
-        return view('detail_menu', compact('menu'));
+        $menu = Menu::findOrFail($menuId);
+
+        $otherMenus = Menu::where('id', '!=', $menuId)
+            ->orderBy('created_at', 'desc')
+            ->take(4)
+            ->get();
+
+        if ($otherMenus->count() < 4) {
+            $remainingCount = 4 - $otherMenus->count();
+            $randomMenus = Menu::whereNotIn('id', array_merge(
+                [$menuId],
+                $otherMenus->pluck('id')->toArray()
+            ))
+                ->inRandomOrder()
+                ->take($remainingCount)
+                ->get();
+
+            $otherMenus = $otherMenus->merge($randomMenus);
+        }
+
+        return view('detail_menu', compact('menu', 'otherMenus'));
     }
 }

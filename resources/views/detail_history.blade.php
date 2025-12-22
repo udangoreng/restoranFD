@@ -67,6 +67,13 @@
                             <span>@currency($items->total_amount + $items->total_amount * 0.1)</span>
                         </div>
                     </div>
+                    <button
+                        class="reservation-btn reservation-btn-primary"{{ $reservation->status == 'Created' || $reservation->status == 'Pending Payment' ? 'disabled' : '' }}>
+                        <a href="{{ route('invoice.download', $reservation->id) }}">
+                            Download
+                            Invoice (PDF)
+                        </a>
+                    </button>
                 </div>
 
                 <div class="history-review-box">
