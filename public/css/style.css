@@ -1898,25 +1898,98 @@ p {
 }
 /* Tambahin ini di CSS lu, di bagian atas chef-section */
 .left-content {
-    flex: 1; /* Biar flexible */
-    max-width: 500px; /* Batas maksimal */
-    padding-right: 40px; /* Jarak dari foto chef */
+    flex: 1;
+    max-width: 500px;
+    padding-right: 40px;
 }
 
-/* Atau kalo mau lebih simple: */
-.left-content {
-    margin-right: 40px; /* Jarak dari foto chef */
+/* Desktop size (normal) */
+.sub-title {
+    font-size: 30px;
+    letter-spacing: 2px;
+    color: #d4af37;
+    margin-bottom: 30px;
 }
 
-/* Kalo mau center di HP, tambahin di responsive: */
-@media (max-width: 767px) {
-    .left-content {
-        margin-right: 0; /* Hapus margin di HP */
-        padding-right: 0; /* Hapus padding di HP */
-        text-align: center; /* Center text di HP */
-        max-width: 100%; /* Full width di HP */
+.chef-name {
+    font-size: 55px;
+    line-height: 1.1;
+    margin-bottom: 25px;
+}
+
+.chef-desc {
+    max-width: 380px;
+    margin: 20px 0 30px;
+    font-size: 17px;
+    opacity: .9;
+}
+
+/* ====== RESPONSIVE TEXT SIZE ====== */
+
+/* Tablet (768px - 991px) */
+@media (max-width: 991px) {
+    .sub-title {
+        font-size: 22px; /* dari 30px */
+        margin-bottom: 20px;
+    }
+    
+    .chef-name {
+        font-size: 38px; /* dari 55px */
+        margin-bottom: 20px;
+    }
+    
+    .chef-desc {
+        font-size: 16px; /* dari 17px */
+        margin: 15px 0 25px;
     }
 }
+
+/* HP (max-width: 767px) */
+@media (max-width: 767px) {
+    .left-content {
+        margin-right: 0;
+        padding-right: 0;
+        text-align: center;
+        max-width: 100%;
+    }
+    
+    .sub-title {
+        font-size: 18px; /* lebih kecil */
+        letter-spacing: 1.5px;
+        margin-bottom: 15px;
+    }
+    
+    .chef-name {
+        font-size: 28px; /* lebih kecil */
+        line-height: 1.2;
+        margin-bottom: 15px;
+    }
+    
+    .chef-desc {
+        font-size: 15px; /* lebih kecil */
+        max-width: 100%;
+        margin: 12px 0 20px;
+        line-height: 1.6;
+        padding: 0 10px; /* kasih padding biar gak mepet */
+    }
+}
+
+/* HP kecil banget (< 480px) */
+@media (max-width: 480px) {
+    .sub-title {
+        font-size: 16px;
+    }
+    
+    .chef-name {
+        font-size: 24px;
+    }
+    
+    .chef-desc {
+        font-size: 14px;
+        padding: 0 5px;
+    }
+}
+
 /* ====== TAMBAHIN MEDIA QUERIES INI ====== */
 
 /* Tablet (768px - 991px) */
