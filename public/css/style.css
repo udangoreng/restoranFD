@@ -1887,23 +1887,22 @@ p {
     line-height: 1.6;
 }
 
+/* ====== CHEF SECTION ====== */
 .chef-section {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background: #0d2625;
     padding: 70px 90px;
-    /* DIRAPETIN */
     color: white;
 }
-/* Tambahin ini di CSS lu, di bagian atas chef-section */
+
 .left-content {
     flex: 1;
     max-width: 500px;
     padding-right: 40px;
 }
 
-/* Desktop size (normal) */
 .sub-title {
     font-size: 30px;
     letter-spacing: 2px;
@@ -1922,318 +1921,6 @@ p {
     margin: 20px 0 30px;
     font-size: 17px;
     opacity: .9;
-}
-
-/* ====== RESPONSIVE TEXT SIZE ====== */
-
-/* Tablet (768px - 991px) */
-@media (max-width: 991px) {
-    .sub-title {
-        font-size: 22px; /* dari 30px */
-        margin-bottom: 20px;
-    }
-    
-    .chef-name {
-        font-size: 38px; /* dari 55px */
-        margin-bottom: 20px;
-    }
-    
-    .chef-desc {
-        font-size: 16px; /* dari 17px */
-        margin: 15px 0 25px;
-    }
-}
-
-/* HP (max-width: 767px) */
-@media (max-width: 767px) {
-    .left-content {
-        margin-right: 0;
-        padding-right: 0;
-        text-align: center;
-        max-width: 100%;
-    }
-    
-    .sub-title {
-        font-size: 18px; /* lebih kecil */
-        letter-spacing: 1.5px;
-        margin-bottom: 15px;
-    }
-    
-    .chef-name {
-        font-size: 28px; /* lebih kecil */
-        line-height: 1.2;
-        margin-bottom: 15px;
-    }
-    
-    .chef-desc {
-        font-size: 15px; /* lebih kecil */
-        max-width: 100%;
-        margin: 12px 0 20px;
-        line-height: 1.6;
-        padding: 0 10px; /* kasih padding biar gak mepet */
-    }
-}
-
-/* HP kecil banget (< 480px) */
-@media (max-width: 480px) {
-    .sub-title {
-        font-size: 16px;
-    }
-    
-    .chef-name {
-        font-size: 24px;
-    }
-    
-    .chef-desc {
-        font-size: 14px;
-        padding: 0 5px;
-    }
-}
-
-/* ====== TAMBAHIN MEDIA QUERIES INI ====== */
-
-/* Tablet (768px - 991px) */
-@media (max-width: 991px) {
-    .chef-section {
-        padding: 60px 50px;
-        flex-wrap: wrap; /* Boleh wrap kalo penuh */
-        gap: 40px;
-    }
-    
-    .left-content {
-        order: 1;
-        flex: 1;
-        min-width: 300px;
-    }
-    
-    .chef-photo-wrapper {
-        order: 2;
-        margin-left: 0;
-        align-self: center;
-    }
-    
-    .side-images {
-        order: 3;
-        margin-right: 0;
-        flex-direction: row; /* Jadi horizontal di tablet */
-        justify-content: center;
-        gap: 30px;
-        width: 100%;
-        margin-top: 40px;
-    }
-    
-    .sub-title {
-        font-size: 24px;
-        margin-bottom: 20px;
-    }
-    
-    .chef-name {
-        font-size: 42px;
-        margin-bottom: 20px;
-    }
-    
-    .chef-desc {
-        max-width: 100%;
-        font-size: 16px;
-        margin: 15px 0 25px;
-    }
-    
-    .chef-photo {
-        width: 300px;
-        height: 420px;
-    }
-    
-    .top-img, .bottom-img {
-        width: 200px;
-    }
-    
-    .top-img {
-        height: 140px;
-    }
-    
-    .bottom-img {
-        height: 300px;
-    }
-}
-
-/* HP (max-width: 767px) */
-@media (max-width: 767px) {
-    .chef-section {
-        padding: 40px 20px;
-        flex-direction: column; /* Jadi vertikal */
-        gap: 50px;
-    }
-    
-    .left-content {
-        order: 1;
-        width: 100%;
-        text-align: center; /* Center di HP */
-    }
-    
-    .sub-title {
-        font-size: 20px;
-        letter-spacing: 1.5px;
-        margin-bottom: 15px;
-    }
-    
-    .chef-name {
-        font-size: 32px;
-        line-height: 1.2;
-        margin-bottom: 15px;
-    }
-    
-    .chef-desc {
-        font-size: 16px;
-        max-width: 100%;
-        margin: 15px 0 20px;
-        line-height: 1.6;
-    }
-    
-    .chef-photo-wrapper {
-        order: 2;
-        margin-left: 0;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .chef-photo {
-        width: 100%;
-        max-width: 250px;
-        height: 350px;
-        border-radius: 40% / 30%;
-    }
-    
-    .experience-badge {
-        position: relative; /* Ubah position di HP */
-        bottom: auto;
-        left: auto;
-        margin-top: -30px;
-        width: 120px;
-        height: 120px;
-        align-self: flex-start;
-        margin-left: 20px;
-    }
-    
-    .side-images {
-        order: 3;
-        margin-right: 0;
-        flex-direction: column; /* Tetap vertikal di HP */
-        gap: 30px;
-        width: 100%;
-        align-items: center;
-    }
-    
-    .top-img, .bottom-img {
-        width: 100%;
-        max-width: 280px;
-    }
-    
-    .top-img {
-        height: 180px;
-    }
-    
-    .bottom-img {
-        height: 250px;
-    }
-}
-
-/* HP kecil banget (< 480px) */
-@media (max-width: 480px) {
-    .chef-section {
-        padding: 30px 15px;
-        gap: 40px;
-    }
-    
-    .sub-title {
-        font-size: 18px;
-    }
-    
-    .chef-name {
-        font-size: 28px;
-    }
-    
-    .chef-photo {
-        max-width: 200px;
-        height: 280px;
-    }
-    
-    .experience-badge {
-        width: 100px;
-        height: 100px;
-        margin-left: 10px;
-    }
-    
-    .top-img, .bottom-img {
-        max-width: 100%;
-    }
-    
-    .top-img {
-        height: 150px;
-    }
-    
-    .bottom-img {
-        height: 200px;
-    }
-}
-
-/* Landscape HP */
-@media (max-height: 600px) and (max-width: 900px) {
-    .chef-section {
-        padding: 40px 30px;
-    }
-    
-    .chef-photo {
-        height: 350px;
-        max-width: 250px;
-    }
-    
-    .side-images {
-        flex-direction: row;
-        gap: 20px;
-    }
-    
-    .top-img, .bottom-img {
-        height: 150px;
-        width: 180px;
-    }
-}
-
-
-.sub-title {
-    font-size: 30px;
-    letter-spacing: 2px;
-    color: #d4af37;
-    margin-bottom: 30px;
-}
-
-.chef-name {
-    font-size: 55px;
-    line-height: 1.1;
-    margin-bottom: 25px;
-}
-
-.chef-desc {
-    max-width: 380px;
-    margin: 20px 0 30px;
-    font-size: 17px;
-    opacity: .9;
-}
-
-.team-btn {
-    padding: 12px 30px;
-    border: 1px solid #d4af37;
-    background: transparent;
-    color: #d4af37;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: .3s;
-}
-
-.team-btn:hover {
-    background: #d4af37;
-    color: #082b28;
 }
 
 .chef-photo-wrapper {
@@ -2247,9 +1934,7 @@ p {
     border-radius: 50% / 35%;
     overflow: hidden;
     border: 3px solid #c89b3c;
-    padding: 0px;
     transition: transform .5s ease;
-    gap: 0px;
 }
 
 .chef-photo img {
@@ -2309,6 +1994,202 @@ p {
 
 .side-img:hover {
     transform: scale(1.05);
+}
+
+/* ====== RESPONSIVE ====== */
+
+/* Tablet (768px - 991px) */
+@media (max-width: 991px) {
+    .chef-section {
+        padding: 60px 50px;
+        flex-wrap: wrap;
+        gap: 40px;
+    }
+    
+    .left-content {
+        order: 1;
+        flex: 1;
+        min-width: 300px;
+        padding-right: 30px;
+    }
+    
+    .sub-title {
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+    
+    .chef-name {
+        font-size: 38px;
+        margin-bottom: 20px;
+    }
+    
+    .chef-desc {
+        font-size: 16px;
+        max-width: 100%;
+        margin: 15px 0 25px;
+    }
+    
+    .chef-photo-wrapper {
+        order: 2;
+        margin-left: 0;
+        align-self: center;
+    }
+    
+    .chef-photo {
+        width: 300px;
+        height: 420px;
+    }
+    
+    .experience-badge {
+        width: 130px;
+        height: 130px;
+    }
+    
+    .side-images {
+        order: 3;
+        margin-right: 0;
+        flex-direction: row;
+        justify-content: center;
+        gap: 30px;
+        width: 100%;
+        margin-top: 40px;
+    }
+    
+    .top-img {
+        width: 200px;
+        height: 140px;
+    }
+    
+    .bottom-img {
+        width: 180px;
+        height: 300px;
+    }
+}
+
+/* HP (max-width: 767px) */
+@media (max-width: 767px) {
+    .chef-section {
+        padding: 40px 20px;
+        flex-direction: column;
+        gap: 50px;
+        text-align: center;
+    }
+    
+    .left-content {
+        order: 1;
+        width: 100%;
+        padding-right: 0;
+        text-align: center;
+    }
+    
+    .sub-title {
+        font-size: 18px;
+        letter-spacing: 1.5px;
+        margin-bottom: 15px;
+    }
+    
+    .chef-name {
+        font-size: 28px;
+        line-height: 1.2;
+        margin-bottom: 15px;
+    }
+    
+    .chef-desc {
+        font-size: 15px;
+        max-width: 100%;
+        margin: 12px 0 20px;
+        line-height: 1.6;
+        padding: 0 10px;
+    }
+    
+    .chef-photo-wrapper {
+        order: 2;
+        margin-left: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .chef-photo {
+        width: 100%;
+        max-width: 250px;
+        height: 350px;
+    }
+    
+    .experience-badge {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        margin-top: -30px;
+        width: 120px;
+        height: 120px;
+        align-self: flex-start;
+        margin-left: 20px;
+    }
+    
+    .side-images {
+        order: 3;
+        margin-right: 0;
+        flex-direction: column;
+        gap: 30px;
+        width: 100%;
+        align-items: center;
+    }
+    
+    .top-img {
+        width: 100%;
+        max-width: 280px;
+        height: 180px;
+    }
+    
+    .bottom-img {
+        width: 100%;
+        max-width: 280px;
+        height: 250px;
+    }
+}
+
+/* HP kecil (< 480px) */
+@media (max-width: 480px) {
+    .chef-section {
+        padding: 30px 15px;
+        gap: 40px;
+    }
+    
+    .sub-title {
+        font-size: 16px;
+    }
+    
+    .chef-name {
+        font-size: 24px;
+    }
+    
+    .chef-desc {
+        font-size: 14px;
+        padding: 0 5px;
+    }
+    
+    .chef-photo {
+        max-width: 200px;
+        height: 280px;
+    }
+    
+    .experience-badge {
+        width: 100px;
+        height: 100px;
+        margin-left: 10px;
+    }
+    
+    .top-img {
+        max-width: 100%;
+        height: 150px;
+    }
+    
+    .bottom-img {
+        max-width: 100%;
+        height: 200px;
+    }
 }
 
 .gallery-section {
