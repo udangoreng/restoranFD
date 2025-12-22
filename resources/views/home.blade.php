@@ -55,7 +55,7 @@
 
                 <h3>Appetizers</h3>
                 <p>Small bites, big flavors — the perfect beginning to your dining experience</p>
-                <a href="#" class="btn-menu">VIEW MENU</a>
+                <a href="{{route('menu')}}" class="btn-menu">VIEW MENU</a>
             </div>
 
             <div class="menu-card">
@@ -66,7 +66,7 @@
 
                 <h3>Main Dishes</h3>
                 <p>Bold flavors and masterful creations for a truly unforgettable main course</p>
-                <a href="#" class="btn-menu">VIEW MENU</a>
+                <a href="{{route('menu')}}" class="btn-menu">VIEW MENU</a>
             </div>
 
             <div class="menu-card">
@@ -77,7 +77,7 @@
 
                 <h3>Desserts</h3>
                 <p>End your meal on a sweet note with irresistible dessert creations</p>
-                <a href="#" class="btn-menu">VIEW MENU</a>
+                <a href="{{route('menu')}}" class="btn-menu">VIEW MENU</a>
             </div>
         </div>
     </section>
