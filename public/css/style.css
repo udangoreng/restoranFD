@@ -1649,6 +1649,47 @@ body.nav-active {
         margin-bottom: 24px !important; 
         letter-spacing: 2px;
     }
+
+    .additional-section {
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+
+    .additional-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .additional-img {
+        width: 100%;
+        height: 200px;
+        margin-bottom: 12px;
+    }
+
+    .additional-text {
+        margin-left: 0 !important; 
+        width: 100%;
+    }
+
+    .additional-name {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 16px;
+        margin-bottom: 6px;
+        text-align: left;
+    }
+
+    .additional-price {
+        font-size: 14px;
+        white-space: nowrap;
+    }
+
+    .additional-desc {
+        font-size: 14px;
+        line-height: 1.5;
+        text-align: left;
+    }
 }
 
 @media (max-width: 480px) {
