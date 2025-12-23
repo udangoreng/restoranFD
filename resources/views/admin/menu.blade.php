@@ -14,7 +14,7 @@
             </button>
         </div>
 
-        @foreach (['name', 'category', 'price', 'calories', 'description', 'img_url'] as $field)
+        @foreach (['name', 'category', 'price', 'calories', 'description', 'img_path'] as $field)
             @error($field)
                 <div class="alert alert-danger" role="alert">
                     {{ $message }}
@@ -65,7 +65,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="image" class="form-label">Image</label>
-                                <input type="file" class="form-control" id="image" name="img_url">
+                                <input type="file" class="form-control" id="image" name="img_path">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -96,9 +96,9 @@
                         <td>{{ Str::limit($menu->description, 50) }}</td>
                         <td>{{ $menu->price }}</td>
                         <td>
-                            @if ($menu->img_url)
-                                <img src="{{ asset($menu->img_url) }}" alt="{{ $menu->name }}"
-                                    width="50">
+                            @if ($menu->img_path)
+                                <img src="{{ Storage::disk('public')->exists($img_path) ? asset('storage.' . $menu->img_path) : $menu->img_path }}"
+                                    alt="{{ $menu->name }}" height="150px">
                             @else
                                 No Image
                             @endif
@@ -106,11 +106,11 @@
                         <td>
                             <a href="{{ route('admin.menu.detail', $menu->id) }}" class="btn btn-warning btn-sm">Edit</a>
                             <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                data-bs-target="#deleteModal{{$menu->id}}">Delete</button>
+                                data-bs-target="#deleteModal{{ $menu->id }}">Delete</button>
                             <form action="{{ route('admin.menu.destroy', $menu->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <div class="modal fade" id="deleteModal{{$menu->id}}" tabindex="-1"
+                                <div class="modal fade" id="deleteModal{{ $menu->id }}" tabindex="-1"
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
