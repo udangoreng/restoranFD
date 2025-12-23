@@ -138,7 +138,7 @@
             @foreach ($additionals as $additional)
                 <div class="col-md-6 d-flex additional-item">
                     <div class="additional-img hover-img"
-                        style="background-image: url({{ Storage::disk('public')->exists($additional->img_path) ? asset('storage.' . $additional->img_path) : asset($additional->img_path) }});">
+                        style="background-image: url({{ Storage::disk('public')->exists($additional->img_path) ? asset('storage/' . $additional->img_path) : asset($additional->img_path) }});">
                     </div>
                     <a
                         href="{{ isset($reservation) ? route('order.menu.detail', [$reservation->id, $appetizer->id]) : route('menu.detail', $appetizer->id) }}">
