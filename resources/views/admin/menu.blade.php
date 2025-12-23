@@ -97,7 +97,7 @@
                         <td>{{ $menu->price }}</td>
                         <td>
                             @if ($menu->img_path)
-                                <img src="{{ Storage::disk('public')->exists($menu->img_path) ? asset('storage/' . $menu->img_path) : $menu->img_path }}"
+                                <img src="{{ Storage::disk('public')->exists($menu->img_path) ? asset('storage/' . $menu->img_path) : asset($menu->img_path) }}"
                                     alt="{{ $menu->name }}" height="150px">
                             @else
                                 No Image
