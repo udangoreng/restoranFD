@@ -97,7 +97,7 @@ class CartSystem {
             html += `
                 <div class="order-item" data-cart-id="${item.id}">
                     <div class="item-image">
-                        <img src="${item.menu?.img_path ? '/storage/' + item.menu.img_path : '/img/default.jpg'}" alt="${item.menu?.name || 'Item'}">
+                        <img src="${item.menu?.img_url ? '/storage/' + item.menu.img_url : '/img/default.jpg'}" alt="${item.menu?.name || 'Item'}">
                     </div>
                     <div class="item-details">
                         <div class="item-name">${item.menu?.name || 'Unknown Item'}</div>

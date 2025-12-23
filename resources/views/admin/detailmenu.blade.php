@@ -44,12 +44,12 @@
         </div>
         <div class="mb-3">
             <label for="image" class="form-label fw-bold">Image</label><br>
-            @if ($menu->img_path)
-                <img src="{{ asset($menu->img_path) }}" alt="{{ $menu->name }}" height="150px">
+            @if ($menu->img_url)
+                <img src="{{ asset($menu->img_url) }}" alt="{{ $menu->name }}" height="150px">
             @else
                 No Image
             @endif
-            <input type="file" name="img_path" class="form-control">
+            <input type="file" name="img_url" class="form-control">
         </div>
         <button type="submit" class="btn btn-primary d-flex ms-auto">Update</button>
     </form>

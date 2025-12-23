@@ -46,14 +46,14 @@
         </div>
         <div class="mb-3">
             <label for="image" class="form-label fw-bold">Image</label><br>
-            @if ($user->img_path)
+            @if ($user->profile_img_url)
                 <div class="text-center">
-                    <img src="{{ asset($user->img_path) }}" alt="{{ $user->name }}" height="150px">
+                    <img src="{{ asset($user->profile_img_url) }}" alt="{{ $user->name }}" height="150px">
                 </div>
             @else
                 No Image
             @endif
-            <input type="file" name="img_path" class="form-control">
+            <input type="file" name="profile_img_url" class="form-control">
         </div>
         <button type="submit" class="btn btn-primary d-flex ms-auto">Update</button>
     </form>

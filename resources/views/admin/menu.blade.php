@@ -14,7 +14,7 @@
             </button>
         </div>
 
-        @foreach (['name', 'category', 'price', 'calories', 'description', 'img_path'] as $field)
+        @foreach (['name', 'category', 'price', 'calories', 'description', 'img_url'] as $field)
             @error($field)
                 <div class="alert alert-danger" role="alert">
                     {{ $message }}
@@ -65,7 +65,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="image" class="form-label">Image</label>
-                                <input type="file" class="form-control" id="image" name="img_path">
+                                <input type="file" class="form-control" id="image" name="img_url">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -96,8 +96,8 @@
                         <td>{{ Str::limit($menu->description, 50) }}</td>
                         <td>{{ $menu->price }}</td>
                         <td>
-                            @if ($menu->img_path)
-                                <img src="{{ asset($menu->img_path) }}" alt="{{ $menu->name }}"
+                            @if ($menu->img_url)
+                                <img src="{{ asset($menu->img_url) }}" alt="{{ $menu->name }}"
                                     width="50">
                             @else
                                 No Image

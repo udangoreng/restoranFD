@@ -28,6 +28,18 @@ class User extends Authenticatable
         'birthday'
     ];
 
+    public function getImageUrlAttribute()
+    {
+        if (!$this->img_path) {
+            return asset('img/fotoprofil.jpeg');
+        }
+        if (file_exists(public_path($this->profile_img_path))) {
+            return asset($this->profile_img_path);
+        }
+
+        return asset('storage/' . $this->profile_img_path);
+    }
+
     public function reservations()
     {
         return $this->hasMany(Reservation::class);
