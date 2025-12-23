@@ -37,6 +37,7 @@ Route::get('/aboutus', function () {
 
 Route::get('/order/{id}/payment/callback', [CheckoutController::class, 'handlePaymentCallback'])->name('order.payment.callback');
 Route::get('/reservation/{id}/payment/callback', [ReservationController::class, 'handlePaymentCallback'])->name('reservation.payment.callback');
+Route::post('/checkout/callback', [CheckoutController::class, 'callback']);
 Route::middleware(['verifyrole:admin'])->prefix('admin')->group(function () {
     Route::get('/reservation/{id}/get-payment-token', [ReservationController::class, 'getPaymentToken'])->name("admin.reservation.payment-token");
     Route::get('/dashboard', [AuthController::class, 'adminDash'])->name('admin');
@@ -61,7 +62,7 @@ Route::middleware(['verifyrole:admin'])->prefix('admin')->group(function () {
         Route::get('/reservation', 'show')->name('admin.reservation');
         Route::get('/reservation/{id}/edit', 'edit')->name('admin.reservation.detail');
         Route::put('/reservation/{id}/status', 'updateStatus')->name('admin.reservation.update-status');
-        Route::put('/reservation/{id}/table', 'tableStatus')->name('admin.reservation.update-table');
+        Route::put('/reservation/{id}/table', 'updateTable')->name('admin.reservation.update-table');
         Route::post('/admin/reservation/{id}/process-payment', 'processPayment')->name('admin.reservation.process-payment');
         Route::delete('/admin/reservation/{id}', 'destroyReservation')->name('admin.reservation.destroy');
     });
@@ -108,7 +109,6 @@ Route::middleware(['verifyrole:customer'])->group(function () {
 
     Route::controller(CheckoutController::class)->group(function () {
         Route::get('/checkout', 'show')->name('checkout');
-        Route::post('/checkout/callback', 'callback');
         Route::post('/checkout/process', 'process')->name('checkout.process');
         Route::get('/checkout/success', 'success')->name('checkout.success');
         Route::get('/checkout/error', 'geterror')->name('checkout.error');

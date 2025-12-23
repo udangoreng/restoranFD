@@ -80,7 +80,7 @@ class ReservationController extends Controller
 
         $data = $request->merge([
             'reservation_code' => $res_id,
-            'status' => 'Pending Payment', // Set to Pending Payment initially
+            'status' => 'Pending Payment',
             'time_out' => $time_out->format('H:i'),
         ]);
 
@@ -123,7 +123,6 @@ class ReservationController extends Controller
             return response()->json(['status' => 'error', 'message' => 'No order found for this reservation.']);
         }
 
-        // Check if full payment is already paid (remaining_amount is 0)
         if ($order->remaining_amount == 0) {
             return response()->json(['status' => 'error', 'message' => 'Payment has already been completed.']);
         }
@@ -131,7 +130,7 @@ class ReservationController extends Controller
         $transactionDetails = [
             'transaction_details' => [
                 'order_id' => 'PAY-' . $order->order_code . '-' . time(),
-                'gross_amount' => $order->remaining_amount, // Pay the remaining amount
+                'gross_amount' => $order->remaining_amount,
             ],
             'customer_details' => [
                 'first_name' => $reservation->first_name,
@@ -189,14 +188,12 @@ class ReservationController extends Controller
         }
 
         if ($transactionStatus === 'capture' || $transactionStatus === 'settlement') {
-            // FULL Payment successful
             $order->status = 'Completed';
-            $order->remaining_amount = 0; // Set remaining to 0
+            $order->remaining_amount = 0;
             $order->payment_type = 'Full_Settlement';
             $order->payment_method = $paymentType;
             $order->save();
 
-            // Reservation is now Confirmed (Table is theirs)
             $reservation->status = 'Confirmed';
             $reservation->save();
 
@@ -208,13 +205,11 @@ class ReservationController extends Controller
             return redirect()->route('reservation.detail', $id)
                 ->with('warning', 'Payment is pending. Please complete your payment.');
         } else {
-            // Payment failed
             $order->status = 'Cancelled';
             $order->save();
             $reservation->status = 'Cancelled';
             $reservation->save();
 
-            // Free table
             if ($reservation->table_id) {
                 $table = CustTable::find($reservation->table_id);
                 if ($table) {
@@ -496,16 +491,6 @@ class ReservationController extends Controller
         } catch (\Exception $e) {
             Log::error('Failed to send cancellation email: ' . $e->getMessage());
         }
-    }
-
-    // Unused methods
-    public function store(Request $request)
-    {
-        abort(404);
-    }
-    public function destroy(string $id)
-    {
-        abort(404);
     }
 
     public function generateInvoice($reservationId)
