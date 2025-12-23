@@ -174,7 +174,7 @@
             }
         }
 
-            @media (max-width: 768px) {
+        @media (max-width: 768px) {
             .detail-menu-box {
                 padding: 16px !important;
                 border-radius: 24px;
@@ -200,16 +200,16 @@
                 font-size: 16px;
             }
 
-        .add-to-cart-btn {
-            width: 100%;
-            margin-top: 20px;
+            .add-to-cart-btn {
+                width: 100%;
+                margin-top: 20px;
+            }
         }
-    }
 
-    @media (max-width: 480px) {
-        .othermenu-name {
-            font-size: 14px;
-        }
+        @media (max-width: 480px) {
+            .othermenu-name {
+                font-size: 14px;
+            }
 
             .othermenu-price {
                 font-size: 13px;
@@ -252,7 +252,8 @@
 
             <div class="col-md-4 d-flex justify-content-center">
                 <div class="detail-menu-image-circle">
-                    <img src="{{ Storage::disk('public')->exists($menu->img_path) ? asset('storage/'. $menu->img_path) : asset($menu->img_path )}}" alt="Gambar Menu" class="detail-menu-image">
+                    <img src="{{ Storage::disk('public')->exists($menu->img_path) ? asset('storage/' . $menu->img_path) : asset($menu->img_path) }}"
+                        alt="Gambar Menu" class="detail-menu-image">
                 </div>
             </div>
 
@@ -266,9 +267,9 @@
 
                 <h4 class="detail-menu-price">@currency($menu->price)</h4>
             </div>
-            <button class="add-to-cart-btn" data-menu-id="{{ $menu->id }}" data-name="{{ $menu->name }}"
-                data-price="{{ $menu->price }}" data-image="{{ asset($menu->img_path) }}">
-                Add to Order
+            <button class="add-to-cart-btn" data-menu-id="{{ $menu->id }}"
+                data-image-url="{{ Storage::disk('public')->exists($menu->img_path) ? asset('storage/' . $menu->img_path) : asset($menu->img_path) }}">
+                Add to Cart
             </button>
         </div>
     </section>
@@ -281,7 +282,9 @@
             <div class="row g-3">
                 @foreach ($otherMenus as $item)
                     <div class="col-6 col-md-3">
-                        <div class="othermenu-item" style="background-image: url({{ Storage::disk('public')->exists($item->img_path) ? asset('storage/'. $item->img_path) : asset($item->img_path) }});"></div>
+                        <div class="othermenu-item"
+                            style="background-image: url({{ Storage::disk('public')->exists($item->img_path) ? asset('storage/' . $item->img_path) : asset($item->img_path) }});">
+                        </div>
                         <a href="detail-appetizer1.html" class="othermenu-info">
                             <h5 class="othermenu-name">{{ $item->name }}</h5>
                             <p class="othermenu-price">@currency($item->price)</p>

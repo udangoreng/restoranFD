@@ -94,10 +94,11 @@ class CartSystem {
         let html = '';
         cartItems.forEach(item => {
             const itemTotal = item.price * item.quantity;
+            const imageUrl = item.image_url || item.menu?.image_url
             html += `
                 <div class="order-item" data-cart-id="${item.id}">
                     <div class="item-image">
-                        <img src="${item.menu?.img_url ? '/storage/' + item.menu.img_url : '/img/default.jpg'}" alt="${item.menu?.name || 'Item'}">
+                        <img src="${imageUrl}" alt="${item.menu?.name || 'Item'}">
                     </div>
                     <div class="item-details">
                         <div class="item-name">${item.menu?.name || 'Unknown Item'}</div>

@@ -45,7 +45,7 @@
                 @foreach ($mainDishes as $mainDish)
                     <div class="col-6 col-md-3">
                         <div class="menu-item"
-                            style="background-image: url({{ Storage::disk('public')->exists($imainDish->img_path) ? asset('storage/'. $mainDish->img_path) : asset($mainDish->img_path) }});"></div>
+                            style="background-image: url({{ Storage::disk('public')->exists($mainDish->img_path) ? asset('storage/'. $mainDish->img_path) : asset($mainDish->img_path) }});"></div>
                         <a href="{{ isset($reservation) ? route('order.menu.detail', [$reservation->id, $mainDish->id]) : route('menu.detail', $mainDish->id) }}"
                             class="menu-info">
                             <h5 class="menu-name">{{ $mainDish->name }}</h5>
