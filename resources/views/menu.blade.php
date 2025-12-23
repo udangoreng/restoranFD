@@ -28,7 +28,8 @@
                 @foreach ($appetizers as $appetizer)
                     <div class="col-6 col-md-3">
                         <div class="menu-item"
-                            style="background-image: url({{ Storage::disk('public')->exists($appetizer->img_path) ? asset('storage/'. $appetizer->img_path) : asset($appetizer->img_path) }});"></div>
+                            style="background-image: url({{ Storage::disk('public')->exists($appetizer->img_path) ? asset('storage/' . $appetizer->img_path) : asset($appetizer->img_path) }});">
+                        </div>
                         <a href="{{ isset($reservation) ? route('order.menu.detail', [$reservation->id, $appetizer->id]) : route('menu.detail', $appetizer->id) }}"
                             class="menu-info">
                             <h5 class="menu-name">{{ $appetizer->name }}</h5>
@@ -45,7 +46,8 @@
                 @foreach ($mainDishes as $mainDish)
                     <div class="col-6 col-md-3">
                         <div class="menu-item"
-                            style="background-image: url({{ Storage::disk('public')->exists($mainDish->img_path) ? asset('storage/'. $mainDish->img_path) : asset($mainDish->img_path) }});"></div>
+                            style="background-image: url({{ Storage::disk('public')->exists($mainDish->img_path) ? asset('storage/' . $mainDish->img_path) : asset($mainDish->img_path) }});">
+                        </div>
                         <a href="{{ isset($reservation) ? route('order.menu.detail', [$reservation->id, $mainDish->id]) : route('menu.detail', $mainDish->id) }}"
                             class="menu-info">
                             <h5 class="menu-name">{{ $mainDish->name }}</h5>
@@ -62,7 +64,7 @@
                 @foreach ($desserts as $dessert)
                     <div class="col-6 col-md-3">
                         <div class="menu-item"
-                            style="background-image: url({{ Storage::disk('public')->exists($dessert->img_path) ? asset('storage/'. $dessert->img_path) : asset($dessert->img_path) }});">
+                            style="background-image: url({{ Storage::disk('public')->exists($dessert->img_path) ? asset('storage/' . $dessert->img_path) : asset($dessert->img_path) }});">
                         </div>
                         <a href="{{ isset($reservation) ? route('order.menu.detail', [$reservation->id, $dessert->id]) : route('menu.detail', $dessert->id) }}"
                             class="menu-info">
@@ -106,7 +108,8 @@
             <div class="drink-list">
                 @foreach ($beverages as $beverage)
                     <div class="drink-item">
-                        <img src="{{ Storage::disk('public')->exists($beverage->img_path) ? asset('storage.'. $beverage->img_path) : asset($beverage->img_path) }}" class="drink-thumb">
+                        <img src="{{ Storage::disk('public')->exists($beverage->img_path) ? asset('storage/' . $beverage->img_path) : asset($beverage->img_path) }}"
+                            class="drink-thumb">
                         <div class="drink-text">
                             <div class="drink-title-row">
                                 <a
@@ -135,7 +138,7 @@
             @foreach ($additionals as $additional)
                 <div class="col-md-6 d-flex additional-item">
                     <div class="additional-img hover-img"
-                        style="background-image: url({{ Storage::disk('public')->exists($additional->img_path) ? asset('storage.'. $additional->img_path) : asset($additional->img_path) }});">
+                        style="background-image: url({{ Storage::disk('public')->exists($additional->img_path) ? asset('storage.' . $additional->img_path) : asset($additional->img_path) }});">
                     </div>
                     <a
                         href="{{ isset($reservation) ? route('order.menu.detail', [$reservation->id, $appetizer->id]) : route('menu.detail', $appetizer->id) }}">
