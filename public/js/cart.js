@@ -18,24 +18,31 @@ class CartSystem {
     }
 
     attachGlobalEvents() {
+        // Add to cart buttons
         document.addEventListener('click', (e) => {
             if (e.target.closest('.add-to-cart-btn')) {
                 this.handleAddToCart(e.target.closest('.add-to-cart-btn'));
             }
 
+            // Plus/minus buttons
             if (e.target.closest('.quantity-btn')) {
                 const btn = e.target.closest('.quantity-btn');
                 this.handleQuantityChange(btn);
             }
+
+            // Delete buttons
             if (e.target.closest('.trash-btn')) {
                 const btn = e.target.closest('.trash-btn');
                 this.handleDeleteItem(btn);
             }
+
+            // Checkout button
             if (e.target.id === 'checkoutBtn') {
                 this.handleCheckout();
             }
         });
 
+        // Modal show event
         const orderModal = document.getElementById('orderModal');
         if (orderModal) {
             orderModal.addEventListener('show.bs.modal', () => {
@@ -94,11 +101,10 @@ class CartSystem {
         let html = '';
         cartItems.forEach(item => {
             const itemTotal = item.price * item.quantity;
-            let imageUrl = this.getImageUrl(item);
             html += `
                 <div class="order-item" data-cart-id="${item.id}">
                     <div class="item-image">
-                        <img src="${imageUrl}" alt="${item.menu?.name || 'Item'}">
+                        <img src="${item.menu?.img_path ? '/storage/' + item.menu.img_path : '/img/default.jpg'}" alt="${item.menu?.name || 'Item'}">
                     </div>
                     <div class="item-details">
                         <div class="item-name">${item.menu?.name || 'Unknown Item'}</div>
@@ -120,26 +126,6 @@ class CartSystem {
         subtotalElement.textContent = 'IDR ' + total.toLocaleString('id-ID');
     }
 
-    getImageUrl(item) {
-        if (item.image_url) {
-            return item.image_url;
-        }
-        
-        if (item.menu?.image_url) {
-            return item.menu.image_url;
-        }
-        
-        if (item.menu?.img_url) {
-            return '/storage/' + item.menu.img_url;
-        }
-        
-        if (item.menu?.img_path) {
-            return '/storage/' + item.menu.img_path;
-        }
-        
-        return '/img/default.jpg';
-    }
-
     updateCartCount(cartItems) {
         const cartCountElement = document.getElementById('cartCount');
         const floatingCart = document.getElementById('floatingCartBtn');
@@ -149,6 +135,7 @@ class CartSystem {
         const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
         cartCountElement.textContent = totalItems;
 
+        // Show/hide floating cart
         if (floatingCart) {
             floatingCart.style.visibility = totalItems > 0 ? 'visible' : 'hidden';
         }
@@ -162,8 +149,8 @@ class CartSystem {
 
         const hasItems = data.cart && data.cart.length > 0;
         const isValidOrder = data.is_valid_order !== false;
-        const isDownpaymentPaid = data.is_downpayment_paid;
 
+        // Show/hide warning
         if (warningElement) {
             if (!isValidOrder && hasItems) {
                 warningElement.style.display = 'block';
@@ -178,8 +165,11 @@ class CartSystem {
                 warningElement.innerHTML = '';
             }
         }
-        checkoutBtn.disabled = !hasItems || !isValidOrder || isDownpaymentPaid;
 
+        // Enable/disable checkout button
+        checkoutBtn.disabled = !hasItems || !isValidOrder;
+
+        // Set checkout URL if valid
         if (hasItems && isValidOrder && data.order_id) {
             checkoutBtn.onclick = () => {
                 window.location.href = `/checkout?order_id=${data.order_id}`;
@@ -301,10 +291,12 @@ class CartSystem {
     }
 
     showPopup(message, type = 'info') {
+        // You can replace this with a better popup system
         alert(message);
     }
 }
 
+// Initialize cart system when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     window.cartSystem = new CartSystem();
 });
