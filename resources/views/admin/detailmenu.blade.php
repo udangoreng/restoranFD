@@ -45,7 +45,7 @@
         <div class="mb-3">
             <label for="image" class="form-label fw-bold">Image</label><br>
             @if ($menu->img_path)
-                <img src="{{ Storage::disk('public')->exists($img_path) ? asset('storage.'. $menu->img_path) : $menu->img_path }}" alt="{{ $menu->name }}" height="150px">
+                <img src="{{ Storage::disk('public')->exists($menu->img_path) ? asset('storage/'. $menu->img_path) : $menu->img_path }}" alt="{{ $menu->name }}" height="150px">
             @else
                 No Image
             @endif

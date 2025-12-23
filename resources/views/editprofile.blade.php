@@ -345,7 +345,7 @@
                 <div class="profile-layout">
                     <aside class="profile-card">
                         <div class="profile-photo">
-                            <img src="{{ $userdata->profile_img_path ? asset($userdata->profile_img_path) : asset('img/fotoprofil.jpeg') }}"
+                            <img src="{{ Storage::disk('public')->exists($user->profile_img_path) ? asset('storage/'. $user->profile_img_path) : $user->profile_img_path }}" alt="{{ $user->name }}" height="150px"
                                 alt="Profile Photo">
                         </div>
 

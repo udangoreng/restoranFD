@@ -328,7 +328,7 @@
                 max-width: 600px;
                 margin: 0 auto;
             }
-            
+
             .profile-card {
                 max-width: 100%;
             }
@@ -338,61 +338,61 @@
             body {
                 padding: 15px;
             }
-            
+
             .profile-container {
                 padding: 15px 10px;
             }
-            
+
             .profile-box {
                 padding: 20px 15px;
                 border-radius: 15px;
             }
-            
+
             .page-title {
                 font-size: 24px;
                 text-align: center;
             }
-            
+
             .profile-photo img {
                 max-width: 200px;
                 height: 200px;
             }
-            
+
             .section-header {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 10px;
                 margin: 20px 0 10px 0;
             }
-            
+
             .detail-btn {
                 align-self: stretch;
                 justify-content: center;
             }
-            
+
             .reservation-header {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 10px;
             }
-            
+
             .status {
                 align-self: flex-start;
             }
-            
+
             .section-title {
                 font-size: 20px;
                 text-align: center;
             }
-            
+
             .section-subtitle {
                 font-size: 17px;
             }
-            
+
             .about-list li {
                 font-size: 15px;
             }
-            
+
             .reservation-body p {
                 font-size: 14px;
             }
@@ -402,61 +402,61 @@
             body {
                 padding: 10px;
             }
-            
+
             .profile-container {
                 padding: 10px 5px;
             }
-            
+
             .profile-box {
                 padding: 15px 10px;
                 border-width: 1px;
             }
-            
+
             .page-title {
                 font-size: 22px;
                 margin-bottom: 20px;
             }
-            
+
             .profile-photo img {
                 max-width: 180px;
                 height: 180px;
             }
-            
+
             .profile-name {
                 font-size: 20px;
             }
-            
+
             .profile-card,
             .activity-card {
                 padding: 20px 15px;
             }
-            
+
             .section-title {
                 font-size: 19px;
             }
-            
+
             .section-subtitle {
                 font-size: 16px;
             }
-            
+
             .detail-btn {
                 padding: 8px 16px;
                 font-size: 13px;
             }
-            
+
             .reservation-item {
                 padding: 15px;
             }
-            
+
             .reservation-id {
                 font-size: 13px;
             }
-            
+
             .edit-btn {
                 padding: 5px 12px;
                 font-size: 11px;
             }
-            
+
             .about-list li {
                 font-size: 14px;
             }
@@ -467,28 +467,28 @@
                 max-width: 160px;
                 height: 160px;
             }
-            
+
             .page-title {
                 font-size: 20px;
             }
-            
+
             .profile-name {
                 font-size: 18px;
             }
-            
+
             .detail-btn {
                 width: 100%;
                 justify-content: center;
             }
-            
+
             .section-subtitle {
                 font-size: 15px;
             }
-            
+
             .profile-about h4 {
                 font-size: 16px;
             }
-            
+
             .about-list li {
                 font-size: 13px;
             }
@@ -500,14 +500,15 @@
                 color: black;
                 padding: 0;
             }
-            
+
             .profile-box {
                 border: 1px solid #ccc;
                 background: white;
                 color: black;
             }
-            
-            .detail-btn, .edit-btn {
+
+            .detail-btn,
+            .edit-btn {
                 display: none !important;
             }
         }
@@ -538,7 +539,7 @@
                 <div class="profile-layout">
                     <aside class="profile-card">
                         <div class="profile-photo">
-                            <img src="{{ $userdata->profile_img_path ? asset($userdata->profile_img_path) : asset('img/fotoprofil.jpeg') }}"
+                            <img src="<img src="{{ Storage::disk('public')->exists($user->profile_img_path) ? asset('storage/' . $user->profile_img_path) : $user->profile_img_path }}"
                                 alt="Profile Photo">
                         </div>
                         <h2 class="profile-name">{{ $userdata->name }}</h2>

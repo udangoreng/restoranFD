@@ -46,9 +46,9 @@
         </div>
         <div class="mb-3">
             <label for="image" class="form-label fw-bold">Image</label><br>
-            @if ($user->img_path)
+            @if ($user->profile_img_path)
                 <div class="text-center">
-                    <img src="{{ asset('storage/' . $user->img_path) }}" alt="{{ $user->name }}" height="150px">
+                    <img src="{{ Storage::disk('public')->exists($user->profile_img_path) ? asset('storage/'. $user->profile_img_path) : $user->profile_img_path }}" alt="{{ $user->name }}" height="150px">
                 </div>
             @else
                 No Image
