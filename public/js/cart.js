@@ -94,7 +94,7 @@ class CartSystem {
         let html = '';
         cartItems.forEach(item => {
             const itemTotal = item.price * item.quantity;
-            const imageUrl = item.image_url || item.menu?.image_url
+            let imageUrl = this.getImageUrl(item);
             html += `
                 <div class="order-item" data-cart-id="${item.id}">
                     <div class="item-image">
@@ -118,6 +118,26 @@ class CartSystem {
 
         container.innerHTML = html;
         subtotalElement.textContent = 'IDR ' + total.toLocaleString('id-ID');
+    }
+
+    getImageUrl(item) {
+        if (item.image_url) {
+            return item.image_url;
+        }
+        
+        if (item.menu?.image_url) {
+            return item.menu.image_url;
+        }
+        
+        if (item.menu?.img_url) {
+            return '/storage/' + item.menu.img_url;
+        }
+        
+        if (item.menu?.img_path) {
+            return '/storage/' + item.menu.img_path;
+        }
+        
+        return '/img/default.jpg';
     }
 
     updateCartCount(cartItems) {
