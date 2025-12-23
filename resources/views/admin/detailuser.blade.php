@@ -48,7 +48,7 @@
             <label for="image" class="form-label fw-bold">Image</label><br>
             @if ($user->img_path)
                 <div class="text-center">
-                    <img src="{{ asset('storage/' . $user->img_path) }}" alt="{{ $user->name }}" height="150px">
+                    <img src="{{ asset($user->img_path) }}" alt="{{ $user->name }}" height="150px">
                 </div>
             @else
                 No Image

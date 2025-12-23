@@ -538,7 +538,7 @@
                 <div class="profile-layout">
                     <aside class="profile-card">
                         <div class="profile-photo">
-                            <img src="{{ $userdata->profile_img_path ? asset('storage/' . $userdata->profile_img_path) : asset('img/fotoprofil.jpeg') }}"
+                            <img src="{{ $userdata->profile_img_path ? asset($userdata->profile_img_path) : asset('img/fotoprofil.jpeg') }}"
                                 alt="Profile Photo">
                         </div>
                         <h2 class="profile-name">{{ $userdata->name }}</h2>
