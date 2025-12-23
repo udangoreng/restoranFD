@@ -17,4 +17,13 @@ class Menu extends Model
         'description',
         'img_path',
     ];
+
+    public function getImageUrlAttribute()
+    {
+        if (file_exists(public_path($this->img_path))) {
+            return asset($this->img_path);
+        }
+
+        return asset('storage/' . $this->img_path);
+    }
 }
