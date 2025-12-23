@@ -285,7 +285,7 @@
                         <div class="othermenu-item"
                             style="background-image: url({{ Storage::disk('public')->exists($item->img_path) ? asset('storage/' . $item->img_path) : asset($item->img_path) }});">
                         </div>
-                        <a href="{{ isset($reservation) ? route('order.menu.detail', [$reservation->id, $mainDish->id]) : route('menu.detail', $mainDish->id) }}" class="othermenu-info">
+                        <a href="{{ isset($reservation) ? route('order.menu.detail', [$reservation->id, $item->id]) : route('menu.detail', $item->id) }}" class="othermenu-info">
                             <h5 class="othermenu-name">{{ $item->name }}</h5>
                             <p class="othermenu-price">@currency($item->price)</p>
                         </a>
