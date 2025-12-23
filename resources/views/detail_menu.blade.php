@@ -174,8 +174,7 @@
             }
         }
 
-        /* ================= MOBILE ================= */
-        @media (max-width: 768px) {
+            @media (max-width: 768px) {
             .detail-menu-box {
                 padding: 16px !important;
                 border-radius: 24px;
@@ -201,17 +200,16 @@
                 font-size: 16px;
             }
 
-            .add-to-cart-btn {
-                width: 100%;
-                margin-top: 20px;
-            }
+        .add-to-cart-btn {
+            width: 100%;
+            margin-top: 20px;
         }
+    }
 
-        /* ================= SMALL MOBILE ================= */
-        @media (max-width: 480px) {
-            .othermenu-name {
-                font-size: 14px;
-            }
+    @media (max-width: 480px) {
+        .othermenu-name {
+            font-size: 14px;
+        }
 
             .othermenu-price {
                 font-size: 13px;

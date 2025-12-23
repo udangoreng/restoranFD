@@ -81,10 +81,8 @@
     --transition-2: 500ms ease;
     --transition-3: 1000ms ease;
 }
-/* ====== TAMBAHIN 3 BARIS INI ====== */
 * { box-sizing: border-box; }
 img, video { max-width: 100%; height: auto; }
-/* ================================= */
 *,
 *::before,
 *::after {
@@ -299,19 +297,19 @@ body.nav-active {
 }
 @media (max-width: 991px) {
     #navbar {
-        display: none; /* Sembunyiin navbar di tablet/HP */
+        display: none; 
     }
     #mobile {
-        display: flex; /* Tampilin menu hamburger */
+        display: flex; 
     }
 }
 
 @media (min-width: 992px) {
     #navbar {
-        display: flex; /* Tampilin navbar di desktop */
+        display: flex; 
     }
     #mobile {
-        display: none; /* Sembunyiin menu hamburger di desktop */
+        display: none; 
     }
 }
 
@@ -349,7 +347,7 @@ body.nav-active {
 .mobile-menu-logo {
     text-align: center;
     margin-bottom: 30px;
-    flex-shrink: 0; /* Biar gak kecut */
+    flex-shrink: 0; 
 }
 
 .mobile-menu-logo img {
@@ -362,9 +360,9 @@ body.nav-active {
     list-style: none;
     padding: 0;
     margin: 0;
-    flex: 1; /* Ambil sisa space */
+    flex: 1; 
     overflow-y: auto;
-    padding-bottom: 20px; /* Space bawah */
+    padding-bottom: 20px; 
 }
 
 .mobile-nav-list li {
@@ -411,7 +409,6 @@ body.nav-active {
     transform: translateX(3px);
 }
 
-/* Tambahin di CSS lu: */
 .mobile-link.active {
     color: #c89b3c !important;
 }
@@ -494,15 +491,13 @@ body.nav-active {
     font-size: 150px;
     font-weight: 400;
     letter-spacing: 0.5px;
-    margin: 0; /* Tambahin ini */
+    margin: 0; 
 }
-/* ====== RESPONSIVE FIX ====== */
 
-/* Tablet (768px - 991px) */
 @media (max-width: 991px) {
     #hero h1.serif {
         font-size: 70px;
-        top: 32%; /* Adjust posisi */
+        top: 32%; 
         line-height: 1.2;
         font-family: 'Playfair Display';
     }
@@ -510,19 +505,18 @@ body.nav-active {
         font-size: 100px;
         font-family: 'Parisienne';
         font-style: italic;
-        top: 40%; /* Adjust posisi */
+        top: 40%; 
     }
 }
 
-/* HP (max-width: 767px) */
 @media (max-width: 767px) {
     #hero {
-        height: 85vh; /* Sedikit lebih pendek di HP */
+        height: 85vh; 
     }
     
     #hero h1.serif {
         font-size: 40px;
-        top: 32%; /* Naikin dikit */
+        top: 32%; 
         letter-spacing: 2px;
         line-height: 1.3;
         font-family: 'Playfair Display';
@@ -532,11 +526,10 @@ body.nav-active {
         font-size: 60px;
         font-family: 'Parisienne';
         font-style: italic;
-        top: 40%; /* Turunin dikit */
+        top: 40%; 
         letter-spacing: 1px;
     }
-    
-    /* Bikin video lebih aman di HP */
+   
     .banner video {
         width: 100%;
         height: 100%;
@@ -545,7 +538,6 @@ body.nav-active {
     }
 }
 
-/* HP kecil banget (< 480px) */
 @media (max-width: 480px) {
     #hero h1.serif {
         font-size: 32px;
@@ -562,7 +554,6 @@ body.nav-active {
     }
 }
 
-/* Landscape HP */
 @media (max-height: 500px) and (max-width: 900px) {
     #hero h1.serif {
         font-size: 50px;
@@ -826,9 +817,6 @@ body.nav-active {
     font-family: "Forum", serif;
 }
 
-/* ====== TAMBAHIN RESPONSIVE INI ====== */
-
-/* Tablet (768px - 991px) */
 @media (max-width: 991px) {
     .our-story {
         padding: 60px 40px;
@@ -854,7 +842,6 @@ body.nav-active {
     }
 }
 
-/* HP (max-width: 767px) */
 @media (max-width: 767px) {
     .our-story {
         padding: 40px 20px;
@@ -886,24 +873,20 @@ body.nav-active {
     }
     
     .story-row {
-        flex-direction: column; /* Jadi vertikal di HP */
+        flex-direction: column; 
         gap: 15px;
         margin: 10px 0;
     }
     
-    /* Atur urutan item di HP */
     .story-row:nth-child(1) {
-        /* Row 1: Gambar - Text - Gambar */
         flex-direction: column;
     }
     
     .story-row:nth-child(2) {
-        /* Row 2: Text - Gambar - Text */
         flex-direction: column;
     }
 }
 
-/* HP kecil banget (< 480px) */
 @media (max-width: 480px) {
     .story-title {
         font-size: 28px;
@@ -932,7 +915,7 @@ body.nav-active {
     background: #0d2625;
     color: #fff;
 }
-/* Responsive untuk story-section */
+
 @media (max-width: 991px) {
     .story-section {
         padding: 0px 50px;
@@ -1133,56 +1116,54 @@ body.nav-active {
     margin: auto;
     gap: 40px;
 }
-/* ====== TAMBAHIN MEDIA QUERIES INI ====== */
-/* Untuk Tablet (768px - 991px) */
+
 @media (max-width: 991px) {
     .footer-content {
         gap: 30px;
         padding: 0 20px;
     }
     .footer-img-container {
-        width: 25%; /* Sedikit lebih kecil */
+        width: 25%; 
         padding-top: 150px;
     }
     .footer-center {
-        width: 45%; /* Sedikit lebih besar */
+        width: 45%; 
     }
     .footer-side-img {
-        width: 100%; /* Full width container */
+        width: 100%; 
         height: 300px;
     }
 }
 
-/* Untuk HP (max-width: 767px) */
 @media (max-width: 767px) {
     .footer-content {
-        flex-direction: column; /* Jadi vertikal */
+        flex-direction: column; 
         align-items: center;
         gap: 60px;
         padding: 0 20px;
     }
     
     .footer-img-container {
-        width: 100% !important; /* Full width */
-        padding-top: 0 !important; /* Hapus padding atas */
-        order: 2; /* Posisi: kiri-kanan jadi bawah */
+        width: 100% !important; 
+        padding-top: 0 !important; 
+        order: 2; 
     }
     
     .footer-center {
-        width: 100% !important; /* Full width */
-        order: 1; /* Posisi: tengah jadi atas */
+        width: 100% !important; 
+        order: 1; 
     }
     
     .footer-side-img {
         width: 100%;
-        max-width: 300px; /* Batas maksimal */
+        max-width: 300px; 
         height: 250px;
         margin: 0 auto;
         display: block;
     }
     
     .footer-logo-img {
-        width: 200px; /* Sedikit lebih kecil di HP */
+        width: 200px; 
     }
     
     .visit-us {
@@ -1191,7 +1172,7 @@ body.nav-active {
     }
     
     .newsletter-form {
-        flex-direction: column; /* Input & button jadi vertikal */
+        flex-direction: column; 
         align-items: center;
         gap: 15px;
     }
@@ -1206,7 +1187,6 @@ body.nav-active {
         max-width: 300px;
     }
     
-    /* Padding footer di HP */
     .footer {
         padding-top: 80px;
     }
@@ -1664,6 +1644,16 @@ body.nav-active {
 }
 
 @media (max-width: 768px) {
+    .additional-title {
+        font-size: 22px;
+        margin-bottom: 24px !important; 
+        letter-spacing: 2px;
+    }
+
+    .additional-section {
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
 
     .additional-item {
         flex-direction: column;
@@ -2275,8 +2265,8 @@ p {
         width: 100%;
         max-width: 280px;
         height: 450px;
-        position: relative; /* Pastiin ini */
-        z-index: 2; /* Biar di atas badge */
+        position: relative; 
+        z-index: 2; 
     }
     
     .experience-badge {
@@ -2312,7 +2302,6 @@ p {
     }
 }
 
-/* HP kecil (< 480px) */
 @media (max-width: 480px) {
     .chef-section {
         padding: 30px 15px;
@@ -2371,14 +2360,14 @@ p {
     position: relative;
     width: 100%;
     overflow: hidden;
-    -webkit-overflow-scrolling: touch; /* Buat smooth scroll di iOS */
+    -webkit-overflow-scrolling: touch; 
 }
 
 .gallery-track {
     display: flex;
     transition: transform 0.05s linear;
-    cursor: grab; /* Biar keliatan bisa di-drag */
-    user-select: none; /* Biar gak bisa select text */
+    cursor: grab; 
+    user-select: none; 
 }
 
 .gallery-track img {
@@ -2390,7 +2379,6 @@ p {
     border-radius: 12px;
 }
 
-/* Buat HP: hover zone gak bisa dipake, jadi hide */
 @media (max-width: 767px) {
     .gallery-title {
         font-size: 32px;
@@ -2398,36 +2386,33 @@ p {
     }
     
     .gallery-track img {
-        width: 300px; /* Lebih kecil di HP */
+        width: 300px; 
         height: 200px;
         margin: 0 15px;
     }
     
-    /* Hover zone cuma buat desktop */
     .hover-zone {
         display: none !important;
     }
     
-    /* Gallery track biar bisa di-scroll horizontal */
     .gallery-wrapper {
-        overflow-x: auto; /* Biar bisa scroll horizontal di HP */
+        overflow-x: auto;
         overflow-y: hidden;
         -webkit-overflow-scrolling: touch;
-        scrollbar-width: none; /* Hide scrollbar Firefox */
-        -ms-overflow-style: none; /* Hide scrollbar IE/Edge */
+        scrollbar-width: none; 
+        -ms-overflow-style: none; 
     }
     
     .gallery-wrapper::-webkit-scrollbar {
-        display: none; /* Hide scrollbar Chrome/Safari */
+        display: none; 
     }
     
     .gallery-track {
         display: flex;
-        transition: none; /* Matiin transition kalo scroll manual */
+        transition: none; 
         cursor: grab;
     }
-    
-    /* Efek ketika di-drag */
+   
     .gallery-track:active {
         cursor: grabbing;
     }
@@ -2812,10 +2797,6 @@ p {
         text-align: center;
     }
 }
-
-/* =========================
-   RESPONSIVE MENU TABLE
-   ========================= */
 
 .reservation-order {
     overflow-x: auto;
